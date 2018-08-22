@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Agile Content - Thales</string>
+
+    <!-- DEFAULT -->
+    <string name="alert">Alert</string>
+    <string name="ok">OK</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="no_internet_description">A network error has occurred. Check your Internet connection and try again later</string>
+    <string name="loading">Loading&#8230;</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="main_activity_toolbar">GitHub Viewer</string>
+    <string name="main_activity_button">Search</string>
+    <string name="main_activity_search_edittext">Profile</string>
+    <string name="main_activity_profile_validation">Profile is a mandatory field.</string>
+
+    <!-- PROFILE ACTIVITY -->
+    <string name="profile_activity_user_not_found">User not found. Please enter another name</string>
+    <string name="profile_activity_generic_issue">It was not possible to complete the request, please try again</string>
+    <string name="profile_activity_no_repository">This user does not have any public repository</string>
+
+</resources>
