@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by thalesbertolini on 21/08/2018
  **/
 public class RestAPI {
-    private static final String URL = "https://api.github.com/users/";
+    private static final String URL = "https://api.github.com/";
 
     private static Retrofit retrofit = null;
 

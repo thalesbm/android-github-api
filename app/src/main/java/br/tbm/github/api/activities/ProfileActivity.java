@@ -19,7 +19,7 @@ import br.tbm.github.api.components.CircleTransform;
 import br.tbm.github.api.entities.ProfileResponse;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
-import br.tbm.github.api.rest.RestService;
+import br.tbm.github.api.rest.RestUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,7 +73,7 @@ public class ProfileActivity extends BaseActivity {
     private void searchProfileByName() {
         showProgressDialog(getString(R.string.loading));
 
-        RestService service = RestAPI.getRetrofitInstance().create(RestService.class);
+        RestUser service = RestAPI.getRetrofitInstance().create(RestUser.class);
         Call<ArrayList<RepositoriesResponse>> responseCall = service.listRepositories(mProfileResponse.getLogin());
         responseCall.enqueue(new Callback<ArrayList<RepositoriesResponse>>() {
             @Override

@@ -14,7 +14,7 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.components.CustomTextWatcher;
 import br.tbm.github.api.entities.ProfileResponse;
 import br.tbm.github.api.rest.RestAPI;
-import br.tbm.github.api.rest.RestService;
+import br.tbm.github.api.rest.RestUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity {
     private void searchProfileByName(String profileName) {
         showProgressDialog(getString(R.string.loading));
 
-        RestService service = RestAPI.getRetrofitInstance().create(RestService.class);
+        RestUser service = RestAPI.getRetrofitInstance().create(RestUser.class);
         Call<ProfileResponse> responseCall = service.getProfile(profileName);
         responseCall.enqueue(new Callback<ProfileResponse>() {
             @Override

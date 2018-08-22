@@ -11,20 +11,11 @@ import retrofit2.http.Path;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public interface RestService {
+public interface RestUser {
 
-    // see all commits
-    // https://api.github.com/repos/thalesbm/android-entrevistas-tests/events
-
-    // see all branches
-    // https://api.github.com/repos/thalesbm/android-entrevistas-tests/branches
-
-    // see all tags
-    // https://api.github.com/repos/thalesbm/android-entrevistas-tests/tags
-
-    @GET("{username}/repos")
+    @GET("users/{username}/repos")
     Call<ArrayList<RepositoriesResponse>> listRepositories(@Path("username") String username);
 
-    @GET("{username}")
+    @GET("users/{username}")
     Call<ProfileResponse> getProfile(@Path("username") String username);
 }
