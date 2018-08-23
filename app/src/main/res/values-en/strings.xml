@@ -14,6 +14,9 @@
     <string name="generic_connection_issue">It was not possible to complete the request, please try again</string>
     <string name="generic_database_issue">It was not possible to connect with the database, please try again</string>
 
+    <!-- ######## MENU ######## -->
+    <string name="action_search">Search</string>
+
     <!-- ######## MAIN ACTIVITY ########-->
     <string name="main_activity_toolbar">Github - API</string>
     <string name="main_activity_button">Search</string>
