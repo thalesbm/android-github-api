@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Github - API</string>
 
     <!-- DEFAULT -->
@@ -11,10 +13,10 @@
 
     <!-- MAIN ACTIVITY -->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_button">Pesquisar</string>
-    <string name="main_activity_search_edittext">Nome do usuário</string>
-    <string name="main_activity_profile_validation">Campo usuário é obrigatório.</string>
-    <string name="main_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
+    <string name="main_activity_button">Search</string>
+    <string name="main_activity_search_edittext">Username</string>
+    <string name="main_activity_profile_validation">Username is mandatory field.</string>
+    <string name="main_activity_description">Fill in the username below and click on the search to find the public information about him.</string>
 
     <!-- PROFILE ACTIVITY -->
     <string name="profile_activity_user_not_found">User not found. Please enter another name</string>

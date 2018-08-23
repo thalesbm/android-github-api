@@ -4,6 +4,9 @@ import android.app.Application;
 
 import br.tbm.github.api.dao.DatabaseHelper;
 
+/**
+ * Created by thalesbertolini on 23/08/2018
+ **/
 public class GithubApplication extends Application {
 
     private static DatabaseHelper dataBaseHelper = null;

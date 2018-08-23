@@ -12,6 +12,9 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.entities.RepositoriesResponse;
 
+/**
+ * Created by thalesbertolini on 21/08/2018
+ **/
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
 
     private List<RepositoriesResponse> mList;

@@ -5,6 +5,9 @@ import android.content.Intent;
 
 import br.tbm.github.api.activities.MainActivity;
 
+/**
+ * Created by thalesbertolini on 23/08/2018
+ **/
 public class RedirectUtils {
 
     /**
