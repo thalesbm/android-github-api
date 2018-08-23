@@ -11,7 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import br.tbm.github.api.models.Historic;
+import br.tbm.github.api.models.Profile;
 
 /**
  * Created by thalesbertolini on 23/08/2018
@@ -25,7 +25,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static DatabaseHelper databaseHelper = null;
     private static final AtomicInteger usageCounter = new AtomicInteger(0);
 
-    private HistoricDao historicDao = null;
+    private ProfileDao profileDao = null;
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,7 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
-            TableUtils.createTableIfNotExists(connectionSource, Historic.class);
+            TableUtils.createTableIfNotExists(connectionSource, Profile.class);
 
             Log.i(TAG, "Create table with success!");
         } catch (SQLException e) {
@@ -54,9 +54,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, Historic.class, true);
+            TableUtils.dropTable(connectionSource, Profile.class, true);
 
-            TableUtils.createTableIfNotExists(connectionSource, Historic.class);
+            TableUtils.createTableIfNotExists(connectionSource, Profile.class);
 
         } catch (Exception e) {
             Log.e(TAG, "Error to update table: " + e);
@@ -64,18 +64,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    public HistoricDao getHistoricDao() throws SQLException {
-        return historicDao == null ? new HistoricDao(connectionSource, Historic.class, databaseHelper) : historicDao;
+    public ProfileDao getProfileDao() throws SQLException {
+        return profileDao == null ? new ProfileDao(connectionSource, Profile.class, databaseHelper) : profileDao;
     }
 
     @Override
     public void close() {
         super.close();
-        historicDao = null;
+        profileDao = null;
         databaseHelper = null;
     }
 
     public void cleanTable() throws SQLException {
-        TableUtils.clearTable(connectionSource, Historic.class);
+        TableUtils.clearTable(connectionSource, Profile.class);
     }
 }

@@ -1,30 +1,42 @@
-package br.tbm.github.api.entities;
+package br.tbm.github.api.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+import java.util.Date;
 
 import br.tbm.github.api.utils.ParcelableUtils;
 
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class ProfileResponse implements Parcelable {
+@DatabaseTable(tableName = "tb_historic")
+public class Profile implements Parcelable {
 
+    @DatabaseField(generatedId = true)
     @SerializedName("id")
     private Long id;
 
+    @DatabaseField(canBeNull = false)
     @SerializedName("name")
     private String name;
 
+    @DatabaseField(canBeNull = false)
     @SerializedName("login")
     private String login;
 
+    @DatabaseField
     @SerializedName("avatar_url")
     private String avatarUrl;
 
-    public ProfileResponse() {
+    @DatabaseField(canBeNull = false)
+    private Date created;
+
+    public Profile() {
     }
 
     public Long getId() {
@@ -59,6 +71,14 @@ public class ProfileResponse implements Parcelable {
         this.login = login;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -70,22 +90,24 @@ public class ProfileResponse implements Parcelable {
         dest.writeValue(name);
         dest.writeValue(login);
         dest.writeValue(avatarUrl);
+        dest.writeValue(created);
     }
 
-    public ProfileResponse(Parcel in) {
+    public Profile(Parcel in) {
         this.id = ParcelableUtils.readValueToLong(in);
         this.name = ParcelableUtils.readValueToString(in);
         this.login = ParcelableUtils.readValueToString(in);
         this.avatarUrl = ParcelableUtils.readValueToString(in);
+        this.created = ParcelableUtils.readValueToDate(in);
     }
 
-    public static final Creator<ProfileResponse> CREATOR = new Creator<ProfileResponse>() {
-        public ProfileResponse createFromParcel(Parcel in) {
-            return new ProfileResponse(in);
+    public static final Creator<Profile> CREATOR = new Creator<Profile>() {
+        public Profile createFromParcel(Parcel in) {
+            return new Profile(in);
         }
 
-        public ProfileResponse[] newArray(int size) {
-            return new ProfileResponse[size];
+        public Profile[] newArray(int size) {
+            return new Profile[size];
         }
     };
 }

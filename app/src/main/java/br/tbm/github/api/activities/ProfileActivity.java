@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.RepositoryAdapter;
 import br.tbm.github.api.components.CircleTransform;
-import br.tbm.github.api.entities.ProfileResponse;
+import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
@@ -35,7 +35,7 @@ public class ProfileActivity extends BaseActivity {
     private ImageView mIvProfile;
     private TextView mTvEmptyDescription;
 
-    private ProfileResponse mProfileResponse;
+    private Profile mProfile;
 
     private ArrayList<RepositoriesResponse> mBody;
 
@@ -44,7 +44,7 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mProfileResponse = getIntent().getExtras().getParcelable(PROFILE_INTENT);
+        mProfile = getIntent().getExtras().getParcelable(PROFILE_INTENT);
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties("");
@@ -74,7 +74,7 @@ public class ProfileActivity extends BaseActivity {
         showProgressDialog(getString(R.string.loading));
 
         RestUser service = RestAPI.getRetrofitInstance().create(RestUser.class);
-        Call<ArrayList<RepositoriesResponse>> responseCall = service.listRepositories(mProfileResponse.getLogin());
+        Call<ArrayList<RepositoriesResponse>> responseCall = service.listRepositories(mProfile.getLogin());
         responseCall.enqueue(new Callback<ArrayList<RepositoriesResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Response<ArrayList<RepositoriesResponse>> response) {
@@ -119,15 +119,15 @@ public class ProfileActivity extends BaseActivity {
         }
 
         // baixa a imagem usando picasso library
-        if (!mProfileResponse.getAvatarUrl().equals("")) {
+        if (!mProfile.getAvatarUrl().equals("")) {
             Picasso.with(this)
-                    .load(mProfileResponse.getAvatarUrl())
+                    .load(mProfile.getAvatarUrl())
                     .fit()
                     .error(R.drawable.img_user_not_found)
                     .transform(new CircleTransform())
                     .into(mIvProfile);
         }
 
-        changeToolbarTitle(mProfileResponse.getName());
+        changeToolbarTitle(mProfile.getName());
     }
 }

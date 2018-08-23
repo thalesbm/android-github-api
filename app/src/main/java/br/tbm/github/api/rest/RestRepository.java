@@ -2,7 +2,6 @@ package br.tbm.github.api.rest;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.entities.ProfileResponse;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;

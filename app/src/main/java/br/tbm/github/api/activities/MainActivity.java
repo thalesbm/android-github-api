@@ -1,6 +1,5 @@
 package br.tbm.github.api.activities;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.os.Bundle;
@@ -9,10 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.components.CustomTextWatcher;
-import br.tbm.github.api.entities.ProfileResponse;
+import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
 import retrofit2.Call;
@@ -105,30 +103,45 @@ public class MainActivity extends BaseActivity {
         showProgressDialog(getString(R.string.loading));
 
         RestUser service = RestAPI.getRetrofitInstance().create(RestUser.class);
-        Call<ProfileResponse> responseCall = service.getProfile(profileName);
-        responseCall.enqueue(new Callback<ProfileResponse>() {
+        Call<Profile> responseCall = service.getProfile(profileName);
+        responseCall.enqueue(new Callback<Profile>() {
             @Override
-            public void onResponse(@NonNull Call<ProfileResponse> call, @NonNull Response<ProfileResponse> response) {
-                dismissProgressDialog();
-
-                if (response.isSuccessful()) {
-                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                    intent.putExtra(Constants.PROFILE_INTENT, response.body());
-                    startActivity(intent);
-                } else {
-                    if (response.raw().code() == HTTP_NOT_FOUND) {
-                        showAlertDialog(getString(R.string.profile_activity_user_not_found), false);
-                    } else {
-                        showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
-                    }
-                }
+            public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
+                searchProfileResponseSuccess(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<ProfileResponse> call, @NonNull Throwable t) {
-                dismissProgressDialog();
-                showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
+            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
+                searchProfileResponseFailure();
             }
         });
+    }
+
+    /**
+     * Metodo responsavel pela logica de sucesso da chamada de pesquisar pelo username
+     * @param response Response<Profile>
+     */
+    private void searchProfileResponseSuccess(Response<Profile> response) {
+        dismissProgressDialog();
+
+        if (response.isSuccessful()) {
+//            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+//            intent.putExtra(Constants.PROFILE_INTENT, response.body());
+//            startActivity(intent);
+        } else {
+            if (response.raw().code() == HTTP_NOT_FOUND) {
+                showAlertDialog(getString(R.string.profile_activity_user_not_found), false);
+            } else {
+                showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
+            }
+        }
+    }
+
+    /**
+     * Metodo responsavel pela logica de erro da chamada de pesquisar pelo username
+     */
+    private void searchProfileResponseFailure() {
+        dismissProgressDialog();
+        showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
     }
 }

@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 
 import br.tbm.github.api.activities.ProfileActivity;
-import br.tbm.github.api.entities.ProfileResponse;
+import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.entities.RepositoriesResponse;
 
 import static android.test.MoreAsserts.assertEmpty;
@@ -33,7 +33,7 @@ public class ProfileActivityTest {
             new ActivityTestRule<>(ProfileActivity.class, true, false);
 
     private Intent createIntent(String login) {
-        ProfileResponse profile = new ProfileResponse();
+        Profile profile = new Profile();
         profile.setName("Thales Bertolini");
         profile.setAvatarUrl("");
         profile.setLogin(login);

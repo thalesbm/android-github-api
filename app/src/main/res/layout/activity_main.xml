@@ -47,10 +47,22 @@
         android:id="@+id/main_activity_list_movies_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background_blue"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@drawable/button_background_blue"
         android:text="@string/main_activity_button"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/main_activity_search_textlayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/main_activity_search_textlayout" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/main_activity_list_movies_button" />
+
 </android.support.constraint.ConstraintLayout>
