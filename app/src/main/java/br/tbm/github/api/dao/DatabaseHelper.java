@@ -20,7 +20,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private final String TAG = DatabaseHelper.class.getSimpleName();
 
     private static final String DATABASE_NAME = "tbm_github_api.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     private static DatabaseHelper databaseHelper = null;
     private static final AtomicInteger usageCounter = new AtomicInteger(0);

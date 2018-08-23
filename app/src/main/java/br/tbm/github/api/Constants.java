@@ -5,7 +5,7 @@ package br.tbm.github.api;
  **/
 public class Constants {
 
-    public static final String PROFILE_INTENT = "PROFILE_INTENT";
+    public static final String INTENT_PROFILE = "INTENT_PROFILE";
 
     public static final int HTTP_NOT_FOUND = 404;
 }

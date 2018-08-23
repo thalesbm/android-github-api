@@ -3,6 +3,7 @@ package br.tbm.github.api.tasks;
 import android.util.Log;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.interfaces.TasksCallbacks;
@@ -21,7 +22,10 @@ public class SaveGithubUserTask extends BaseTask<Profile, Void, Void> {
     @Override
     protected Void doInBackground(Profile... params) {
         try {
-            mDatabase.getProfileDao().create(params[0]);
+            Profile profile = params[0];
+            profile.setCreated(new Date());
+
+            mDatabase.getProfileDao().create(profile);
         } catch (SQLException e) {
             Log.e(TAG, "Ocorreu um erro ao salvar o usuario do github");
             e.printStackTrace();

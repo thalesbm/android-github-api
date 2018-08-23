@@ -10,9 +10,12 @@ import android.widget.EditText;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.components.CustomTextWatcher;
+import br.tbm.github.api.interfaces.TasksCallbacks;
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
+import br.tbm.github.api.tasks.SaveGithubUserTask;
+import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity {
         mTvProfile = findViewById(R.id.main_activity_search_textlayout);
         mEdProfile = findViewById(R.id.main_activity_search_edittext);
 
-        // mEdProfile.setText("thalesbm2");
+        mEdProfile.setText("thalesbm2");
 
         mEdProfile.addTextChangedListener(new CustomTextWatcher() {
             @Override
@@ -112,36 +115,53 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-                searchProfileResponseFailure();
+                displayGenericNetworkIssue();
             }
         });
     }
+
+    // ####################
+    // CALLBACK DAS TASKS
+    // ####################
+
+    /**
+     * Metodo responsavel por fechar o progress dialog e redirecionar para a tela de perfil
+     * @param profile Profile
+     */
+    private void saveGithubUserSuccess(Profile profile) {
+        dismissProgressDialog();
+        RedirectUtils.redirectToProfileActivity(this, profile);
+    }
+
+    // ####################
+    // CALLBACK DO SERVIDOR
+    // ####################
 
     /**
      * Metodo responsavel pela logica de sucesso da chamada de pesquisar pelo username
      * @param response Response<Profile>
      */
-    private void searchProfileResponseSuccess(Response<Profile> response) {
-        dismissProgressDialog();
-
+    private void searchProfileResponseSuccess(final Response<Profile> response) {
         if (response.isSuccessful()) {
-//            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-//            intent.putExtra(Constants.PROFILE_INTENT, response.body());
-//            startActivity(intent);
+            new SaveGithubUserTask(new TasksCallbacks.SaveGithubUserTaskCallback() {
+                @Override
+                public void saveGithubUserTaskSuccess() {
+                    saveGithubUserSuccess(response.body());
+                }
+
+                @Override
+                public void saveGithubUserTaskFailure() {
+                    displayGenericDatabaseIssue();
+                }
+            }).execute(response.body());
+
         } else {
+            dismissProgressDialog();
             if (response.raw().code() == HTTP_NOT_FOUND) {
-                showAlertDialog(getString(R.string.profile_activity_user_not_found), false);
+                showAlertDialog(getString(R.string.main_activity_user_not_found), false);
             } else {
-                showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
+                showAlertDialog(getString(R.string.main_activity_generic_connection_issue), false);
             }
         }
-    }
-
-    /**
-     * Metodo responsavel pela logica de erro da chamada de pesquisar pelo username
-     */
-    private void searchProfileResponseFailure() {
-        dismissProgressDialog();
-        showAlertDialog(getString(R.string.profile_activity_generic_issue), false);
     }
 }

@@ -1,24 +1,29 @@
 <resources>
     <string name="app_name">Github - API</string>
 
-    <!-- DEFAULT -->
+    <!-- ######## DEFAULT ######## -->
     <string name="alert">Alert</string>
     <string name="ok">OK</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="no_internet_description">A network error has occurred. Check your Internet connection and try again later</string>
     <string name="loading">Loading&#8230;</string>
 
-    <!-- MAIN ACTIVITY -->
+    <!-- ######## GENERIC ISSUE ######## -->
+    <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
+    <string name="generic_connection_issue">Nao foi possivel completar a requisiçao, tente novamente mais tarde</string>
+    <string name="generic_database_issue">Nao foi possivel completar a requisiçao, tente novamente mais tarde</string>
+
+    <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>
     <string name="main_activity_button">Pesquisar</string>
     <string name="main_activity_search_edittext">Nome do usuário</string>
-    <string name="main_activity_profile_validation">Campo usuário é obrigatório.</string>
     <string name="main_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
 
-    <!-- PROFILE ACTIVITY -->
-    <string name="profile_activity_user_not_found">User not found. Please enter another name</string>
-    <string name="profile_activity_generic_issue">It was not possible to complete the request, please try again</string>
+    <!-- ######## MAIN ACTIVITY (ERRORS) ######## -->
+    <string name="main_activity_profile_validation">Campo usuário é obrigatório.</string>
+    <string name="main_activity_user_not_found">Usuário nao foi encontrado</string>
+
+    <!-- ######## PROFILE ACTIVITY ######## -->
     <string name="profile_activity_no_repository">This user does not have any public repository</string>
 
 </resources>

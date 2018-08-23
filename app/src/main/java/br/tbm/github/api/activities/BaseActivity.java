@@ -144,6 +144,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo generico que fecha o progress dialog caso esteja aberto e exibe uma mensagem generica
+     * de erro na base de dados
+     */
+    protected void displayGenericDatabaseIssue() {
+        dismissProgressDialog();
+        showAlertDialog(getString(R.string.generic_database_issue), false);
+    }
+
+    /**
+     * Metodo generico que fecha o progress dialog caso esteja aberto e exibe uma mensagem generica
+     * de na conexao com o servidor
+     */
+    protected void displayGenericNetworkIssue() {
+        dismissProgressDialog();
+        showAlertDialog(getString(R.string.generic_connection_issue), false);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

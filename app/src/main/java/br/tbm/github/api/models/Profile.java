@@ -3,6 +3,7 @@ package br.tbm.github.api.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -18,8 +19,12 @@ import br.tbm.github.api.utils.ParcelableUtils;
 public class Profile implements Parcelable {
 
     @DatabaseField(generatedId = true)
-    @SerializedName("id")
+    @SerializedName("internal_id")
     private Long id;
+
+    @DatabaseField(canBeNull = false)
+    @SerializedName("id")
+    private Long githubID;
 
     @DatabaseField(canBeNull = false)
     @SerializedName("name")
@@ -87,6 +92,7 @@ public class Profile implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
+        dest.writeValue(githubID);
         dest.writeValue(name);
         dest.writeValue(login);
         dest.writeValue(avatarUrl);
@@ -95,6 +101,7 @@ public class Profile implements Parcelable {
 
     public Profile(Parcel in) {
         this.id = ParcelableUtils.readValueToLong(in);
+        this.githubID = ParcelableUtils.readValueToLong(in);
         this.name = ParcelableUtils.readValueToString(in);
         this.login = ParcelableUtils.readValueToString(in);
         this.avatarUrl = ParcelableUtils.readValueToString(in);

@@ -3,7 +3,9 @@ package br.tbm.github.api.utils;
 import android.app.Activity;
 import android.content.Intent;
 
+import br.tbm.github.api.Constants;
 import br.tbm.github.api.activities.MainActivity;
+import br.tbm.github.api.models.Profile;
 
 /**
  * Created by thalesbertolini on 23/08/2018
@@ -18,5 +20,16 @@ public class RedirectUtils {
         Intent intent = new Intent(activity, MainActivity.class);
         activity.startActivity(intent);
         activity.finish();
+    }
+
+    /**
+     * Metodo responsavel por redirecionar para a tela de perfil
+     * @param activity Activity
+     * @param profile Profile
+     */
+    public static void redirectToProfileActivity(Activity activity, Profile profile) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.putExtra(Constants.INTENT_PROFILE, profile);
+        activity.startActivity(intent);
     }
 }

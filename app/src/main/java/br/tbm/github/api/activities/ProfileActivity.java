@@ -83,14 +83,14 @@ public class ProfileActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     updateScreen(response.body());
                 } else {
-                    showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
+                    // showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Throwable t) {
                 dismissProgressDialog();
-                showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
+                // showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
             }
         });
     }
