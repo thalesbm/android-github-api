@@ -7,19 +7,23 @@
     <string name="ok">OK</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
-    <string name="no_internet_description">A network error has occurred. Check your Internet connection and try again later</string>
     <string name="loading">Loading&#8230;</string>
+
+    <!-- ######## GENERIC ISSUE ######## -->
+    <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
+    <string name="generic_connection_issue">It was not possible to complete the request, please try again</string>
+    <string name="generic_database_issue">It was not possible to connect with the database, please try again</string>
 
     <!-- ######## MAIN ACTIVITY ########-->
     <string name="main_activity_toolbar">Github - API</string>
     <string name="main_activity_button">Search</string>
     <string name="main_activity_search_edittext">Username</string>
     <string name="main_activity_description">Fill in the username below and click on the search to find the public information about him.</string>
+    <string name="main_activity_list_description">Search Historic</string>
 
     <!-- ######## MAIN ACTIVITY (ERRORS) ########-->
     <string name="main_activity_profile_validation">Username is mandatory field.</string>
     <string name="main_activity_user_not_found">User not found. Please enter another name</string>
-    <string name="main_activity_generic_connection_issue">It was not possible to complete the request, please try again</string>
 
     <!-- ######## PROFILE ACTIVITY ########-->
     <string name="profile_activity_no_repository">This user does not have any public repository</string>

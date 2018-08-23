@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Github - API</string>
 
@@ -11,13 +12,14 @@
     <!-- ######## GENERIC ISSUE ######## -->
     <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
     <string name="generic_connection_issue">Nao foi possivel completar a requisiçao, tente novamente mais tarde</string>
-    <string name="generic_database_issue">Nao foi possivel completar a requisiçao, tente novamente mais tarde</string>
+    <string name="generic_database_issue">Nao foi possivel conectar com o banco de dados, tente novamente mais tarde</string>
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>
     <string name="main_activity_button">Pesquisar</string>
     <string name="main_activity_search_edittext">Nome do usuário</string>
     <string name="main_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
+    <string name="main_activity_list_description">Historico de Pesquisa</string>
 
     <!-- ######## MAIN ACTIVITY (ERRORS) ######## -->
     <string name="main_activity_profile_validation">Campo usuário é obrigatório.</string>

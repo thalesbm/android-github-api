@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.RepositoryAdapter;
 import br.tbm.github.api.components.CircleTransform;
@@ -23,8 +24,6 @@ import br.tbm.github.api.rest.RestUser;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static br.tbm.github.api.Constants.PROFILE_INTENT;
 
 /**
  * Created by thalesbertolini on 21/08/2018
@@ -44,7 +43,7 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mProfile = getIntent().getExtras().getParcelable(PROFILE_INTENT);
+        mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties("");

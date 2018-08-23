@@ -3,17 +3,23 @@ package br.tbm.github.api.activities;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+
 import br.tbm.github.api.R;
+import br.tbm.github.api.adapters.ProfileAdapter;
 import br.tbm.github.api.components.CustomTextWatcher;
 import br.tbm.github.api.interfaces.TasksCallbacks;
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
+import br.tbm.github.api.tasks.ListGithubUsersTask;
 import br.tbm.github.api.tasks.SaveGithubUserTask;
 import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
@@ -29,6 +35,7 @@ public class MainActivity extends BaseActivity {
 
     private TextInputLayout mTvProfile;
     private EditText mEdProfile;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,12 @@ public class MainActivity extends BaseActivity {
         changeToolbarTitle(getString(R.string.main_activity_toolbar));
 
         this.init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.listProfilesFromDatabase();
     }
 
     /**
@@ -66,6 +79,27 @@ public class MainActivity extends BaseActivity {
         btnMovies.setOnClickListener((View v) -> {
             this.redirectToSearchProfile();
         });
+
+        mRecyclerView = findViewById(R.id.main_activity_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+    }
+
+    /**
+     * Metodo responsavel por listar todos os perfils ja pesquisados na base de dados
+     */
+    private void listProfilesFromDatabase() {
+        showProgressDialog(getString(R.string.loading));
+        new ListGithubUsersTask(new TasksCallbacks.ListGithubUserTaskCallback() {
+            @Override
+            public void listGithubUserTaskSuccess(List<Profile> profiles) {
+                listGithubUserSuccess(profiles);
+            }
+
+            @Override
+            public void listGithubUserTaskFailure() {
+                displayGenericDatabaseIssue();
+            }
+        }).execute();
     }
 
     /**
@@ -86,14 +120,13 @@ public class MainActivity extends BaseActivity {
      */
     private void redirectToSearchProfile() {
         if (isOnline()) {
-
             if (validateProfile()) {
                 hideKeyboard();
                 this.searchProfileByName(mEdProfile.getText().toString());
             }
 
         } else {
-            showAlertDialog(getString(R.string.no_internet_description), false);
+            showAlertDialog(getString(R.string.generic_internet_issue), false);
         }
     }
 
@@ -126,11 +159,26 @@ public class MainActivity extends BaseActivity {
 
     /**
      * Metodo responsavel por fechar o progress dialog e redirecionar para a tela de perfil
+     *
      * @param profile Profile
      */
     private void saveGithubUserSuccess(Profile profile) {
         dismissProgressDialog();
         RedirectUtils.redirectToProfileActivity(this, profile);
+    }
+
+    /**
+     * Metodo responsavel por exibir na tela todos os usuarios ja pesquisados e salvos na base de dados
+     *
+     * @param profiles List<Profile>
+     */
+    private void listGithubUserSuccess(List<Profile> profiles) {
+        dismissProgressDialog();
+        if (profiles.isEmpty()) {
+
+        } else {
+            mRecyclerView.setAdapter(new ProfileAdapter(profiles));
+        }
     }
 
     // ####################
@@ -139,6 +187,7 @@ public class MainActivity extends BaseActivity {
 
     /**
      * Metodo responsavel pela logica de sucesso da chamada de pesquisar pelo username
+     *
      * @param response Response<Profile>
      */
     private void searchProfileResponseSuccess(final Response<Profile> response) {
@@ -160,7 +209,7 @@ public class MainActivity extends BaseActivity {
             if (response.raw().code() == HTTP_NOT_FOUND) {
                 showAlertDialog(getString(R.string.main_activity_user_not_found), false);
             } else {
-                showAlertDialog(getString(R.string.main_activity_generic_connection_issue), false);
+                showAlertDialog(getString(R.string.generic_connection_issue), false);
             }
         }
     }

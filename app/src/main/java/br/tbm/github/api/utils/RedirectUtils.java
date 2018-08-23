@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.activities.MainActivity;
+import br.tbm.github.api.activities.ProfileActivity;
 import br.tbm.github.api.models.Profile;
 
 /**
@@ -28,7 +29,7 @@ public class RedirectUtils {
      * @param profile Profile
      */
     public static void redirectToProfileActivity(Activity activity, Profile profile) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(Constants.INTENT_PROFILE, profile);
         activity.startActivity(intent);
     }
