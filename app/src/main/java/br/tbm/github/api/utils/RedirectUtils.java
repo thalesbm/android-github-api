@@ -6,6 +6,7 @@ import android.content.Intent;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.activities.MainActivity;
 import br.tbm.github.api.activities.ProfileActivity;
+import br.tbm.github.api.activities.SearchByUsernameActivity;
 import br.tbm.github.api.models.Profile;
 
 /**
@@ -31,6 +32,16 @@ public class RedirectUtils {
     public static void redirectToProfileActivity(Activity activity, Profile profile) {
         Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(Constants.INTENT_PROFILE, profile);
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    /**
+     * Metodo responsavel por abrir o modal de pesquisar novo usuario
+     * @param activity Activity
+     */
+    public static void redirectToSearchByUsernameActivity(Activity activity) {
+        Intent intent = new Intent(activity, SearchByUsernameActivity.class);
         activity.startActivity(intent);
     }
 }

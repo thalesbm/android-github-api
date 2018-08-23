@@ -19,14 +19,15 @@
 
     <!-- ######## MAIN ACTIVITY ########-->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_button">Search</string>
-    <string name="main_activity_search_edittext">Username</string>
-    <string name="main_activity_description">Fill in the username below and click on the search to find the public information about him.</string>
     <string name="main_activity_list_description">Search Historic</string>
 
-    <!-- ######## MAIN ACTIVITY (ERRORS) ########-->
-    <string name="main_activity_profile_validation">Username is mandatory field.</string>
-    <string name="main_activity_user_not_found">User not found. Please enter another name</string>
+    <!-- ######## SEARCH ACTIVITY ######## -->
+    <string name="search_activity_toolbar">Search</string>
+    <string name="search_activity_button">Search</string>
+    <string name="search_activity_search_edittext">Username</string>
+    <string name="search_activity_description">Fill in the username below and click on the search to find the public information about him.</string>
+    <string name="search_activity_profile_validation">Username is mandatory field.</string>
+    <string name="search_activity_user_not_found">User not found. Please enter another name</string>
 
     <!-- ######## PROFILE ACTIVITY ########-->
     <string name="profile_activity_no_repository">This user does not have any public repository</string>

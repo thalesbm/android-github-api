@@ -19,14 +19,15 @@
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_button">Pesquisar</string>
-    <string name="main_activity_search_edittext">Nome do usuário</string>
-    <string name="main_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
     <string name="main_activity_list_description">Historico de Pesquisa</string>
 
-    <!-- ######## MAIN ACTIVITY (ERRORS) ######## -->
-    <string name="main_activity_profile_validation">Campo usuário é obrigatório.</string>
-    <string name="main_activity_user_not_found">Usuário nao foi encontrado</string>
+    <!-- ######## SEARCH ACTIVITY ######## -->
+    <string name="search_activity_toolbar">Pesquisar</string>
+    <string name="search_activity_button">Pesquisar</string>
+    <string name="search_activity_search_edittext">Nome do usuário</string>
+    <string name="search_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
+    <string name="search_activity_profile_validation">Campo usuário é obrigatório.</string>
+    <string name="search_activity_user_not_found">Usuário nao foi encontrado</string>
 
     <!-- ######## PROFILE ACTIVITY ######## -->
     <string name="profile_activity_no_repository">This user does not have any public repository</string>
