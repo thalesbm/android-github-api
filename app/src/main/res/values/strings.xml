@@ -19,7 +19,7 @@
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_list_description">Historico de Pesquisa</string>
+    <string name="main_activity_list_empty">Você ainda nao fez nenhuma pesquisa, clique no icone de pesquisar acima e faça a sua primeira pesquisa</string>
 
     <!-- ######## SEARCH ACTIVITY ######## -->
     <string name="search_activity_toolbar">Pesquisar</string>

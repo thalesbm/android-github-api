@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ import br.tbm.github.api.utils.RedirectUtils;
 public class MainActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
+    private TextView mTvListEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class MainActivity extends BaseActivity {
     protected void init() {
         mRecyclerView = findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
+
+        mTvListEmpty = findViewById(R.id.main_activity_list_description_text_view);
     }
 
     @Override
@@ -96,8 +101,9 @@ public class MainActivity extends BaseActivity {
     private void listGithubUserSuccess(List<Profile> profiles) {
         dismissProgressDialog();
         if (profiles.isEmpty()) {
-            // TODO: EXIBIR A MENSAGEM CASO NAO TENHA NENHUM ITEM NA LISTA
+            mTvListEmpty.setVisibility(View.VISIBLE);
         } else {
+            mTvListEmpty.setVisibility(View.GONE);
             mRecyclerView.setAdapter(new ProfileAdapter(profiles));
         }
     }

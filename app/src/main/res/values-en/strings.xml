@@ -19,7 +19,7 @@
 
     <!-- ######## MAIN ACTIVITY ########-->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_list_description">Search Historic</string>
+    <string name="main_activity_list_empty">You have not done any search yet, click on the search icon above and search a user for the first time</string>
 
     <!-- ######## SEARCH ACTIVITY ######## -->
     <string name="search_activity_toolbar">Search</string>
