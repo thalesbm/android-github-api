@@ -12,5 +12,7 @@ public interface AdaptersCallbacks {
         void longClick(int position);
 
         void onClick(int position);
+
+        void removeSelection();
     }
 }

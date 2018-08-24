@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty;
+    private ActionMode mCurrentActionMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,11 @@ public class MainActivity extends BaseActivity {
                 public void onClick(int position) {
                     RedirectUtils.redirectToProfileActivity(MainActivity.this, mProfiles.get(position), false);
                 }
+
+                @Override
+                public void removeSelection() {
+                    mCurrentActionMode.finish();
+                }
             }));
         }
     }
@@ -127,11 +133,18 @@ public class MainActivity extends BaseActivity {
     /**
      * Metodo responsavel por carregar o menu na toolbar e a acao do onclick button
      */
-    private CustomActionMode customActionMode = new CustomActionMode() {
+    CustomActionMode customActionMode = new CustomActionMode() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            mCurrentActionMode = mode;
             // mode.setTitle("Options");
             mode.getMenuInflater().inflate(R.menu.menu_list, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            menu.findItem(R.id.action_delete).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
             return true;
         }
 
@@ -144,6 +157,11 @@ public class MainActivity extends BaseActivity {
                 }
             }
             return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mode.finish();
         }
     };
 }

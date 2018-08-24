@@ -1,6 +1,7 @@
 package br.tbm.github.api.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +29,8 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     private AdaptersCallbacks.ProfileAdapterCallback mCallback;
     private List<Profile> mList;
     private Context mContext;
+
+    private boolean hasItemSelected = false;
 
     public ProfileAdapter() {
     }
@@ -67,13 +70,62 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         holder.mTvLogin.setText(profile.getLogin());
 
         holder.mConstraintLayout.setOnLongClickListener((View v) -> {
+            // adiciona como true o item selecionado
+            profile.setHasSelected(true);
+
+            // muda o background do item selecionado
+            holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
+
+            // atribui true quando seleciona um item
+            hasItemSelected = true;
+
+            // retorna o long click para exibir o menu
             mCallback.longClick(position);
             return true;
         });
 
         holder.mConstraintLayout.setOnClickListener((View v) -> {
-            mCallback.onClick(position);
+
+            // verifica se tem pelo menos um item registrado, caso sim apenas altera o fundo,
+            // e nao redireciona para a proxima tela
+            if (hasItemSelected) {
+
+                // se esse item ja está selecionado altera a cor dele para remover da selecao
+                if (profile.hasSelected()) {
+                    profile.setHasSelected(false);
+                    holder.mConstraintLayout.setBackgroundColor(Color.TRANSPARENT);
+
+                    // verifica se existe mais algum item selecionado para remover a action mode
+                    // e exibir o toolbar normalmente
+                    boolean hasMoreThanZeroSelected = false;
+                    for (Profile p : mList) {
+                        if (p.hasSelected()) {
+                            hasMoreThanZeroSelected = true;
+                            break;
+                        }
+                    }
+
+                    if (!hasMoreThanZeroSelected) {
+                        hasItemSelected = false;
+                        mCallback.removeSelection();
+                    }
+
+                } else {
+                    // se o item nao foi selecionado, altera a cor do fundo
+                    holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
+                    profile.setHasSelected(true);
+                }
+            } else {
+                // caso nao tenha nenhum item selecionado, carregar a proxima tela
+                mCallback.onClick(position);
+            }
         });
+
+//        if (profile.hasSelected()) {
+//            holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
+//        } else {
+//            holder.mConstraintLayout.setBackgroundColor(Color.TRANSPARENT);
+//        }
 
         Picasso.with(mContext)
                 .load(profile.getAvatarUrl())

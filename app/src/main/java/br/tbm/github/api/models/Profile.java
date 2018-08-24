@@ -41,6 +41,8 @@ public class Profile implements Parcelable {
     @DatabaseField(canBeNull = false)
     private Date created;
 
+    private boolean hasSelected;
+
     public Profile() {
     }
 
@@ -82,6 +84,22 @@ public class Profile implements Parcelable {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Long getGithubID() {
+        return githubID;
+    }
+
+    public void setGithubID(Long githubID) {
+        this.githubID = githubID;
+    }
+
+    public boolean hasSelected() {
+        return hasSelected;
+    }
+
+    public void setHasSelected(boolean hasSelected) {
+        this.hasSelected = hasSelected;
     }
 
     @Override
