@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,6 +58,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             this.getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+    }
+
+    protected ActionBar getToolbar() {
+        return getSupportActionBar();
     }
 
     /**
