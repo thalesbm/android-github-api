@@ -16,6 +16,7 @@
 
     <!-- ######## MENU ######## -->
     <string name="action_search">Pesquisar</string>
+    <string name="action_delete">Deletar</string>
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>

@@ -10,5 +10,7 @@ public interface AdaptersCallbacks {
      */
     interface ProfileAdapterCallback {
         void longClick(int position);
+
+        void onClick(int position);
     }
 }

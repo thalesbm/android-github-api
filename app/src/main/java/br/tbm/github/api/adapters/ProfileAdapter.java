@@ -71,6 +71,10 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
             return true;
         });
 
+        holder.mConstraintLayout.setOnClickListener((View v) -> {
+            mCallback.onClick(position);
+        });
+
         Picasso.with(mContext)
                 .load(profile.getAvatarUrl())
                 .fit()

@@ -160,6 +160,6 @@ public class SearchByUsernameActivity extends BaseActivity {
      */
     private void saveGithubUserSuccess(Profile profile) {
         dismissProgressDialog();
-        RedirectUtils.redirectToProfileActivity(this, profile);
+        RedirectUtils.redirectToProfileActivity(this, profile, true);
     }
 }

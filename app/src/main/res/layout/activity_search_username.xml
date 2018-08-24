@@ -48,7 +48,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp"
-		android:background="@drawable/button_background_blue"
+		android:background="@drawable/button_background_black"
 		android:text="@string/search_activity_button"
 		android:textColor="@color/white"
 		app:layout_constraintTop_toBottomOf="@+id/search_activity_search_textlayout" />

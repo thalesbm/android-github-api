@@ -16,6 +16,7 @@ public class RedirectUtils {
 
     /**
      * Metodo responsavel por redirecionar para a tela principal e finalizar a atual tela do aplicativo
+     *
      * @param activity Activity
      */
     public static void redirectToMainActivity(Activity activity) {
@@ -26,18 +27,23 @@ public class RedirectUtils {
 
     /**
      * Metodo responsavel por redirecionar para a tela de perfil
+     *
      * @param activity Activity
-     * @param profile Profile
+     * @param profile  Profile
+     * @param closeCurrentActivity Boolean
      */
-    public static void redirectToProfileActivity(Activity activity, Profile profile) {
+    public static void redirectToProfileActivity(Activity activity, Profile profile, Boolean closeCurrentActivity) {
         Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(Constants.INTENT_PROFILE, profile);
         activity.startActivity(intent);
-        activity.finish();
+        if (closeCurrentActivity) {
+            activity.finish();
+        }
     }
 
     /**
      * Metodo responsavel por abrir o modal de pesquisar novo usuario
+     *
      * @param activity Activity
      */
     public static void redirectToSearchByUsernameActivity(Activity activity) {
