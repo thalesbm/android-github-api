@@ -39,7 +39,7 @@ public class ProfileActivityTest {
         profile.setLogin(login);
 
         Intent intent = new Intent(InstrumentationRegistry.getInstrumentation().getTargetContext(), ProfileActivity.class);
-        intent.putExtra(Constants.PROFILE_INTENT, profile);
+        intent.putExtra(Constants.INTENT_PROFILE, profile);
         return intent;
     }
 

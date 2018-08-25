@@ -63,8 +63,8 @@ public class SearchByUsernameActivity extends BaseActivity {
             }
         });
 
-        Button btnMovies = findViewById(R.id.search_activity_list_movies_button);
-        btnMovies.setOnClickListener((View v) -> {
+        Button btnSearch = findViewById(R.id.search_activity_button);
+        btnSearch.setOnClickListener((View v) -> {
             this.redirectToSearchProfile();
         });
     }

@@ -43,7 +43,7 @@
 	</android.support.design.widget.TextInputLayout>
 
 	<br.tbm.github.api.components.CustomMontserratLightButton
-		android:id="@+id/search_activity_list_movies_button"
+		android:id="@+id/search_activity_button"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="10dp"
