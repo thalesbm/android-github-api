@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 21/08/2018
  **/
 public class MainActivity extends BaseActivity {
+
+    private final String TAG = MainActivity.class.getSimpleName();
 
     private List<Profile> mProfiles;
 
@@ -114,6 +117,8 @@ public class MainActivity extends BaseActivity {
             mRecyclerView.setAdapter(new ProfileAdapter(profiles, new AdaptersCallbacks.ProfileAdapterCallback() {
                 @Override
                 public void longClick(int position) {
+                    Log.d(TAG, "longClick(): " + position);
+                    mProfiles.get(position).setHasSelected(true);
                     startSupportActionMode(customActionMode);
                 }
 
@@ -123,11 +128,38 @@ public class MainActivity extends BaseActivity {
                 }
 
                 @Override
-                public void removeSelection() {
-                    mCurrentActionMode.finish();
+                public void removeSelection(int position, boolean resetActionMode) {
+                    Log.d(TAG, "removeSelection(): " + position);
+                    mProfiles.get(position).setHasSelected(false);
+
+                    if (resetActionMode) {
+                        mCurrentActionMode.finish();
+                    } else {
+                        checkNumberOfItemsHasBeenChecked();
+                    }
+                }
+
+                @Override
+                public void addSelection(int position) {
+                    Log.d(TAG, "addSelection(): " + position);
+                    mProfiles.get(position).setHasSelected(true);
+                    checkNumberOfItemsHasBeenChecked();
                 }
             }));
         }
+    }
+
+    /**
+     * Verifica quantos items foram selecionado para atualizar o action mode title
+     */
+    private void checkNumberOfItemsHasBeenChecked() {
+        int qtd = 0;
+        for (Profile p : mProfiles) {
+            if (p.hasSelected()) {
+                qtd++;
+            }
+        }
+        mCurrentActionMode.setTitle(String.valueOf(qtd));
     }
 
     /**
@@ -137,7 +169,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mCurrentActionMode = mode;
-            // mode.setTitle("Options");
+            mode.setTitle("1");
             mode.getMenuInflater().inflate(R.menu.menu_list, menu);
             return true;
         }

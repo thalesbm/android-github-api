@@ -6,12 +6,11 @@
     <color name="colorAccent">#262626</color>
 
     <color name="transparent">#0000</color>
-    <color name="white">#fff</color>
-    <color name="blue">#00f</color>
-    <color name="red">#f00</color>
-    <color name="green">#0f0</color>
+    <color name="white">#ffffff</color>
     <color name="dark_grey">#4a4a4a</color>
     <color name="mid_grey">#8c8c8c</color>
     <color name="light_grey">#9b9b9b</color>
+
+    <color name="selected_grey">#1A000000</color>
 
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,17 +71,27 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         holder.mTvLogin.setText(profile.getLogin());
 
         holder.mConstraintLayout.setOnLongClickListener((View v) -> {
-            // adiciona como true o item selecionado
-            profile.setHasSelected(true);
 
-            // muda o background do item selecionado
-            holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
+            // executa apenas se item nao está selecionado ainda
+            if (!profile.hasSelected()) {
 
-            // atribui true quando seleciona um item
-            hasItemSelected = true;
+                // adiciona como true o item selecionado
+                profile.setHasSelected(true);
 
-            // retorna o long click para exibir o menu
-            mCallback.longClick(position);
+                // muda o background do item selecionado
+                holder.mConstraintLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.selected_grey));
+
+                // se é falso nao é o primeiro item a ser selecionado
+                if (!hasItemSelected) {
+                    // retorna o long click para exibir o menu
+                    mCallback.longClick(position);
+                } else {
+                    mCallback.addSelection(position);
+                }
+
+                // atribui true quando seleciona um item
+                hasItemSelected = true;
+            }
             return true;
         });
 
@@ -92,7 +103,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
                 // se esse item ja está selecionado altera a cor dele para remover da selecao
                 if (profile.hasSelected()) {
+
+                    // remove a selecao no objeto
                     profile.setHasSelected(false);
+
+                    // altera a cor para transparente
                     holder.mConstraintLayout.setBackgroundColor(Color.TRANSPARENT);
 
                     // verifica se existe mais algum item selecionado para remover a action mode
@@ -105,27 +120,25 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
                         }
                     }
 
+                    // se nao tiver mais nenhum item selecionado, altera a variavel global
                     if (!hasMoreThanZeroSelected) {
                         hasItemSelected = false;
-                        mCallback.removeSelection();
+                        mCallback.removeSelection(position, true);
+                    } else {
+                        mCallback.removeSelection(position, false);
                     }
 
                 } else {
                     // se o item nao foi selecionado, altera a cor do fundo
-                    holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
+                    holder.mConstraintLayout.setBackgroundColor(ContextCompat.getColor(mContext, R.color.selected_grey));
                     profile.setHasSelected(true);
+                    mCallback.addSelection(position);
                 }
             } else {
                 // caso nao tenha nenhum item selecionado, carregar a proxima tela
                 mCallback.onClick(position);
             }
         });
-
-//        if (profile.hasSelected()) {
-//            holder.mConstraintLayout.setBackgroundColor(0x9934B5E4);
-//        } else {
-//            holder.mConstraintLayout.setBackgroundColor(Color.TRANSPARENT);
-//        }
 
         Picasso.with(mContext)
                 .load(profile.getAvatarUrl())

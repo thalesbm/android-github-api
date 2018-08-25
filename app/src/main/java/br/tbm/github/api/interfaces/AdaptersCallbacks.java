@@ -13,6 +13,8 @@ public interface AdaptersCallbacks {
 
         void onClick(int position);
 
-        void removeSelection();
+        void removeSelection(int position, boolean resetActionMode);
+
+        void addSelection(int position);
     }
 }
