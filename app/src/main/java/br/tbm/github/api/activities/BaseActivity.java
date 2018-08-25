@@ -96,6 +96,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param description texto que sera exibido no dialog
      */
     protected void showAlertDialog(String description, final boolean closeCurrentActivity) {
+        dismissProgressDialog();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.alert);
         builder.setMessage(description);

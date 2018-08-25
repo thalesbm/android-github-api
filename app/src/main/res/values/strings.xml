@@ -3,16 +3,16 @@
     <string name="app_name">Github - API</string>
 
     <!-- ######## DEFAULT ######## -->
-    <string name="alert">Alert</string>
+    <string name="alert">Alerta</string>
     <string name="ok">OK</string>
-    <string name="yes">YES</string>
-    <string name="no">NO</string>
-    <string name="loading">Loading&#8230;</string>
+    <string name="yes">SIM</string>
+    <string name="no">NÃO</string>
+    <string name="loading">Carregando&#8230;</string>
 
     <!-- ######## GENERIC ISSUE ######## -->
     <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
-    <string name="generic_connection_issue">Nao foi possivel completar a requisiçao, tente novamente mais tarde</string>
-    <string name="generic_database_issue">Nao foi possivel conectar com o banco de dados, tente novamente mais tarde</string>
+    <string name="generic_connection_issue">Não foi possível completar a requisiçao, tente novamente mais tarde</string>
+    <string name="generic_database_issue">Não foi possível conectar com o banco de dados, tente novamente mais tarde</string>
 
     <!-- ######## MENU ######## -->
     <string name="action_search">Pesquisar</string>
@@ -20,17 +20,17 @@
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>
-    <string name="main_activity_list_empty">Você ainda nao fez nenhuma pesquisa, clique no icone de pesquisar acima e faça a sua primeira pesquisa</string>
+    <string name="main_activity_list_empty">Você ainda não fez nenhuma pesquisa, clique no icone acima e faça a sua primeira pesquisa</string>
 
     <!-- ######## SEARCH ACTIVITY ######## -->
     <string name="search_activity_toolbar">Pesquisar</string>
     <string name="search_activity_button">Pesquisar</string>
     <string name="search_activity_search_edittext">Nome do usuário</string>
-    <string name="search_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informaçoes públicas sobre ele.</string>
+    <string name="search_activity_description">Digite o nome do usuário abaixo e clique em pesquisar para buscar as informações públicas sobre ele.</string>
     <string name="search_activity_profile_validation">Campo usuário é obrigatório.</string>
     <string name="search_activity_user_not_found">Usuário nao foi encontrado</string>
 
     <!-- ######## PROFILE ACTIVITY ######## -->
-    <string name="profile_activity_no_repository">This user does not have any public repository</string>
+    <string name="profile_activity_no_repository">Este usuário não tem nenhum repositório público</string>
 
 </resources>

@@ -131,18 +131,22 @@ public class SearchByUsernameActivity extends BaseActivity {
      */
     private void searchProfileResponseSuccess(final Response<Profile> response) {
         if (response.isSuccessful()) {
-            new SaveGithubUserTask(new TasksCallbacks.SaveGithubUserTaskCallback() {
-                @Override
-                public void saveGithubUserTaskSuccess() {
-                    saveGithubUserSuccess(response.body());
-                }
 
-                @Override
-                public void saveGithubUserTaskFailure() {
-                    displayGenericDatabaseIssue();
-                }
-            }).execute(response.body());
+            if (response.body() != null && response.body().getName() != null) {
+                new SaveGithubUserTask(new TasksCallbacks.SaveGithubUserTaskCallback() {
+                    @Override
+                    public void saveGithubUserTaskSuccess() {
+                        saveGithubUserSuccess(response.body());
+                    }
 
+                    @Override
+                    public void saveGithubUserTaskFailure() {
+                        displayGenericDatabaseIssue();
+                    }
+                }).execute(response.body());
+            } else {
+                showAlertDialog(getString(R.string.search_activity_user_not_found), false);
+            }
         } else {
             dismissProgressDialog();
             if (response.raw().code() == HTTP_NOT_FOUND) {

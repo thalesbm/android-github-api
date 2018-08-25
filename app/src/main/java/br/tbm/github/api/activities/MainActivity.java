@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.R;
@@ -19,6 +20,7 @@ import br.tbm.github.api.interfaces.AdaptersCallbacks;
 import br.tbm.github.api.interfaces.TasksCallbacks;
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.tasks.ListGithubUsersTask;
+import br.tbm.github.api.tasks.RemoveUsersTask;
 import br.tbm.github.api.utils.RedirectUtils;
 
 /**
@@ -184,6 +186,7 @@ public class MainActivity extends BaseActivity {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete: {
+                    removeItems();
                     mode.finish();
                     break;
                 }
@@ -196,4 +199,29 @@ public class MainActivity extends BaseActivity {
             mode.finish();
         }
     };
+
+    /**
+     * Metodo responsavel por selecionar apenas os itens que estao marcados para excluir, chamar a task
+     * para remover os items e listar novamente
+     */
+    private void removeItems() {
+        List<Profile> listToRemove = new ArrayList<>();
+        for (Profile p : mProfiles) {
+            if (p.hasSelected()) {
+                listToRemove.add(p);
+            }
+        }
+
+        new RemoveUsersTask(new TasksCallbacks.RemoveUsersTaskCallback() {
+            @Override
+            public void removeUserTaskSuccess(List<Profile> profiles) {
+                listGithubUserSuccess(profiles);
+            }
+
+            @Override
+            public void removeUserTaskFailure() {
+                displayGenericDatabaseIssue();
+            }
+        }, listToRemove).execute();
+    }
 }

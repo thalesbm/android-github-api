@@ -10,7 +10,7 @@ import br.tbm.github.api.models.Profile;
 public interface TasksCallbacks {
 
     /**
-     * Interface para retornar da task para a activity o status do profile
+     * Callback da task de salvar usuario
      */
     interface SaveGithubUserTaskCallback {
         void saveGithubUserTaskSuccess();
@@ -19,11 +19,20 @@ public interface TasksCallbacks {
     }
 
     /**
-     * Interface para retornar da task para a activity a lista the todos os profiles pesquisados
+     * Callback da task de listar usuarios
      */
     interface ListGithubUserTaskCallback {
         void listGithubUserTaskSuccess(List<Profile> profiles);
 
         void listGithubUserTaskFailure();
+    }
+
+    /**
+     * Callback da task de remover usuarios
+     */
+    interface RemoveUsersTaskCallback {
+        void removeUserTaskSuccess(List<Profile> profiles);
+
+        void removeUserTaskFailure();
     }
 }
