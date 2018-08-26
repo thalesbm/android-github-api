@@ -26,7 +26,10 @@ import br.tbm.github.api.utils.RedirectUtils;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements
+        TasksCallbacks.RemoveUsersTaskCallback,
+        TasksCallbacks.ListGithubUserTaskCallback,
+        AdaptersCallbacks.ProfileAdapterCallback {
 
     private final String TAG = MainActivity.class.getSimpleName();
 
@@ -87,22 +90,8 @@ public class MainActivity extends BaseActivity {
      */
     private void listProfilesFromDatabase() {
         showProgressDialog(getString(R.string.loading));
-        new ListGithubUsersTask(new TasksCallbacks.ListGithubUserTaskCallback() {
-            @Override
-            public void listGithubUserTaskSuccess(List<Profile> profiles) {
-                listGithubUserSuccess(profiles);
-            }
-
-            @Override
-            public void listGithubUserTaskFailure() {
-                displayGenericDatabaseIssue();
-            }
-        }).execute();
+        new ListGithubUsersTask(this).execute();
     }
-
-    // ####################
-    // CALLBACK DAS TASKS
-    // ####################
 
     /**
      * Metodo responsavel por exibir na tela todos os usuarios ja pesquisados e salvos na base de dados
@@ -114,40 +103,11 @@ public class MainActivity extends BaseActivity {
         dismissProgressDialog();
         if (profiles.isEmpty()) {
             mTvListEmpty.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
         } else {
             mTvListEmpty.setVisibility(View.GONE);
-            mRecyclerView.setAdapter(new ProfileAdapter(profiles, new AdaptersCallbacks.ProfileAdapterCallback() {
-                @Override
-                public void longClick(int position) {
-                    Log.d(TAG, "longClick(): " + position);
-                    mProfiles.get(position).setHasSelected(true);
-                    startSupportActionMode(customActionMode);
-                }
-
-                @Override
-                public void onClick(int position) {
-                    RedirectUtils.redirectToProfileActivity(MainActivity.this, mProfiles.get(position), false);
-                }
-
-                @Override
-                public void removeSelection(int position, boolean resetActionMode) {
-                    Log.d(TAG, "removeSelection(): " + position);
-                    mProfiles.get(position).setHasSelected(false);
-
-                    if (resetActionMode) {
-                        mCurrentActionMode.finish();
-                    } else {
-                        checkNumberOfItemsHasBeenChecked();
-                    }
-                }
-
-                @Override
-                public void addSelection(int position) {
-                    Log.d(TAG, "addSelection(): " + position);
-                    mProfiles.get(position).setHasSelected(true);
-                    checkNumberOfItemsHasBeenChecked();
-                }
-            }));
+            mRecyclerView.setAdapter(new ProfileAdapter(profiles, this));
+            mRecyclerView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -212,16 +172,65 @@ public class MainActivity extends BaseActivity {
             }
         }
 
-        new RemoveUsersTask(new TasksCallbacks.RemoveUsersTaskCallback() {
-            @Override
-            public void removeUserTaskSuccess(List<Profile> profiles) {
-                listGithubUserSuccess(profiles);
-            }
+        new RemoveUsersTask(this, listToRemove).execute();
+    }
 
-            @Override
-            public void removeUserTaskFailure() {
-                displayGenericDatabaseIssue();
-            }
-        }, listToRemove).execute();
+    // ################
+    // CALLBACK DA TASK
+    // ################
+
+    @Override
+    public void removeUserTaskSuccess(List<Profile> profiles) {
+        listGithubUserSuccess(profiles);
+    }
+
+    @Override
+    public void removeUserTaskFailure() {
+        displayGenericDatabaseIssue();
+    }
+
+    @Override
+    public void listGithubUserTaskSuccess(List<Profile> profiles) {
+        listGithubUserSuccess(profiles);
+    }
+
+    @Override
+    public void listGithubUserTaskFailure() {
+        displayGenericDatabaseIssue();
+    }
+
+    // ###################
+    // CALLBACK DO ADAPTER
+    // ###################
+
+    @Override
+    public void longClick(int position) {
+        Log.d(TAG, "longClick(): " + position);
+        mProfiles.get(position).setHasSelected(true);
+        startSupportActionMode(customActionMode);
+    }
+
+    @Override
+    public void onClick(int position) {
+        RedirectUtils.redirectToProfileActivity(MainActivity.this, mProfiles.get(position), false);
+    }
+
+    @Override
+    public void removeSelection(int position, boolean resetActionMode) {
+        Log.d(TAG, "removeSelection(): " + position);
+        mProfiles.get(position).setHasSelected(false);
+
+        if (resetActionMode) {
+            mCurrentActionMode.finish();
+        } else {
+            checkNumberOfItemsHasBeenChecked();
+        }
+    }
+
+    @Override
+    public void addSelection(int position) {
+        Log.d(TAG, "addSelection(): " + position);
+        mProfiles.get(position).setHasSelected(true);
+        checkNumberOfItemsHasBeenChecked();
     }
 }
