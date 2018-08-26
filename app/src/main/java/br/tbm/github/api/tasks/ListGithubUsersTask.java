@@ -24,13 +24,12 @@ public class ListGithubUsersTask extends BaseTask<Void, Void, List<Profile>> {
     protected List<Profile> doInBackground(Void... voids) {
         List<Profile> profiles = new ArrayList<>();
         try {
-            profiles = mDatabase.getProfileDao().queryForAll();
+            profiles = mDatabase.getProfileDao().listProfiles();
         } catch (SQLException e) {
             Log.e(TAG, "Ocorreu um erro ao listar os profiles do github");
             e.printStackTrace();
             mCallback.listGithubUserTaskFailure();
         }
-
         return profiles;
     }
 
