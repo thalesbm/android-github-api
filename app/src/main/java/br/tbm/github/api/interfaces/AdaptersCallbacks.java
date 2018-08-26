@@ -6,7 +6,7 @@ package br.tbm.github.api.interfaces;
 public interface AdaptersCallbacks {
 
     /**
-     * Interface para retornar para a activity no evento do click no item da lista
+     * Interface para retornar para a activity eventos do adapter the ProfileAdapter.class
      */
     interface ProfileAdapterCallback {
         void longClick(int position);
@@ -16,5 +16,12 @@ public interface AdaptersCallbacks {
         void removeSelection(int position, boolean resetActionMode);
 
         void addSelection(int position);
+    }
+
+    /**
+     * Interface para retornar para a activity eventos do adapter the RepositoryAdapter.class
+     */
+    interface RepositoryAdapterCallback {
+        void onClick(int position);
     }
 }

@@ -17,6 +17,7 @@ import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.RepositoryAdapter;
 import br.tbm.github.api.components.CircleTransform;
+import br.tbm.github.api.interfaces.AdaptersCallbacks;
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
@@ -28,7 +29,8 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class ProfileActivity extends BaseActivity {
+public class ProfileActivity extends BaseActivity implements
+        AdaptersCallbacks.RepositoryAdapterCallback {
 
     private RecyclerView mRecyclerView;
     private ImageView mIvProfile;
@@ -114,7 +116,7 @@ public class ProfileActivity extends BaseActivity {
         if (body.isEmpty()) {
             mTvEmptyDescription.setVisibility(View.VISIBLE);
         } else {
-            mRecyclerView.setAdapter(new RepositoryAdapter(body));
+            mRecyclerView.setAdapter(new RepositoryAdapter(body, this));
         }
 
         // baixa a imagem usando picasso library
@@ -128,5 +130,10 @@ public class ProfileActivity extends BaseActivity {
         }
 
         changeToolbarTitle(mProfile.getName());
+    }
+
+    @Override
+    public void onClick(int position) {
+
     }
 }

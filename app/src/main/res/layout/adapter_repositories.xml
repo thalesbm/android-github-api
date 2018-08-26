@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adapter_main_layout"
     android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="?android:attr/selectableItemBackground">
 
     <TextView
-        android:id="@+id/adapter_name"
+        android:id="@+id/adapter_name_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
         android:textColor="@color/dark_grey"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/adapter_profile_imageview" />
 
     <TextView
-        android:id="@+id/adapter_language"
+        android:id="@+id/adapter_language_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
         android:textColor="@color/light_grey"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/adapter_profile_imageview"
+        app:layout_constraintTop_toBottomOf="@+id/adapter_name_textview" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/light_grey" />
+        android:layout_marginTop="10dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/adapter_language_textview" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
