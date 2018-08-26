@@ -25,7 +25,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  **/
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class SearchByUsernameActivityTest {
+public class SearchUserTest {
 
     @Rule
     public ActivityTestRule<SearchByUsernameActivity> mActivityRule =
@@ -67,4 +67,6 @@ public class SearchByUsernameActivityTest {
 
         onView(withText(R.string.search_activity_user_not_found)).check(matches(isDisplayed()));
     }
+
+    //TODO: ADICIONAR O TESTE CASO A PESQUISA SEJA COM SUCESSO
 }
