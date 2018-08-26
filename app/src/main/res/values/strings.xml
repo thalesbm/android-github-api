@@ -17,6 +17,9 @@
     <!-- ######## MENU ######## -->
     <string name="action_search">Pesquisar</string>
     <string name="action_delete">Deletar</string>
+    <string name="action_events">Eventos</string>
+    <string name="action_tags">Tags</string>
+    <string name="action_branches">Branches</string>
 
     <!-- ######## MAIN ACTIVITY ######## -->
     <string name="main_activity_toolbar">Github - API</string>

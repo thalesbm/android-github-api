@@ -69,7 +69,7 @@ public class ListProfilesActivity extends BaseActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         return true;
     }
 
@@ -132,7 +132,7 @@ public class ListProfilesActivity extends BaseActivity implements
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             mCurrentActionMode = mode;
             mode.setTitle("1");
-            mode.getMenuInflater().inflate(R.menu.menu_list, menu);
+            mode.getMenuInflater().inflate(R.menu.menu_action_mode, menu);
             return true;
         }
 

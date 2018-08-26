@@ -22,6 +22,7 @@ import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
+import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -134,6 +135,6 @@ public class ProfileActivity extends BaseActivity implements
 
     @Override
     public void onClick(int position) {
-
+        RedirectUtils.redirectToRepositoryDetailsActivity(this);
     }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item
+		android:id="@+id/navigation_branches"
+		android:icon="@drawable/ic_branch_36dp"
+		android:title="@string/action_branches" />
+
+	<item
+		android:id="@+id/navigation_events"
+		android:icon="@drawable/ic_event_grey_36dp"
+		android:title="@string/action_events" />
+
+	<item
+		android:id="@+id/navigation_tags"
+		android:icon="@drawable/ic_tags_36dp"
+		android:title="@string/action_tags" />
+
+</menu>

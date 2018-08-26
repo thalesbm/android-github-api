@@ -6,6 +6,7 @@ import android.content.Intent;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
+import br.tbm.github.api.activities.RepositoryDetailsActivity;
 import br.tbm.github.api.activities.SearchByUsernameActivity;
 import br.tbm.github.api.models.Profile;
 
@@ -42,12 +43,22 @@ public class RedirectUtils {
     }
 
     /**
-     * Metodo responsavel por abrir o modal de pesquisar novo usuario
+     * Metodo responsavel por abrir a tela de pesquisar novo usuario
      *
      * @param activity Activity
      */
     public static void redirectToSearchByUsernameActivity(Activity activity) {
         Intent intent = new Intent(activity, SearchByUsernameActivity.class);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * Metodo responsavel por abrir a tela de mostrar os detalhes do repositorio selecionado
+     *
+     * @param activity Activity
+     */
+    public static void redirectToRepositoryDetailsActivity(Activity activity) {
+        Intent intent = new Intent(activity, RepositoryDetailsActivity.class);
         activity.startActivity(intent);
     }
 }
