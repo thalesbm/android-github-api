@@ -1,22 +1,15 @@
 package br.tbm.github.api;
 
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import br.tbm.github.api.activities.MainActivity;
+import br.tbm.github.api.activities.ListProfilesActivity;
 
-import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -26,11 +19,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTest {
+public class ListProfilesActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
-            new ActivityTestRule<>(MainActivity.class, true, true);
+    public ActivityTestRule<ListProfilesActivity> mActivityRule =
+            new ActivityTestRule<>(ListProfilesActivity.class, true, true);
 
 //    /**
 //     * valida se a logica de nao preencher o campo de perfil e exibir a mensagem está funcionando

@@ -26,12 +26,12 @@ import br.tbm.github.api.utils.RedirectUtils;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class MainActivity extends BaseActivity implements
+public class ListProfilesActivity extends BaseActivity implements
         TasksCallbacks.RemoveUsersTaskCallback,
         TasksCallbacks.ListGithubUserTaskCallback,
         AdaptersCallbacks.ProfileAdapterCallback {
 
-    private final String TAG = MainActivity.class.getSimpleName();
+    private final String TAG = ListProfilesActivity.class.getSimpleName();
 
     private List<Profile> mProfiles;
 
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_profiles);
 
         setupToolbar(findViewById(R.id.toolbar));
         changeToolbarTitle(getString(R.string.main_activity_toolbar));
@@ -212,7 +212,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onClick(int position) {
-        RedirectUtils.redirectToProfileActivity(MainActivity.this, mProfiles.get(position), false);
+        RedirectUtils.redirectToProfileActivity(ListProfilesActivity.this, mProfiles.get(position), false);
     }
 
     @Override

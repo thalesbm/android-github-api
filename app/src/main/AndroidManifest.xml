@@ -27,7 +27,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.ListProfilesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

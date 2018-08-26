@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.activities.MainActivity;
+import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
 import br.tbm.github.api.activities.SearchByUsernameActivity;
 import br.tbm.github.api.models.Profile;
@@ -20,7 +20,7 @@ public class RedirectUtils {
      * @param activity Activity
      */
     public static void redirectToMainActivity(Activity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, ListProfilesActivity.class);
         activity.startActivity(intent);
         activity.finish();
     }
