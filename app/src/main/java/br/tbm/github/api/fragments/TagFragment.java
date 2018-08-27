@@ -26,5 +26,15 @@ public class TagFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
 
         getAppActivity().changeToolbarTitle(getString(R.string.tags_fragment_title));
+
+        this.init();
+    }
+
+    /**
+     * Metodo responsavel por inicializar os componentes da tela
+     */
+    @Override
+    protected void init() {
+
     }
 }

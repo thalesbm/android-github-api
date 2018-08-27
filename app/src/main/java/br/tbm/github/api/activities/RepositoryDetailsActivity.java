@@ -30,9 +30,12 @@ public class RepositoryDetailsActivity extends BaseActivity implements
         this.init();
 
         // exibe o fragment
-        replaceFragment(new BranchFragment(), true);
+        this.replaceFragment(new BranchFragment(), true);
     }
 
+    /**
+     * Metodo responsavel por inicializar os componentes da tela
+     */
     @Override
     protected void init() {
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -43,19 +46,20 @@ public class RepositoryDetailsActivity extends BaseActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_events:
-                replaceFragment(new EventFragment(), false);
+                this.replaceFragment(new EventFragment(), false);
                 return true;
             case R.id.navigation_branches:
-                replaceFragment(new BranchFragment(), false);
+                this.replaceFragment(new BranchFragment(), false);
                 return true;
             case R.id.navigation_tags:
-                replaceFragment(new TagFragment(), false);
+                this.replaceFragment(new TagFragment(), false);
                 return true;
         }
         return false;
     }
 
     /**
+     * Metodo para carregar o fragment na tela
      *
      * @param fragment Fragment
      * @param addToBackStack Boolean
