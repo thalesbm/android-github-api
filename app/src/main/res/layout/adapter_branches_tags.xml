@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/adapter_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp">
+
+    <ImageView
+        android:id="@+id/adapter_imageview"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_branch_list_grey_48dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/adapter_name_textview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="40dp"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:singleLine="true"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/adapter_imageview" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/adapter_name_textview" />
+
+</android.support.constraint.ConstraintLayout>

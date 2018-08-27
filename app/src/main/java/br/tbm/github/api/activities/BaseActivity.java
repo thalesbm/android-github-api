@@ -60,6 +60,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Configura a toolbar mas nao adiciona o titulo dela
+     */
+    protected void setToolbarProperties() {
+        if (this.getSupportActionBar() != null) {
+            this.getSupportActionBar().setTitle("");
+            this.getSupportActionBar().setHomeButtonEnabled(true);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
     protected ActionBar getToolbar() {
         return getSupportActionBar();
     }

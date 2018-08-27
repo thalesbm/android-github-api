@@ -26,7 +26,8 @@ import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
 /**
  * Created by thalesbertolini on 23/08/2018
  **/
-public class SearchByUsernameActivity extends BaseActivity {
+public class SearchByUsernameActivity extends BaseActivity implements
+        TasksCallbacks.SaveGithubUserTaskCallback {
 
     private TextInputLayout mTvProfile;
     private EditText mEdProfile;
@@ -133,17 +134,7 @@ public class SearchByUsernameActivity extends BaseActivity {
         if (response.isSuccessful()) {
 
             if (response.body() != null && response.body().getName() != null) {
-                new SaveGithubUserTask(new TasksCallbacks.SaveGithubUserTaskCallback() {
-                    @Override
-                    public void saveGithubUserTaskSuccess() {
-                        saveGithubUserSuccess(response.body());
-                    }
-
-                    @Override
-                    public void saveGithubUserTaskFailure() {
-                        displayGenericDatabaseIssue();
-                    }
-                }).execute(response.body());
+                new SaveGithubUserTask(this).execute(response.body());
             } else {
                 showAlertDialog(getString(R.string.search_activity_user_not_found), false);
             }
@@ -157,13 +148,23 @@ public class SearchByUsernameActivity extends BaseActivity {
         }
     }
 
+    // ################
+    // CALLBACK DA TASK
+    // ################
+
     /**
      * Metodo responsavel por fechar o progress dialog e redirecionar para a tela de perfil
      *
      * @param profile Profile
      */
-    private void saveGithubUserSuccess(Profile profile) {
+    @Override
+    public void saveGithubUserTaskSuccess(Profile profile) {
         dismissProgressDialog();
         RedirectUtils.redirectToProfileActivity(this, profile, true);
+    }
+
+    @Override
+    public void saveGithubUserTaskFailure() {
+        displayGenericDatabaseIssue();
     }
 }

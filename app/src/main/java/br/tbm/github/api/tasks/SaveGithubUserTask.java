@@ -11,7 +11,7 @@ import br.tbm.github.api.interfaces.TasksCallbacks;
 /**
  * Created by thalesbertolini on 23/08/2018
  **/
-public class SaveGithubUserTask extends BaseTask<Profile, Void, Void> {
+public class SaveGithubUserTask extends BaseTask<Profile, Void, Profile> {
 
     private TasksCallbacks.SaveGithubUserTaskCallback mCallback;
 
@@ -20,9 +20,9 @@ public class SaveGithubUserTask extends BaseTask<Profile, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Profile... params) {
+    protected Profile doInBackground(Profile... params) {
+        Profile profile = params[0];
         try {
-            Profile profile = params[0];
             profile.setCreated(new Date());
 
             mDatabase.getProfileDao().create(profile);
@@ -31,12 +31,12 @@ public class SaveGithubUserTask extends BaseTask<Profile, Void, Void> {
             e.printStackTrace();
             mCallback.saveGithubUserTaskFailure();
         }
-        return null;
+        return profile;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
-        mCallback.saveGithubUserTaskSuccess();
+    protected void onPostExecute(Profile profile) {
+        super.onPostExecute(profile);
+        mCallback.saveGithubUserTaskSuccess(profile);
     }
 }

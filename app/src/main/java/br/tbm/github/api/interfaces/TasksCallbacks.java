@@ -13,7 +13,7 @@ public interface TasksCallbacks {
      * Callback da task de salvar usuario
      */
     interface SaveGithubUserTaskCallback {
-        void saveGithubUserTaskSuccess();
+        void saveGithubUserTaskSuccess(Profile profile);
 
         void saveGithubUserTaskFailure();
     }

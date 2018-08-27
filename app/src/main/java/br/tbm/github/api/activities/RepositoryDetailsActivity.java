@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
+import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.fragments.BranchFragment;
 import br.tbm.github.api.fragments.EventFragment;
@@ -19,18 +20,23 @@ import br.tbm.github.api.fragments.TagFragment;
 public class RepositoryDetailsActivity extends BaseActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener {
 
+    private String mRepositoryName, mUserName;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
 
         setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties("Teste");
+        setToolbarProperties();
+
+        this.mRepositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
+        this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
 
         this.init();
 
         // exibe o fragment
-        this.replaceFragment(new BranchFragment(), true);
+        this.replaceFragment(new BranchFragment(), true, this.getParameters());
     }
 
     /**
@@ -46,25 +52,41 @@ public class RepositoryDetailsActivity extends BaseActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_events:
-                this.replaceFragment(new EventFragment(), false);
+                this.replaceFragment(new EventFragment(), false, this.getParameters());
                 return true;
             case R.id.navigation_branches:
-                this.replaceFragment(new BranchFragment(), false);
+                this.replaceFragment(new BranchFragment(), false, this.getParameters());
                 return true;
             case R.id.navigation_tags:
-                this.replaceFragment(new TagFragment(), false);
+                this.replaceFragment(new TagFragment(), false, this.getParameters());
                 return true;
         }
         return false;
     }
 
     /**
+     * Metodo responsavel por criar o bundle que sera mandado para os fragments
+     *
+     * @return Bundle
+     */
+    private Bundle getParameters() {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.INTENT_REPOSITORY, mRepositoryName);
+        bundle.putString(Constants.INTENT_USERNAME, mUserName);
+        return bundle;
+    }
+
+    /**
      * Metodo para carregar o fragment na tela
      *
-     * @param fragment Fragment
+     * @param fragment       Fragment
      * @param addToBackStack Boolean
      */
-    private void replaceFragment(Fragment fragment, boolean addToBackStack) {
+    private void replaceFragment(Fragment fragment, boolean addToBackStack, Bundle bundle) {
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
+
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.nav_drawer_container, fragment);
         if (addToBackStack) {

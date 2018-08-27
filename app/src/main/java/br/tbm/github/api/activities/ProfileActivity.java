@@ -49,7 +49,7 @@ public class ProfileActivity extends BaseActivity implements
         mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
         setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties("");
+        setToolbarProperties();
 
         this.init();
         this.searchProfileByName();
@@ -85,14 +85,14 @@ public class ProfileActivity extends BaseActivity implements
                 if (response.isSuccessful()) {
                     updateScreen(response.body());
                 } else {
-                    // showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
+                    showAlertDialog(getString(R.string.generic_connection_issue), true);
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Throwable t) {
                 dismissProgressDialog();
-                // showAlertDialog(getString(R.string.profile_activity_generic_issue), true);
+                showAlertDialog(getString(R.string.generic_connection_issue), true);
             }
         });
     }
@@ -133,8 +133,12 @@ public class ProfileActivity extends BaseActivity implements
         changeToolbarTitle(mProfile.getName());
     }
 
+    // ###################
+    // CALLBACK DO ADAPTER
+    // ###################
+
     @Override
     public void onClick(int position) {
-        RedirectUtils.redirectToRepositoryDetailsActivity(this);
+        RedirectUtils.redirectToRepositoryDetailsActivity(this, mBody.get(position).getName(), mProfile.getLogin());
     }
 }

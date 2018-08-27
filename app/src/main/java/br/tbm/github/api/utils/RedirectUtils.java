@@ -29,8 +29,8 @@ public class RedirectUtils {
     /**
      * Metodo responsavel por redirecionar para a tela de perfil
      *
-     * @param activity Activity
-     * @param profile  Profile
+     * @param activity             Activity
+     * @param profile              Profile
      * @param closeCurrentActivity Boolean
      */
     public static void redirectToProfileActivity(Activity activity, Profile profile, Boolean closeCurrentActivity) {
@@ -55,10 +55,14 @@ public class RedirectUtils {
     /**
      * Metodo responsavel por abrir a tela de mostrar os detalhes do repositorio selecionado
      *
-     * @param activity Activity
+     * @param activity       Activity
+     * @param repositoryName String
+     * @param username       String
      */
-    public static void redirectToRepositoryDetailsActivity(Activity activity) {
+    public static void redirectToRepositoryDetailsActivity(Activity activity, String repositoryName, String username) {
         Intent intent = new Intent(activity, RepositoryDetailsActivity.class);
+        intent.putExtra(Constants.INTENT_USERNAME, username);
+        intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
         activity.startActivity(intent);
     }
 }

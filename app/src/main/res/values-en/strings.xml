@@ -38,11 +38,14 @@
 
     <!-- ######## EVENTS FRAGMENT ######## -->
     <string name="events_fragment_title">Events</string>
+    <string name="events_fragment_empty_list">This repository does not have any event</string>
 
     <!-- ######## BRANCHES FRAGMENT ######## -->
     <string name="branches_fragment_title">Branches</string>
+    <string name="branches_fragment_empty_list">This repository does not have any branch</string>
 
     <!-- ######## TAGS FRAGMENT ######## -->
     <string name="tags_fragment_title">Tags</string>
+    <string name="tags_fragment_empty_list">This repository does not have any tag</string>
 
 </resources>

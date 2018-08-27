@@ -3,7 +3,7 @@
 
 	<item
 		android:id="@+id/navigation_branches"
-		android:icon="@drawable/ic_branch_36dp"
+		android:icon="@drawable/ic_branch_grey_36dp"
 		android:title="@string/action_branches" />
 
 	<item
@@ -13,7 +13,7 @@
 
 	<item
 		android:id="@+id/navigation_tags"
-		android:icon="@drawable/ic_tags_36dp"
+		android:icon="@drawable/ic_tags_grey_36dp"
 		android:title="@string/action_tags" />
 
 </menu>
