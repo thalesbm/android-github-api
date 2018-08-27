@@ -4,41 +4,69 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.fragments.BranchFragment;
+import br.tbm.github.api.fragments.EventFragment;
+import br.tbm.github.api.fragments.TagFragment;
 
 /**
  * Created by thalesbertolini on 26/08/2018
  **/
-public class RepositoryDetailsActivity extends BaseActivity {
+public class RepositoryDetailsActivity extends BaseActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
+
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties("Teste");
+
+        this.init();
+
+        // exibe o fragment
+        replaceFragment(new BranchFragment(), true);
     }
 
     @Override
     protected void init() {
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(this);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_events:
-                    return true;
-                case R.id.navigation_branches:
-                    return true;
-                case R.id.navigation_tags:
-                    return true;
-            }
-            return false;
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_events:
+                replaceFragment(new EventFragment(), false);
+                return true;
+            case R.id.navigation_branches:
+                replaceFragment(new BranchFragment(), false);
+                return true;
+            case R.id.navigation_tags:
+                replaceFragment(new TagFragment(), false);
+                return true;
         }
-    };
+        return false;
+    }
+
+    /**
+     *
+     * @param fragment Fragment
+     * @param addToBackStack Boolean
+     */
+    private void replaceFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_drawer_container, fragment);
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(fragment.getClass().getName());
+        }
+
+        fragmentTransaction.commit();
+    }
 }

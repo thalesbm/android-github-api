@@ -36,4 +36,13 @@
     <!-- ######## PROFILE ACTIVITY ########-->
     <string name="profile_activity_no_repository">This user does not have any public repository</string>
 
+    <!-- ######## EVENTS FRAGMENT ######## -->
+    <string name="events_fragment_title">Events</string>
+
+    <!-- ######## BRANCHES FRAGMENT ######## -->
+    <string name="branches_fragment_title">Branches</string>
+
+    <!-- ######## TAGS FRAGMENT ######## -->
+    <string name="tags_fragment_title">Tags</string>
+
 </resources>

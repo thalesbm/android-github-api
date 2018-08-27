@@ -41,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * Adiciona a o titulo da tela na toolbar
      * @param title titulo da tela
      */
-    protected void changeToolbarTitle(String title) {
+    public void changeToolbarTitle(String title) {
         if (this.getSupportActionBar() != null) {
             this.getSupportActionBar().setTitle(title);
         }
