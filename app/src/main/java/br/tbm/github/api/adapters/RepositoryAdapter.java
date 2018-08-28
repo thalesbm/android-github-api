@@ -19,13 +19,13 @@ import br.tbm.github.api.interfaces.AdaptersCallbacks;
  **/
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
 
-    private AdaptersCallbacks.RepositoryAdapterCallback mCallback;
+    private AdaptersCallbacks.DefaultAdapterCallback mCallback;
     private List<RepositoriesResponse> mList;
 
     public RepositoryAdapter() {
     }
 
-    public RepositoryAdapter(List<RepositoriesResponse> list, AdaptersCallbacks.RepositoryAdapterCallback callback) {
+    public RepositoryAdapter(List<RepositoriesResponse> list, AdaptersCallbacks.DefaultAdapterCallback callback) {
         this.mList = list;
         this.mCallback = callback;
     }

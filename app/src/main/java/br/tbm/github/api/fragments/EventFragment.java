@@ -14,9 +14,7 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.adapters.BranchesTagsAdapter;
 import br.tbm.github.api.adapters.EventsAdapter;
-import br.tbm.github.api.entities.BranchesTagsResponse;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
 import br.tbm.github.api.rest.RestAPI;
@@ -29,7 +27,7 @@ import retrofit2.Response;
  * Created by thalesbertolini on 26/08/2018
  **/
 public class EventFragment extends BaseFragment implements
-        AdaptersCallbacks.RepositoryAdapterCallback {
+        AdaptersCallbacks.DefaultAdapterCallback {
 
     private String mRepositoryName, mUserName;
 

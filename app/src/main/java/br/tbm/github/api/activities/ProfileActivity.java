@@ -31,7 +31,7 @@ import retrofit2.Response;
  * Created by thalesbertolini on 21/08/2018
  **/
 public class ProfileActivity extends BaseActivity implements
-        AdaptersCallbacks.RepositoryAdapterCallback {
+        AdaptersCallbacks.DefaultAdapterCallback {
 
     private RecyclerView mRecyclerView;
     private ImageView mIvProfile;

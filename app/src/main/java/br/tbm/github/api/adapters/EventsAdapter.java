@@ -12,7 +12,6 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.entities.EventsResponse;
-import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
 
 /**
@@ -20,13 +19,13 @@ import br.tbm.github.api.interfaces.AdaptersCallbacks;
  **/
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
-    private AdaptersCallbacks.RepositoryAdapterCallback mCallback;
+    private AdaptersCallbacks.DefaultAdapterCallback mCallback;
     private List<EventsResponse> mList;
 
     public EventsAdapter() {
     }
 
-    public EventsAdapter(List<EventsResponse> list, AdaptersCallbacks.RepositoryAdapterCallback callback) {
+    public EventsAdapter(List<EventsResponse> list, AdaptersCallbacks.DefaultAdapterCallback callback) {
         this.mList = list;
         this.mCallback = callback;
     }
