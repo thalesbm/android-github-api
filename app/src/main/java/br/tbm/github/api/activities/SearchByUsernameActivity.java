@@ -116,7 +116,7 @@ public class SearchByUsernameActivity extends BaseActivity implements
 
             @Override
             public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-                displayGenericNetworkIssue();
+                displayGenericNetworkIssue(t.getMessage(), false);
             }
         });
     }

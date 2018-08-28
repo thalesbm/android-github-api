@@ -91,8 +91,7 @@ public class ProfileActivity extends BaseActivity implements
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Throwable t) {
-                dismissProgressDialog();
-                showAlertDialog(t.getMessage(), true);
+                displayGenericNetworkIssue(t.getMessage(), true);
             }
         });
     }

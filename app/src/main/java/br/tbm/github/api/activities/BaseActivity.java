@@ -182,10 +182,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Metodo generico que fecha o progress dialog caso esteja aberto e exibe uma mensagem generica
      * de na conexao com o servidor
+     *
+     * @param message            String
+     * @param closeCurrentScreen Boolean
      */
-    protected void displayGenericNetworkIssue() {
+    public void displayGenericNetworkIssue(String message, boolean closeCurrentScreen) {
         dismissProgressDialog();
-        showAlertDialog(getString(R.string.generic_connection_issue), false);
+        showAlertDialog(message, closeCurrentScreen);
     }
 
     /**

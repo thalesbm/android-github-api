@@ -88,8 +88,7 @@ public class TagFragment extends BaseFragment {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Throwable t) {
-                dismissProgressDialog();
-                showAlertDialog(getString(R.string.generic_connection_issue), true);
+                getAppActivity().displayGenericNetworkIssue(t.getMessage(), true);
             }
         });
     }
