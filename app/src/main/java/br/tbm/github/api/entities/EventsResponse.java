@@ -1,11 +1,16 @@
 package br.tbm.github.api.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
+
+import br.tbm.github.api.utils.ParcelableUtils;
 
 /**
  * Created by thalesbertolini on 28/08/2018
  **/
-public class EventsResponse {
+public class EventsResponse implements Parcelable {
 
     @SerializedName("type")
     private String type;
@@ -19,6 +24,8 @@ public class EventsResponse {
     @SerializedName("created_at")
     private String created;
 
+    public EventsResponse() {
+    }
 
     public String getType() {
         return type;
@@ -51,4 +58,36 @@ public class EventsResponse {
     public void setCreated(String created) {
         this.created = created;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(type);
+        dest.writeValue(created);
+
+        dest.writeParcelable(eventPayloadResponse, flags);
+        dest.writeParcelable(eventActorResponse, flags);
+    }
+
+    public EventsResponse(Parcel in) {
+        this.type = ParcelableUtils.readValueToString(in);
+        this.created = ParcelableUtils.readValueToString(in);
+
+        this.eventPayloadResponse = in.readParcelable(EventPayloadResponse.class.getClassLoader());
+        this.eventActorResponse = in.readParcelable(EventActorResponse.class.getClassLoader());
+    }
+
+    public static final Creator<EventsResponse> CREATOR = new Creator<EventsResponse>() {
+        public EventsResponse createFromParcel(Parcel in) {
+            return new EventsResponse(in);
+        }
+
+        public EventsResponse[] newArray(int size) {
+            return new EventsResponse[size];
+        }
+    };
 }

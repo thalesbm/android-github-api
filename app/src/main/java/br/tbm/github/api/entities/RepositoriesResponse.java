@@ -1,11 +1,16 @@
 package br.tbm.github.api.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
+
+import br.tbm.github.api.utils.ParcelableUtils;
 
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class RepositoriesResponse {
+public class RepositoriesResponse implements Parcelable {
 
     @SerializedName("id")
     private Long id;
@@ -36,6 +41,9 @@ public class RepositoriesResponse {
 
     @SerializedName("language")
     private String language;
+
+    public RepositoriesResponse() {
+    }
 
     public Long getId() {
         return id;
@@ -116,4 +124,48 @@ public class RepositoriesResponse {
     public void setLanguage(String language) {
         this.language = language;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(id);
+        dest.writeValue(nodeId);
+        dest.writeValue(name);
+        dest.writeValue(fullName);
+        dest.writeValue(type);
+        dest.writeValue(htmlUrl);
+        dest.writeValue(description);
+        dest.writeValue(url);
+        dest.writeValue(language);
+
+        dest.writeParcelable(ownerResponse, flags);
+    }
+
+    public RepositoriesResponse(Parcel in) {
+        this.id = ParcelableUtils.readValueToLong(in);
+        this.nodeId = ParcelableUtils.readValueToString(in);
+        this.name = ParcelableUtils.readValueToString(in);
+        this.fullName = ParcelableUtils.readValueToString(in);
+        this.type = ParcelableUtils.readValueToString(in);
+        this.htmlUrl = ParcelableUtils.readValueToString(in);
+        this.description = ParcelableUtils.readValueToString(in);
+        this.url = ParcelableUtils.readValueToString(in);
+        this.language = ParcelableUtils.readValueToString(in);
+
+        this.ownerResponse = in.readParcelable(OwnerResponse.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<RepositoriesResponse> CREATOR = new Parcelable.Creator<RepositoriesResponse>() {
+        public RepositoriesResponse createFromParcel(Parcel in) {
+            return new RepositoriesResponse(in);
+        }
+
+        public RepositoriesResponse[] newArray(int size) {
+            return new RepositoriesResponse[size];
+        }
+    };
 }

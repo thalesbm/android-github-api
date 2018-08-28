@@ -1,11 +1,16 @@
 package br.tbm.github.api.entities;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
+
+import br.tbm.github.api.utils.ParcelableUtils;
 
 /**
  * Created by thalesbertolini on 28/08/2018
  **/
-public class EventActorResponse {
+public class EventActorResponse implements Parcelable {
 
     @SerializedName("login")
     private String login;
@@ -18,6 +23,9 @@ public class EventActorResponse {
 
     @SerializedName("avatar_url")
     private String avatarUrl;
+
+    public EventActorResponse() {
+    }
 
     public String getLogin() {
         return login;
@@ -50,4 +58,34 @@ public class EventActorResponse {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(login);
+        dest.writeValue(displayLogin);
+        dest.writeValue(url);
+        dest.writeValue(avatarUrl);
+    }
+
+    public EventActorResponse(Parcel in) {
+        this.login = ParcelableUtils.readValueToString(in);
+        this.displayLogin = ParcelableUtils.readValueToString(in);
+        this.url = ParcelableUtils.readValueToString(in);
+        this.avatarUrl = ParcelableUtils.readValueToString(in);
+    }
+
+    public static final Creator<EventActorResponse> CREATOR = new Creator<EventActorResponse>() {
+        public EventActorResponse createFromParcel(Parcel in) {
+            return new EventActorResponse(in);
+        }
+
+        public EventActorResponse[] newArray(int size) {
+            return new EventActorResponse[size];
+        }
+    };
 }
