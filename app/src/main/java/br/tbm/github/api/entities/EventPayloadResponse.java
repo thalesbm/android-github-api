@@ -17,6 +17,8 @@ public class EventPayloadResponse implements Parcelable {
     @SerializedName("commits")
     private List<EventCommitsResponse> eventCommitsResponse;
 
+    private String eventType;
+
     public EventPayloadResponse() {
     }
 
@@ -28,6 +30,14 @@ public class EventPayloadResponse implements Parcelable {
         this.eventCommitsResponse = eventCommitsResponse;
     }
 
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -35,10 +45,14 @@ public class EventPayloadResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(eventType);
+
         dest.writeList(eventCommitsResponse);
     }
 
     public EventPayloadResponse(Parcel in) {
+        this.eventType = ParcelableUtils.readValueToString(in);
+
         this.eventCommitsResponse = in.readArrayList(EventCommitsResponse.class.getClassLoader());
     }
 

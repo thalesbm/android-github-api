@@ -16,6 +16,7 @@ import java.util.List;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
+import br.tbm.github.api.entities.EventPayloadResponse;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
 import br.tbm.github.api.models.Profile;
@@ -123,6 +124,9 @@ public class EventFragment extends BaseFragment implements
 
     @Override
     public void onClick(int position) {
-        RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, this.mEventsResponse.get(position).getEventPayloadResponse());
+        EventPayloadResponse selectedEvent = this.mEventsResponse.get(position).getEventPayloadResponse();
+        selectedEvent.setEventType(this.mEventsResponse.get(position).getType());
+        
+        RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, selectedEvent);
     }
 }

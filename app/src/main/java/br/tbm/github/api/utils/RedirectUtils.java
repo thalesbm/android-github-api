@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import br.tbm.github.api.Constants;
+import br.tbm.github.api.activities.EventDetailsActivity;
 import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
 import br.tbm.github.api.activities.RepositoryDetailsActivity;
@@ -75,8 +76,9 @@ public class RedirectUtils {
      * @param username       String
      * @param event          EventPayloadResponse
      */
-    public static void redirectToEventsDetailsActivity(Activity activity, String repositoryName, String username, EventPayloadResponse event) {
-        Intent intent = new Intent(activity, RepositoryDetailsActivity.class);
+    public static void redirectToEventsDetailsActivity(Activity activity, String repositoryName,
+                                                       String username, EventPayloadResponse event) {
+        Intent intent = new Intent(activity, EventDetailsActivity.class);
         intent.putExtra(Constants.INTENT_USERNAME, username);
         intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
         intent.putExtra(Constants.INTENT_EVENT, event);
