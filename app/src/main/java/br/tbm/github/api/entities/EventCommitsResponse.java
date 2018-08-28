@@ -13,6 +13,9 @@ public class EventCommitsResponse {
     @SerializedName("url")
     private String url;
 
+    @SerializedName("sha")
+    private String sha;
+
     public String getMessage() {
         return message;
     }
@@ -27,5 +30,13 @@ public class EventCommitsResponse {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSha() {
+        return sha;
+    }
+
+    public void setSha(String sha) {
+        this.sha = sha;
     }
 }

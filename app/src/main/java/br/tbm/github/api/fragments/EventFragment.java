@@ -11,14 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
+import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
+import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +33,8 @@ public class EventFragment extends BaseFragment implements
         AdaptersCallbacks.DefaultAdapterCallback {
 
     private String mRepositoryName, mUserName;
+
+    private List<EventsResponse> mEventsResponse;
 
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty;
@@ -96,14 +101,17 @@ public class EventFragment extends BaseFragment implements
 
     /**
      * Metodo para carregar a lista de eventos na tela ou exibir a mensagem de lista vazia
+     *
      * @param body ArrayList<EventsResponse>
      */
     private void loadList(ArrayList<EventsResponse> body) {
+        this.mEventsResponse = body;
         if (body.isEmpty()) {
             mTvListEmpty.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         } else {
             mTvListEmpty.setVisibility(View.GONE);
+
             mRecyclerView.setAdapter(new EventsAdapter(body, this));
             mRecyclerView.setVisibility(View.VISIBLE);
         }
@@ -115,6 +123,6 @@ public class EventFragment extends BaseFragment implements
 
     @Override
     public void onClick(int position) {
-
+        RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, this.mEventsResponse.get(position).getEventPayloadResponse());
     }
 }

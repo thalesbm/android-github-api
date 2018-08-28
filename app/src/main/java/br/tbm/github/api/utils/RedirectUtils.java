@@ -8,6 +8,7 @@ import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
 import br.tbm.github.api.activities.RepositoryDetailsActivity;
 import br.tbm.github.api.activities.SearchByUsernameActivity;
+import br.tbm.github.api.entities.EventPayloadResponse;
 import br.tbm.github.api.models.Profile;
 
 /**
@@ -63,6 +64,22 @@ public class RedirectUtils {
         Intent intent = new Intent(activity, RepositoryDetailsActivity.class);
         intent.putExtra(Constants.INTENT_USERNAME, username);
         intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * Metodo responsavel por abrir a tela de mostrar os detalhes do evento selecionado
+     *
+     * @param activity       Activity
+     * @param repositoryName String
+     * @param username       String
+     * @param event          EventPayloadResponse
+     */
+    public static void redirectToEventsDetailsActivity(Activity activity, String repositoryName, String username, EventPayloadResponse event) {
+        Intent intent = new Intent(activity, RepositoryDetailsActivity.class);
+        intent.putExtra(Constants.INTENT_USERNAME, username);
+        intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
+        intent.putExtra(Constants.INTENT_EVENT, event);
         activity.startActivity(intent);
     }
 }

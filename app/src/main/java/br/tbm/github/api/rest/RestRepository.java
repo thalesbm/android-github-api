@@ -24,4 +24,9 @@ public interface RestRepository {
     @GET("repos/{username}/{project}/branches")
     Call<ArrayList<BranchesTagsResponse>> listBranches(@Path("username") String username,
                                                        @Path("project") String project);
+
+    @GET("repos/{username}/{project}/commits/{sha}")
+    Call<ArrayList<BranchesTagsResponse>> getCommit(@Path("username") String username,
+                                                    @Path("project") String project,
+                                                    @Path("sha") String sha);
 }
