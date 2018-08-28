@@ -3,7 +3,7 @@ package br.tbm.github.api.rest;
 import java.util.ArrayList;
 
 import br.tbm.github.api.entities.BranchesTagsResponse;
-import br.tbm.github.api.entities.RepositoriesResponse;
+import br.tbm.github.api.entities.EventsResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -14,8 +14,8 @@ import retrofit2.http.Path;
 public interface RestRepository {
 
     @GET("repos/{username}/{project}/events")
-    Call<ArrayList<RepositoriesResponse>> listEvents(@Path("username") String username,
-                                                      @Path("project") String project);
+    Call<ArrayList<EventsResponse>> listEvents(@Path("username") String username,
+                                               @Path("project") String project);
 
     @GET("repos/{username}/{project}/tags")
     Call<ArrayList<BranchesTagsResponse>> listTags(@Path("username") String username,
