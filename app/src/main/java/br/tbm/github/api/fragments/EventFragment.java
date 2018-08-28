@@ -83,7 +83,7 @@ public class EventFragment extends BaseFragment implements
                 if (response.isSuccessful()) {
                     loadList(response.body());
                 } else {
-                    showAlertDialog(getString(R.string.generic_connection_issue), true);
+                    getAppActivity().analiseRetrofitFailureResponse(response.raw().code(), true);
                 }
             }
 

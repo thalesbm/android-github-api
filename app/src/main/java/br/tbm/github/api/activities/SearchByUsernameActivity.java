@@ -139,12 +139,7 @@ public class SearchByUsernameActivity extends BaseActivity implements
                 showAlertDialog(getString(R.string.search_activity_user_not_found), false);
             }
         } else {
-            dismissProgressDialog();
-            if (response.raw().code() == HTTP_NOT_FOUND) {
-                showAlertDialog(getString(R.string.search_activity_user_not_found), false);
-            } else {
-                showAlertDialog(getString(R.string.generic_connection_issue), false);
-            }
+            analiseRetrofitFailureResponse(response.raw().code(), false);
         }
     }
 

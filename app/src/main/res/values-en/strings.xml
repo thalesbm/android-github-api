@@ -13,6 +13,7 @@
     <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
     <string name="generic_connection_issue">It was not possible to complete the request, please try again</string>
     <string name="generic_database_issue">It was not possible to connect with the database, please try again</string>
+    <string name="generic_connection_forbidden">You have exceeded the maximum numbers of requests, try again later</string>
 
     <!-- ######## MENU ######## -->
     <string name="action_search">Search</string>

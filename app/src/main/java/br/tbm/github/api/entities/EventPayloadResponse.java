@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * Created by thalesbertolini on 28/08/2018
+ **/
 public class EventPayloadResponse {
 
     @SerializedName("commits")

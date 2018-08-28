@@ -85,7 +85,7 @@ public class ProfileActivity extends BaseActivity implements
                 if (response.isSuccessful()) {
                     updateScreen(response.body());
                 } else {
-                    showAlertDialog(getString(R.string.generic_connection_issue), true);
+                    analiseRetrofitFailureResponse(response.raw().code(), true);
                 }
             }
 

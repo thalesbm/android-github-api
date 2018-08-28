@@ -15,20 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="aijoijdsijoasd"
         android:textColor="@color/dark_grey"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/adapter_login_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="aijoijdsijoasd"
-        android:textColor="@color/light_grey"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/adapter_type_textview" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/adapter_created_textview"
@@ -36,10 +24,24 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="aijoijdsijoasd"
         android:textColor="@color/light_grey"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/adapter_login_textview" />
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/adapter_type_textview" />
+
+    <ImageView
+        android:id="@+id/adapter_profile_imageview"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/adapter_login_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light_grey"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adapter_profile_imageview" />
 
     <View
         android:layout_width="match_parent"

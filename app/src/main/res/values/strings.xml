@@ -13,6 +13,7 @@
     <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
     <string name="generic_connection_issue">Não foi possível completar a requisiçao, tente novamente mais tarde</string>
     <string name="generic_database_issue">Não foi possível conectar com o banco de dados, tente novamente mais tarde</string>
+    <string name="generic_connection_forbidden">Você excedeu o numero maximo de requisiçoes, tente novamente mais tarde</string>
 
     <!-- ######## MENU ######## -->
     <string name="action_search">Pesquisar</string>
