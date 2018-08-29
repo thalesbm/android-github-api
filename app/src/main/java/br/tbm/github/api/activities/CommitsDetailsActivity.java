@@ -3,12 +3,18 @@ package br.tbm.github.api.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.adapters.EventsAdapter;
 import br.tbm.github.api.entities.CommitsResponse;
+import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
@@ -23,6 +29,9 @@ import retrofit2.Response;
 public class CommitsDetailsActivity extends BaseActivity {
 
     private String mRepositoryName, mUserName, mSha;
+
+    private RecyclerView mRecyclerView;
+    private TextView mTvListEmpty;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +51,10 @@ public class CommitsDetailsActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        mRecyclerView = findViewById(R.id.activity_commits_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
+        mTvListEmpty = findViewById(R.id.activity_commits_empty_text_view);
     }
 
     /**
@@ -57,11 +69,11 @@ public class CommitsDetailsActivity extends BaseActivity {
         Call<CommitsResponse> responseCall = service.listCommits(mUserName, mRepositoryName, mSha);
         responseCall.enqueue(new Callback<CommitsResponse>() {
             @Override
-            public void onResponse(@NonNull Call<CommitsResponse>call, @NonNull Response<CommitsResponse> response) {
+            public void onResponse(@NonNull Call<CommitsResponse> call, @NonNull Response<CommitsResponse> response) {
                 dismissProgressDialog();
 
                 if (response.isSuccessful()) {
-                    // updateScreen(response.body());
+                    updateScreen(response.body());
                 } else {
                     analiseRetrofitFailureResponse(response.raw().code(), true);
                 }
@@ -72,5 +84,23 @@ public class CommitsDetailsActivity extends BaseActivity {
                 displayGenericNetworkIssue(t.getMessage(), true);
             }
         });
+    }
+
+    /**
+     * Metodo para carregar a lista de commits na tela ou exibir a mensagem de lista vazia e
+     * carregar o autor do commit
+     *
+     * @param body CommitsResponse
+     */
+    private void updateScreen(CommitsResponse body) {
+        if (body.getCommitFilesResponse() != null && !body.getCommitFilesResponse().isEmpty()) {
+            mTvListEmpty.setVisibility(View.GONE);
+
+            // mRecyclerView.setAdapter(new EventsAdapter(body, this));
+            mRecyclerView.setVisibility(View.VISIBLE);
+        } else {
+            mTvListEmpty.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
     }
 }
