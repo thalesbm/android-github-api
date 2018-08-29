@@ -9,14 +9,16 @@ import android.widget.TextView;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.adapters.EventsAdapter;
 import br.tbm.github.api.adapters.EventsDetailsAdapter;
 import br.tbm.github.api.entities.EventPayloadResponse;
+import br.tbm.github.api.interfaces.AdaptersCallbacks;
+import br.tbm.github.api.utils.RedirectUtils;
 
 /**
  * Created by thalesbertolini on 28/08/2018
  **/
-public class EventDetailsActivity extends BaseActivity {
+public class EventDetailsActivity extends BaseActivity implements
+        AdaptersCallbacks.DefaultAdapterCallback {
 
     private String mRepositoryName, mUserName;
     private EventPayloadResponse mSelectedEvent;
@@ -58,12 +60,21 @@ public class EventDetailsActivity extends BaseActivity {
         if (mSelectedEvent.getEventCommitsResponse() != null && !mSelectedEvent.getEventCommitsResponse().isEmpty()) {
             mTvListEmpty.setVisibility(View.GONE);
 
-            mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse()));
+            mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse(), this));
             mRecyclerView.setVisibility(View.VISIBLE);
 
         } else {
             mTvListEmpty.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         }
+    }
+
+    // ###################
+    // CALLBACK DO ADAPTER
+    // ###################
+
+    @Override
+    public void onClick(int position) {
+        RedirectUtils.redirectToCommitsDetailsActivity(this, mRepositoryName, mUserName, mSelectedEvent.getEventCommitsResponse().get(position).getSha());
     }
 }

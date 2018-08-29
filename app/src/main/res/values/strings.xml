@@ -40,6 +40,9 @@
     <!-- ######## EVENT DETAILS ACTIVITY ######## -->
     <string name="activity_event_details_empty_list">Este evento não tem nenhum item</string>
 
+    <!-- ######## COMMIT DETAILS ACTIVITY ######## -->
+    <string name="commit_details_activity_toolbar">Commits</string>
+
     <!-- ######## EVENTS FRAGMENT ######## -->
     <string name="events_fragment_title">Eventos</string>
     <string name="events_fragment_empty_list">Este repositório não tem nenhum evento</string>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 
 import br.tbm.github.api.Constants;
+import br.tbm.github.api.activities.CommitsDetailsActivity;
 import br.tbm.github.api.activities.EventDetailsActivity;
 import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
@@ -82,6 +83,23 @@ public class RedirectUtils {
         intent.putExtra(Constants.INTENT_USERNAME, username);
         intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
         intent.putExtra(Constants.INTENT_EVENT, event);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * Metodo responsavel por abrir a tela de mostrar os detalhes do commit selecionado
+     *
+     * @param activity       Activity
+     * @param repositoryName String
+     * @param username       String
+     * @param sha            String
+     */
+    public static void redirectToCommitsDetailsActivity(Activity activity, String repositoryName,
+                                                        String username, String sha) {
+        Intent intent = new Intent(activity, CommitsDetailsActivity.class);
+        intent.putExtra(Constants.INTENT_USERNAME, username);
+        intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
+        intent.putExtra(Constants.INTENT_SHA, sha);
         activity.startActivity(intent);
     }
 }

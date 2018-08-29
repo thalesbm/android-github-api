@@ -1,6 +1,7 @@
 package br.tbm.github.api.adapters;
 
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.entities.EventCommitsResponse;
+import br.tbm.github.api.interfaces.AdaptersCallbacks;
 
 /**
  * Created by thalesbertolini on 27/08/2018
@@ -18,21 +20,25 @@ import br.tbm.github.api.entities.EventCommitsResponse;
 public class EventsDetailsAdapter extends RecyclerView.Adapter<EventsDetailsAdapter.ViewHolder> {
 
     private List<EventCommitsResponse> mList;
+    private AdaptersCallbacks.DefaultAdapterCallback mCallback;
 
     public EventsDetailsAdapter() {
     }
 
-    public EventsDetailsAdapter(List<EventCommitsResponse> list) {
+    public EventsDetailsAdapter(List<EventCommitsResponse> list, AdaptersCallbacks.DefaultAdapterCallback callback) {
+        this.mCallback = callback;
         this.mList = list;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTvName, mTvDescription;
+        private ConstraintLayout mConstraintLayout;
 
         private ViewHolder(View vi) {
             super(vi);
             mTvName = vi.findViewById(R.id.adapter_name_textview);
             mTvDescription = vi.findViewById(R.id.adapter_description_textview);
+            mConstraintLayout = vi.findViewById(R.id.adapter_main_layout);
         }
     }
 
@@ -49,6 +55,10 @@ public class EventsDetailsAdapter extends RecyclerView.Adapter<EventsDetailsAdap
 
         holder.mTvName.setText(git.getEventAuthorResponse().getName());
         holder.mTvDescription.setText(git.getMessage());
+
+        holder.mConstraintLayout.setOnClickListener((View v) -> {
+            mCallback.onClick(position);
+        });
     }
 
     @Override
