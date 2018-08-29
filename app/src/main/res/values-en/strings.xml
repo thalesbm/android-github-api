@@ -42,6 +42,8 @@
 
     <!-- ######## COMMIT DETAILS ACTIVITY ######## -->
     <string name="commit_details_activity_toolbar">Commits</string>
+    <string name="commit_details_activity_description">Description</string>
+    <string name="commit_details_activity_list_empty">This event does not have any commit</string>
 
     <!-- ######## EVENTS FRAGMENT ######## -->
     <string name="events_fragment_title">Events</string>

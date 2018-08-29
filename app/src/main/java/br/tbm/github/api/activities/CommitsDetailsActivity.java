@@ -6,19 +6,24 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
+import br.tbm.github.api.components.CircleTransform;
 import br.tbm.github.api.entities.CommitsResponse;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
 import br.tbm.github.api.rest.RestUser;
+import br.tbm.github.api.utils.DateUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +36,8 @@ public class CommitsDetailsActivity extends BaseActivity {
     private String mRepositoryName, mUserName, mSha;
 
     private RecyclerView mRecyclerView;
-    private TextView mTvListEmpty;
+    private TextView mTvListEmpty, mTvCommitterName, mTvCommitterDate, mTvCommitDescription;
+    private ImageView mIvCommitterProfile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,12 +55,20 @@ public class CommitsDetailsActivity extends BaseActivity {
         this.getCommitDetailsFromServer();
     }
 
+    /**
+     * Metodo responsavel por inicializar os componentes da tela
+     */
     @Override
     protected void init() {
         mRecyclerView = findViewById(R.id.activity_commits_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
         mTvListEmpty = findViewById(R.id.activity_commits_empty_text_view);
+        mTvCommitterName = findViewById(R.id.activity_commit_details_name_textview);
+        mTvCommitterDate = findViewById(R.id.activity_commit_created_textview);
+        mTvCommitDescription = findViewById(R.id.activity_commit_details_description_textview);
+
+        mIvCommitterProfile = findViewById(R.id.activity_commit_details_imageview);
     }
 
     /**
@@ -93,14 +107,34 @@ public class CommitsDetailsActivity extends BaseActivity {
      * @param body CommitsResponse
      */
     private void updateScreen(CommitsResponse body) {
-        if (body.getCommitFilesResponse() != null && !body.getCommitFilesResponse().isEmpty()) {
-            mTvListEmpty.setVisibility(View.GONE);
+        if (body.getCommitFilesResponse() != null) {
 
-            // mRecyclerView.setAdapter(new EventsAdapter(body, this));
-            mRecyclerView.setVisibility(View.VISIBLE);
+            mTvCommitterName.setText(body.getOwnerResponse().getLogin());
+            mTvCommitterDate.setText(DateUtils.formatDate(body.getCommitDetailsResponse().getCommitterResponse().getDate()));
+            mTvCommitDescription.setText(body.getCommitDetailsResponse().getMessage());
+
+            // baixa a imagem usando picasso library
+            if (!body.getOwnerResponse().getAvatarUrl().equals("")) {
+                Picasso.with(this)
+                        .load(body.getOwnerResponse().getAvatarUrl())
+                        .fit()
+                        .error(R.drawable.img_user_not_found)
+                        .transform(new CircleTransform())
+                        .into(mIvCommitterProfile);
+            }
+
+            if (!body.getCommitFilesResponse().isEmpty()) {
+                mTvListEmpty.setVisibility(View.GONE);
+
+                // mRecyclerView.setAdapter(new EventsAdapter(body, this));
+                mRecyclerView.setVisibility(View.VISIBLE);
+            } else {
+                mTvListEmpty.setVisibility(View.VISIBLE);
+                mRecyclerView.setVisibility(View.GONE);
+            }
+
         } else {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
+            displayGenericNetworkIssue(getString(R.string.generic_connection_issue), true);
         }
     }
 }
