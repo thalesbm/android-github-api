@@ -21,6 +21,9 @@ public class EventCommitsResponse implements Parcelable {
     @SerializedName("sha")
     private String sha;
 
+    @SerializedName("author")
+    private EventAuthorResponse eventAuthorResponse;
+
     public EventCommitsResponse() {
     }
 
@@ -48,6 +51,14 @@ public class EventCommitsResponse implements Parcelable {
         this.sha = sha;
     }
 
+    public EventAuthorResponse getEventAuthorResponse() {
+        return eventAuthorResponse;
+    }
+
+    public void setEventAuthorResponse(EventAuthorResponse eventAuthorResponse) {
+        this.eventAuthorResponse = eventAuthorResponse;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -58,12 +69,16 @@ public class EventCommitsResponse implements Parcelable {
         dest.writeValue(message);
         dest.writeValue(sha);
         dest.writeValue(url);
+
+        dest.writeParcelable(eventAuthorResponse, flags);
     }
 
     public EventCommitsResponse(Parcel in) {
         this.message = ParcelableUtils.readValueToString(in);
         this.sha = ParcelableUtils.readValueToString(in);
         this.url = ParcelableUtils.readValueToString(in);
+
+        this.eventAuthorResponse = in.readParcelable(EventAuthorResponse.class.getClassLoader());
     }
 
     public static final Creator<EventCommitsResponse> CREATOR = new Creator<EventCommitsResponse>() {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
+import br.tbm.github.api.adapters.EventsDetailsAdapter;
 import br.tbm.github.api.entities.EventPayloadResponse;
 
 /**
@@ -57,8 +58,9 @@ public class EventDetailsActivity extends BaseActivity {
         if (mSelectedEvent.getEventCommitsResponse() != null && !mSelectedEvent.getEventCommitsResponse().isEmpty()) {
             mTvListEmpty.setVisibility(View.GONE);
 
-            // mRecyclerView.setAdapter(new EventsAdapter(body, this));
+            mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse()));
             mRecyclerView.setVisibility(View.VISIBLE);
+
         } else {
             mTvListEmpty.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);

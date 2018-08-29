@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * Created by thalesbertolini on 28/08/2018
+ **/
 public class DateUtils {
 
     public static String formatDate(String created) {
