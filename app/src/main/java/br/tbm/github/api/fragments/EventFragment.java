@@ -14,13 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.Constants;
+import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
 import br.tbm.github.api.entities.EventPayloadResponse;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
-import br.tbm.github.api.models.Profile;
-import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
 import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
@@ -79,7 +78,7 @@ public class EventFragment extends BaseFragment implements
     private void getEventsFromServer() {
         showProgressDialog(getString(R.string.loading));
 
-        RestRepository service = RestAPI.getRetrofitInstance().create(RestRepository.class);
+        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<ArrayList<EventsResponse>> responseCall = service.listEvents(mUserName, mRepositoryName);
         responseCall.enqueue(new Callback<ArrayList<EventsResponse>>() {
             @Override

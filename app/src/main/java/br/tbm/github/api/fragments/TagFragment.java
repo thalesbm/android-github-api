@@ -13,11 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
+import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.BranchesTagsAdapter;
-import br.tbm.github.api.adapters.ProfileAdapter;
 import br.tbm.github.api.entities.BranchesTagsResponse;
-import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +71,7 @@ public class TagFragment extends BaseFragment {
     private void getTagsFromServer() {
         showProgressDialog(getString(R.string.loading));
 
-        RestRepository service = RestAPI.getRetrofitInstance().create(RestRepository.class);
+        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<ArrayList<BranchesTagsResponse>> responseCall = service.listTags(mUserName, mRepositoryName);
         responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {
             @Override

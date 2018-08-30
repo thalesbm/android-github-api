@@ -12,11 +12,11 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import br.tbm.github.api.Constants;
+import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.components.CircleTransform;
 import br.tbm.github.api.entities.CommitsResponse;
-import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
 import br.tbm.github.api.utils.DateUtils;
 import retrofit2.Call;
@@ -74,7 +74,7 @@ public class CommitsDetailsActivity extends BaseActivity {
     private void getCommitDetailsFromServer() {
         showProgressDialog(getString(R.string.loading));
 
-        RestRepository service = RestAPI.getRetrofitInstance().create(RestRepository.class);
+        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<CommitsResponse> responseCall = service.listCommits(mUserName, mRepositoryName, mSha);
         responseCall.enqueue(new Callback<CommitsResponse>() {
             @Override

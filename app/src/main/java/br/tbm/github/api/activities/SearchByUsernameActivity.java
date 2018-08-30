@@ -9,19 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.components.CustomTextWatcher;
 import br.tbm.github.api.interfaces.TasksCallbacks;
 import br.tbm.github.api.models.Profile;
-import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestUser;
 import br.tbm.github.api.tasks.SaveGithubUserTask;
 import br.tbm.github.api.utils.RedirectUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
 
 /**
  * Created by thalesbertolini on 23/08/2018
@@ -106,7 +104,7 @@ public class SearchByUsernameActivity extends BaseActivity implements
     private void searchProfileByName(String profileName) {
         showProgressDialog(getString(R.string.loading));
 
-        RestUser service = RestAPI.getRetrofitInstance().create(RestUser.class);
+        RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
         Call<Profile> responseCall = service.getProfile(profileName);
         responseCall.enqueue(new Callback<Profile>() {
             @Override
