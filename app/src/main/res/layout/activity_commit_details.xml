@@ -70,7 +70,6 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="2dp"
         android:background="@color/light_grey"
         app:layout_constraintTop_toBottomOf="@+id/activity_commit_details_description_textview" />
 
@@ -93,7 +92,6 @@
         android:id="@+id/activity_commits_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:overScrollMode="never"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_commit_details_description_textview" />

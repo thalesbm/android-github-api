@@ -11,18 +11,13 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.adapters.EventsAdapter;
+import br.tbm.github.api.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.components.CircleTransform;
 import br.tbm.github.api.entities.CommitsResponse;
-import br.tbm.github.api.entities.EventsResponse;
-import br.tbm.github.api.entities.RepositoriesResponse;
 import br.tbm.github.api.rest.RestAPI;
 import br.tbm.github.api.rest.RestRepository;
-import br.tbm.github.api.rest.RestUser;
 import br.tbm.github.api.utils.DateUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -126,7 +121,7 @@ public class CommitsDetailsActivity extends BaseActivity {
             if (!body.getCommitFilesResponse().isEmpty()) {
                 mTvListEmpty.setVisibility(View.GONE);
 
-                // mRecyclerView.setAdapter(new EventsAdapter(body, this));
+                mRecyclerView.setAdapter(new CommitDetailsAdapter(body.getCommitFilesResponse()));
                 mRecyclerView.setVisibility(View.VISIBLE);
             } else {
                 mTvListEmpty.setVisibility(View.VISIBLE);
