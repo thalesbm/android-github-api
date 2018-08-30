@@ -4,6 +4,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,7 +19,10 @@ import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  * Created by thalesbertolini on 25/08/2018
@@ -37,10 +41,14 @@ public class SearchUserTest {
      */
     @Test
     public void validateEditText1() {
+
+        // preenche o campo de texto
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("   "), closeSoftKeyboard());
 
+        // clica no botao de pesquisar
         onView(withId(R.id.search_activity_button)).perform(click());
 
+        // valida a mensagem na tela
         onView(withText(R.string.search_activity_profile_validation)).check(matches(isDisplayed()));
     }
 
@@ -50,23 +58,45 @@ public class SearchUserTest {
      */
     @Test
     public void validateEditText2() {
+
+        // clica no botao de pesquisar
         onView(withId(R.id.search_activity_button)).perform(click());
 
+        // valida a mensagem na tela
         onView(withText(R.string.search_activity_profile_validation)).check(matches(isDisplayed()));
     }
 
     /**
-     * TESTE: Usuario preencheu o nome do usuario errado
+     * TESTE: Usuario preencheu o nome do perfil errado
      * RESULTADO ESPERADO: Exibir a mensagem de erro
      */
     @Test
     public void validateWrongUsername() {
-        onView(ViewMatchers.withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm3"), closeSoftKeyboard());
 
+        // preenche o campo de texto
+        onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm3"), closeSoftKeyboard());
+
+        // clica no botao de pesquisar
         onView(withId(R.id.search_activity_button)).perform(click());
 
+        // valida a mensagem na tela
         onView(withText(R.string.search_activity_user_not_found)).check(matches(isDisplayed()));
     }
 
-    //TODO: ADICIONAR O TESTE CASO A PESQUISA SEJA COM SUCESSO
+    /**
+     * TESTE: Usuario preencheu o nome do perfil correto
+     * RESULTADO ESPERADO: Redirecionar para a proxima tela e exibir o perfil
+     */
+    @Test
+    public void searchCorrectUsername() {
+
+        // preenche o campo de texto
+        onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm"), closeSoftKeyboard());
+
+        // clica no botao de pesquisar
+        onView(withId(R.id.search_activity_button)).perform(click());
+
+        // valida o texto na tela
+        onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.toolbar)))).check(matches(withText("Thales Marega")));
+    }
 }
