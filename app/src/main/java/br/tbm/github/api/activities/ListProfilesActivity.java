@@ -161,6 +161,15 @@ public class ListProfilesActivity extends BaseActivity implements
     };
 
     /**
+     * Retorna a quantidade de items na lista
+     *
+     * @return int
+     */
+    public int getListSize() {
+        return mProfiles.size();
+    }
+
+    /**
      * Metodo responsavel por selecionar apenas os itens que estao marcados para excluir, chamar a task
      * para remover os items e listar novamente
      */
