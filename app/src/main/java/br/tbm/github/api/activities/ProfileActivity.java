@@ -1,7 +1,6 @@
 package br.tbm.github.api.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,24 +13,22 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.RepositoryAdapter;
 import br.tbm.github.api.components.CircleTransform;
+import br.tbm.github.api.controllers.ProfileController;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
 import br.tbm.github.api.models.Profile;
 import br.tbm.github.api.entities.RepositoriesResponse;
-import br.tbm.github.api.rest.RestUser;
 import br.tbm.github.api.utils.RedirectUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class ProfileActivity extends BaseActivity implements
+public class ProfileActivity extends BaseActivity<RepositoriesResponse> implements
         AdaptersCallbacks.DefaultAdapterCallback {
+
+    private ProfileController mController;
 
     private RecyclerView mRecyclerView;
     private ImageView mIvProfile;
@@ -47,6 +44,8 @@ public class ProfileActivity extends BaseActivity implements
         setContentView(R.layout.activity_profile);
 
         mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
+
+        mController = new ProfileController(this);
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties();
@@ -75,34 +74,7 @@ public class ProfileActivity extends BaseActivity implements
     private void searchProfileByName() {
         showProgressDialog(getString(R.string.loading));
 
-        RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
-        Call<ArrayList<RepositoriesResponse>> responseCall = service.listRepositories(mProfile.getLogin());
-        responseCall.enqueue(new Callback<ArrayList<RepositoriesResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Response<ArrayList<RepositoriesResponse>> response) {
-                dismissProgressDialog();
-
-                if (response.isSuccessful()) {
-                    updateScreen(response.body());
-                } else {
-                    analiseRetrofitFailureResponse(response.raw().code(), true);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<RepositoriesResponse>> call, @NonNull Throwable t) {
-                displayGenericNetworkIssue(t.getMessage(), true);
-            }
-        });
-    }
-
-    /**
-     * Metodo responsavel por retornar a lista de repositorios do server para testes
-     *
-     * @return ArrayList<RepositoriesResponse>
-     */
-    public ArrayList<RepositoriesResponse> getBody() {
-        return mBody;
+        mController.search(mProfile.getLogin());
     }
 
     /**
@@ -139,5 +111,15 @@ public class ProfileActivity extends BaseActivity implements
     @Override
     public void onClick(int position) {
         RedirectUtils.redirectToRepositoryDetailsActivity(this, mBody.get(position).getName(), mProfile.getLogin());
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void success(ArrayList<RepositoriesResponse> repositories) {
+        super.success(repositories);
+        this.updateScreen(repositories);
     }
 }

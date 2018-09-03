@@ -1,7 +1,6 @@
 package br.tbm.github.api.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -9,23 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.components.CustomTextWatcher;
-import br.tbm.github.api.interfaces.TasksCallbacks;
+import br.tbm.github.api.controllers.SearchByUsernameController;
 import br.tbm.github.api.models.Profile;
-import br.tbm.github.api.rest.RestUser;
-import br.tbm.github.api.tasks.SaveGithubUserTask;
 import br.tbm.github.api.utils.RedirectUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 23/08/2018
  **/
-public class SearchByUsernameActivity extends BaseActivity implements
-        TasksCallbacks.SaveGithubUserTaskCallback {
+public class SearchByUsernameActivity extends BaseActivity<Profile> {
+
+    private SearchByUsernameController mController;
 
     private TextInputLayout mTvProfile;
     private EditText mEdProfile;
@@ -34,6 +28,8 @@ public class SearchByUsernameActivity extends BaseActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_username);
+
+        mController = new SearchByUsernameController(this);
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.search_activity_toolbar));
@@ -104,60 +100,16 @@ public class SearchByUsernameActivity extends BaseActivity implements
     private void searchProfileByName(String profileName) {
         showProgressDialog(getString(R.string.loading));
 
-        RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
-        Call<Profile> responseCall = service.getProfile(profileName);
-        responseCall.enqueue(new Callback<Profile>() {
-            @Override
-            public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                searchProfileResponseSuccess(response);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-                displayGenericNetworkIssue(t.getMessage(), false);
-            }
-        });
+        mController.search(profileName);
     }
 
-    // ####################
-    // CALLBACK DO SERVIDOR
-    // ####################
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
 
-    /**
-     * Metodo responsavel pela logica de sucesso da chamada de pesquisar pelo username
-     *
-     * @param response Response<Profile>
-     */
-    private void searchProfileResponseSuccess(final Response<Profile> response) {
-        if (response.isSuccessful()) {
-
-            if (response.body() != null && response.body().getName() != null) {
-                new SaveGithubUserTask(this).execute(response.body());
-            } else {
-                showAlertDialog(getString(R.string.search_activity_user_not_found), false);
-            }
-        } else {
-            analiseRetrofitFailureResponse(response.raw().code(), false);
-        }
-    }
-
-    // ################
-    // CALLBACK DA TASK
-    // ################
-
-    /**
-     * Metodo responsavel por fechar o progress dialog e redirecionar para a tela de perfil
-     *
-     * @param profile Profile
-     */
     @Override
-    public void saveGithubUserTaskSuccess(Profile profile) {
-        dismissProgressDialog();
+    public void success(Profile profile) {
+        super.success(profile);
         RedirectUtils.redirectToProfileActivity(this, profile, true);
-    }
-
-    @Override
-    public void saveGithubUserTaskFailure() {
-        displayGenericDatabaseIssue();
     }
 }

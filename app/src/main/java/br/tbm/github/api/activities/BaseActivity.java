@@ -15,7 +15,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.ControllerCallbacks;
 
 import static br.tbm.github.api.Constants.HTTP_FORBIDDEN;
 import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
@@ -23,7 +26,8 @@ import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity<T> extends AppCompatActivity
+        implements ControllerCallbacks<T> {
 
     protected abstract void init();
 
@@ -214,5 +218,34 @@ public abstract class BaseActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void displayAlertDialog(int id, boolean closeActivity) {
+        showAlertDialog(getString(id), closeActivity);
+    }
+
+    @Override
+    public void displayAlertDialog(String message, boolean closeActivity) {
+        showAlertDialog(message, closeActivity);
+    }
+
+    @Override
+    public void networkIssue(int code, boolean closeActivity) {
+        analiseRetrofitFailureResponse(code, closeActivity);
+    }
+
+    @Override
+    public void success(T t) {
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void success(ArrayList<T> t) {
+        dismissProgressDialog();
     }
 }

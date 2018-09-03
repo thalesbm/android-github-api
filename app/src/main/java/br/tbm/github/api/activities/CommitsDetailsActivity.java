@@ -1,7 +1,6 @@
 package br.tbm.github.api.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,21 +11,19 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.components.CircleTransform;
+import br.tbm.github.api.controllers.CommitsDetailsController;
 import br.tbm.github.api.entities.CommitsResponse;
-import br.tbm.github.api.rest.RestRepository;
 import br.tbm.github.api.utils.DateUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 29/08/2018
  **/
-public class CommitsDetailsActivity extends BaseActivity {
+public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> {
+
+    private CommitsDetailsController mController;
 
     private String mRepositoryName, mUserName, mSha;
 
@@ -38,6 +35,8 @@ public class CommitsDetailsActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commit_details);
+
+        this.mController = new CommitsDetailsController(this);
 
         this.mRepositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
         this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
@@ -73,26 +72,7 @@ public class CommitsDetailsActivity extends BaseActivity {
      */
     private void getCommitDetailsFromServer() {
         showProgressDialog(getString(R.string.loading));
-
-        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<CommitsResponse> responseCall = service.listCommits(mUserName, mRepositoryName, mSha);
-        responseCall.enqueue(new Callback<CommitsResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<CommitsResponse> call, @NonNull Response<CommitsResponse> response) {
-                dismissProgressDialog();
-
-                if (response.isSuccessful()) {
-                    updateScreen(response.body());
-                } else {
-                    analiseRetrofitFailureResponse(response.raw().code(), true);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<CommitsResponse> call, @NonNull Throwable t) {
-                displayGenericNetworkIssue(t.getMessage(), true);
-            }
-        });
+        mController.search(mUserName, mRepositoryName, mSha);
     }
 
     /**
@@ -131,5 +111,15 @@ public class CommitsDetailsActivity extends BaseActivity {
         } else {
             displayGenericNetworkIssue(getString(R.string.generic_connection_issue), true);
         }
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void success(CommitsResponse response) {
+        super.success(response);
+        this.updateScreen(response);
     }
 }

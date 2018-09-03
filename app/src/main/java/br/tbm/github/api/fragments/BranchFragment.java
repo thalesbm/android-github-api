@@ -13,19 +13,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.BranchesTagsAdapter;
+import br.tbm.github.api.controllers.BranchController;
 import br.tbm.github.api.entities.BranchesTagsResponse;
-import br.tbm.github.api.rest.RestRepository;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 26/08/2018
  **/
-public class BranchFragment extends BaseFragment {
+public class BranchFragment extends BaseFragment<BranchesTagsResponse> {
+
+    private BranchController mController;
 
     private String mRepositoryName, mUserName;
 
@@ -42,6 +40,8 @@ public class BranchFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mController = new BranchController(this);
 
         getAppActivity().changeToolbarTitle(getString(R.string.branches_fragment_title));
 
@@ -70,26 +70,7 @@ public class BranchFragment extends BaseFragment {
      */
     private void getBranchesFromServer() {
         showProgressDialog(getString(R.string.loading));
-
-        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<ArrayList<BranchesTagsResponse>> responseCall = service.listBranches(mUserName, mRepositoryName);
-        responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Response<ArrayList<BranchesTagsResponse>> response) {
-                dismissProgressDialog();
-
-                if (response.isSuccessful()) {
-                    loadList(response.body());
-                } else {
-                    getAppActivity().analiseRetrofitFailureResponse(response.raw().code(), true);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Throwable t) {
-                getAppActivity().displayGenericNetworkIssue(t.getMessage(), true);
-            }
-        });
+        mController.search(mUserName, mRepositoryName);
     }
 
     /**
@@ -105,5 +86,15 @@ public class BranchFragment extends BaseFragment {
             mRecyclerView.setAdapter(new BranchesTagsAdapter(body, true));
             mRecyclerView.setVisibility(View.VISIBLE);
         }
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void success(ArrayList<BranchesTagsResponse> response) {
+        super.success(response);
+        this.loadList(response);
     }
 }

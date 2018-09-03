@@ -7,13 +7,17 @@ import android.net.ConnectivityManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 
+import java.util.ArrayList;
+
 import br.tbm.github.api.R;
 import br.tbm.github.api.activities.BaseActivity;
+import br.tbm.github.api.interfaces.ControllerCallbacks;
 
 /**
  * Created by thalesbertolini on 26/08/2018
  **/
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T> extends Fragment
+        implements ControllerCallbacks<T> {
 
     protected abstract void init();
 
@@ -21,6 +25,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * Metodo responsavel por retornar uma instancia do BaseActivity
+     *
      * @return BaseActivity
      */
     protected BaseActivity getAppActivity() {
@@ -29,6 +34,7 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * Exibe o dialog caso ele seja null ou nao esteja visivel, ou apenas muda a mensagem
+     *
      * @param message mensagem que vai ser exibida no dialog
      */
     protected synchronized final void showProgressDialog(String message) {
@@ -81,5 +87,34 @@ public abstract class BaseFragment extends Fragment {
     protected boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) getAppActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void displayAlertDialog(int id, boolean closeActivity) {
+        showAlertDialog(getString(id), closeActivity);
+    }
+
+    @Override
+    public void displayAlertDialog(String message, boolean closeActivity) {
+        showAlertDialog(message, closeActivity);
+    }
+
+    @Override
+    public void networkIssue(int code, boolean closeActivity) {
+        getAppActivity().analiseRetrofitFailureResponse(code, closeActivity);
+    }
+
+    @Override
+    public void success(T t) {
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void success(ArrayList<T> t) {
+        dismissProgressDialog();
     }
 }

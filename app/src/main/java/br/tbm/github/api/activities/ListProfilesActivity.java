@@ -10,28 +10,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.ProfileAdapter;
 import br.tbm.github.api.components.CustomActionMode;
+import br.tbm.github.api.controllers.ListProfilesController;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
-import br.tbm.github.api.interfaces.TasksCallbacks;
 import br.tbm.github.api.models.Profile;
-import br.tbm.github.api.tasks.ListGithubUsersTask;
-import br.tbm.github.api.tasks.RemoveUsersTask;
 import br.tbm.github.api.utils.RedirectUtils;
 
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public class ListProfilesActivity extends BaseActivity implements
-        TasksCallbacks.RemoveUsersTaskCallback,
-        TasksCallbacks.ListGithubUserTaskCallback,
+public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         AdaptersCallbacks.ProfileAdapterCallback {
 
     private final String TAG = ListProfilesActivity.class.getSimpleName();
+
+    private ListProfilesController mController;
 
     private List<Profile> mProfiles;
 
@@ -43,6 +40,8 @@ public class ListProfilesActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_profiles);
+
+        mController = new ListProfilesController(this);
 
         setupToolbar(findViewById(R.id.toolbar));
         changeToolbarTitle(getString(R.string.main_activity_toolbar));
@@ -90,7 +89,7 @@ public class ListProfilesActivity extends BaseActivity implements
      */
     private void listProfilesFromDatabase() {
         showProgressDialog(getString(R.string.loading));
-        new ListGithubUsersTask(this).execute();
+        mController.getProfiles();
     }
 
     /**
@@ -100,7 +99,6 @@ public class ListProfilesActivity extends BaseActivity implements
      */
     private void listGithubUserSuccess(List<Profile> profiles) {
         this.mProfiles = profiles;
-        dismissProgressDialog();
         if (profiles.isEmpty()) {
             mTvListEmpty.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
@@ -109,19 +107,6 @@ public class ListProfilesActivity extends BaseActivity implements
             mRecyclerView.setAdapter(new ProfileAdapter(profiles, this));
             mRecyclerView.setVisibility(View.VISIBLE);
         }
-    }
-
-    /**
-     * Verifica quantos items foram selecionado para atualizar o action mode title
-     */
-    private void checkNumberOfItemsHasBeenChecked() {
-        int qtd = 0;
-        for (Profile p : mProfiles) {
-            if (p.hasSelected()) {
-                qtd++;
-            }
-        }
-        mCurrentActionMode.setTitle(String.valueOf(qtd));
     }
 
     /**
@@ -146,7 +131,7 @@ public class ListProfilesActivity extends BaseActivity implements
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete: {
-                    removeItems();
+                    mController.removeItems(mProfiles);
                     mode.finish();
                     break;
                 }
@@ -167,45 +152,6 @@ public class ListProfilesActivity extends BaseActivity implements
      */
     public int getListSize() {
         return mProfiles.size();
-    }
-
-    /**
-     * Metodo responsavel por selecionar apenas os itens que estao marcados para excluir, chamar a task
-     * para remover os items e listar novamente
-     */
-    private void removeItems() {
-        List<Profile> listToRemove = new ArrayList<>();
-        for (Profile p : mProfiles) {
-            if (p.hasSelected()) {
-                listToRemove.add(p);
-            }
-        }
-
-        new RemoveUsersTask(this, listToRemove).execute();
-    }
-
-    // ################
-    // CALLBACK DA TASK
-    // ################
-
-    @Override
-    public void removeUserTaskSuccess(List<Profile> profiles) {
-        listGithubUserSuccess(profiles);
-    }
-
-    @Override
-    public void removeUserTaskFailure() {
-        displayGenericDatabaseIssue();
-    }
-
-    @Override
-    public void listGithubUserTaskSuccess(List<Profile> profiles) {
-        listGithubUserSuccess(profiles);
-    }
-
-    @Override
-    public void listGithubUserTaskFailure() {
-        displayGenericDatabaseIssue();
     }
 
     // ###################
@@ -232,7 +178,7 @@ public class ListProfilesActivity extends BaseActivity implements
         if (resetActionMode) {
             mCurrentActionMode.finish();
         } else {
-            checkNumberOfItemsHasBeenChecked();
+            mCurrentActionMode.setTitle(mController.checkNumberOfItemsHasBeenChecked(mProfiles));
         }
     }
 
@@ -240,6 +186,16 @@ public class ListProfilesActivity extends BaseActivity implements
     public void addSelection(int position) {
         Log.d(TAG, "addSelection(): " + position);
         mProfiles.get(position).setHasSelected(true);
-        checkNumberOfItemsHasBeenChecked();
+        mCurrentActionMode.setTitle(mController.checkNumberOfItemsHasBeenChecked(mProfiles));
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void success(List<Profile> profiles) {
+        super.success(profiles);
+        this.listGithubUserSuccess(profiles);
     }
 }

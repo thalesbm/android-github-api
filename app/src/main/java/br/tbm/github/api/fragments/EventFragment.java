@@ -14,23 +14,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.adapters.EventsAdapter;
+import br.tbm.github.api.controllers.EventController;
 import br.tbm.github.api.entities.EventPayloadResponse;
 import br.tbm.github.api.entities.EventsResponse;
 import br.tbm.github.api.interfaces.AdaptersCallbacks;
-import br.tbm.github.api.rest.RestRepository;
 import br.tbm.github.api.utils.RedirectUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 26/08/2018
  **/
-public class EventFragment extends BaseFragment implements
+public class EventFragment extends BaseFragment<EventsResponse> implements
         AdaptersCallbacks.DefaultAdapterCallback {
+
+    private EventController mController;
 
     private String mRepositoryName, mUserName;
 
@@ -49,6 +47,8 @@ public class EventFragment extends BaseFragment implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mController = new EventController(this);
 
         getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
 
@@ -77,26 +77,7 @@ public class EventFragment extends BaseFragment implements
      */
     private void getEventsFromServer() {
         showProgressDialog(getString(R.string.loading));
-
-        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<ArrayList<EventsResponse>> responseCall = service.listEvents(mUserName, mRepositoryName);
-        responseCall.enqueue(new Callback<ArrayList<EventsResponse>>() {
-            @Override
-            public void onResponse(@NonNull Call<ArrayList<EventsResponse>> call, @NonNull Response<ArrayList<EventsResponse>> response) {
-                dismissProgressDialog();
-
-                if (response.isSuccessful()) {
-                    loadList(response.body());
-                } else {
-                    getAppActivity().analiseRetrofitFailureResponse(response.raw().code(), true);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<ArrayList<EventsResponse>> call, @NonNull Throwable t) {
-                getAppActivity().displayGenericNetworkIssue(t.getMessage(), true);
-            }
-        });
+        mController.search(mUserName, mRepositoryName);
     }
 
     /**
@@ -127,5 +108,15 @@ public class EventFragment extends BaseFragment implements
         selectedEvent.setEventType(this.mEventsResponse.get(position).getType());
         
         RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, selectedEvent);
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void success(ArrayList<EventsResponse> response) {
+        super.success(response);
+        this.loadList(response);
     }
 }
