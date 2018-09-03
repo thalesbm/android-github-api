@@ -66,12 +66,13 @@ dependencies {
     androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"
     androidTestImplementation "com.android.support.test:runner:$androidTestVersion"
     androidTestImplementation "com.android.support.test:rules:$androidTestVersion"
-
     androidTestImplementation("com.android.support.test.espresso:espresso-intents:$espressoVersion") {
         exclude group: 'com.google.code.findbugs'
     }
-
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion") {
+        exclude group: 'com.google.code.findbugs'
+    }
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
         exclude group: 'com.google.code.findbugs'
     }
 

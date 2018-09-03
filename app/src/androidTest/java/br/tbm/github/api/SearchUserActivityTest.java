@@ -1,6 +1,5 @@
 package br.tbm.github.api;
 
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -29,7 +28,7 @@ import static org.hamcrest.core.AllOf.allOf;
  **/
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class SearchUserTest {
+public class SearchUserActivityTest {
 
     @Rule
     public ActivityTestRule<SearchByUsernameActivity> mActivityRule =

@@ -5,6 +5,8 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +35,22 @@ public class ListProfilesActivityTest {
     public ActivityTestRule<ListProfilesActivity> mActivityRule =
             new ActivityTestRule<>(ListProfilesActivity.class, true, true);
 
+    @Before
+    public void before() {
+        // remove todos os items
+        this.selectAllProfilesAndDeleteAllProfiles(true);
+    }
+
+    @After
+    public void after() {
+        // remove todos os items
+        this.selectAllProfilesAndDeleteAllProfiles(true);
+    }
+
+    /**
+     * TESTE: Remover todos os items da lista
+     * RESULTADO ESPERADO: Verificar se ao remover todos os items da lista o app vai exibir a mensagem de lista vazia
+     */
     @Test
     public void removeAllProfiles() {
         // pesquisa novos items para ter certeza que vai ter items na lista
@@ -46,23 +64,38 @@ public class ListProfilesActivityTest {
         onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
     }
 
+    /**
+     * TESTE: Pesquisar apenas um item e remover esse item da lista
+     * RESULTADO ESPERADO: Verificar se ao remover o item da lista o app vai exibir a mensagem de lista vazia
+     */
     @Test
     public void removeJustOneProfile() {
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
 
+        // verifica se o app exibiu a mensagem de lista vazia
+        onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
+
         // pesquisa um novo perfil
         this.searchAnItem("thalesbm");
 
-        // remove todos os items
-        this.selectAllProfilesAndDeleteAllProfiles(true);
+        // clica e para nao selecionar mais um item da lista
+        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, longClick()));
+
+        // remove esse item
+        onView(withId(R.id.action_delete)).perform(click());
+
+        // verifica se o app exibiu a mensagem de lista vazia
+        onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
     }
 
+    /**
+     * TESTE: Pesquisar 3 perfils, selecionar todos mas remover apenas 2
+     * RESULTADO ESPERADO: Verificar se o app vai remover apenas 2 registros e atualizar a lista
+     * apenas com um registro
+     */
     @Test
-    public void searchThreeProfilesAndSelectThreeAndRemoveOne() {
-        // remove todos os items
-        this.selectAllProfilesAndDeleteAllProfiles(true);
-
+    public void searchThreeProfilesAndSelectThreeAndRemoveTwo() {
         // pesquisa um novo perfil
         this.searchAnItem("thalesbm2");
         this.searchAnItem("thalesbm");
@@ -81,11 +114,13 @@ public class ListProfilesActivityTest {
         onView(withText("thalesbm")).check(matches(isDisplayed()));
     }
 
+    /**
+     * TESTE: Pesquisar 2 perfils, selecionar todos mas remover apenas 1
+     * RESULTADO ESPERADO:Verificar se o app vai remover apenas 2 registros e atualizar a lista
+     * apenas com um registro
+     */
     @Test
     public void searchTwoProfilesAndRemoveOneProfile() {
-        // remove todos os items
-        this.selectAllProfilesAndDeleteAllProfiles(true);
-
         // pesquisa um novo perfil
         this.searchAnItem("thalesbm2");
         this.searchAnItem("thalesbm");
