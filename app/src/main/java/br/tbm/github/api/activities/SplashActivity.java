@@ -15,7 +15,7 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 23/08/2018
  **/
 public class SplashActivity extends BaseActivity implements
-        Runnable{
+        Runnable {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class SplashActivity extends BaseActivity implements
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
         }
         return super.onKeyDown(keyCode, event);
