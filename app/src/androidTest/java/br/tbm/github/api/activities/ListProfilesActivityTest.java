@@ -39,13 +39,13 @@ public class ListProfilesActivityTest {
     public ActivityTestRule<ListProfilesActivity> mActivityRule =
             new ActivityTestRule<>(ListProfilesActivity.class, true, true);
 
-//    private IdlingResource mIdlingResource;
+    private IdlingResource mIdlingResource;
 
     @Before
     public void before() {
-//        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
-//
-//        IdlingRegistry.getInstance().register(mIdlingResource);
+        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
+
+        IdlingRegistry.getInstance().register(mIdlingResource);
 
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
@@ -54,10 +54,9 @@ public class ListProfilesActivityTest {
 
     @After
     public void after() {
-
-//        if (mIdlingResource != null) {
-//            IdlingRegistry.getInstance().unregister(mIdlingResource);
-//        }
+        if (mIdlingResource != null) {
+            IdlingRegistry.getInstance().unregister(mIdlingResource);
+        }
 
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
@@ -86,10 +85,10 @@ public class ListProfilesActivityTest {
      */
     @Test
     public void removeJustOneProfile() {
-        // remove todos os items
+//         remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
 
-        // verifica se o app exibiu a mensagem de lista vazia
+//         verifica se o app exibiu a mensagem de lista vazia
         onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
 
         // pesquisa um novo perfil
@@ -110,46 +109,46 @@ public class ListProfilesActivityTest {
      * RESULTADO ESPERADO: Verificar se o app vai remover apenas 2 registros e atualizar a lista
      * apenas com um registro
      */
-    @Test
-    public void searchThreeProfilesAndSelectThreeAndRemoveTwo() {
-        // pesquisa um novo perfil
-        this.searchAnItem("thalesbm2");
-        this.searchAnItem("thalesbm");
-        this.searchAnItem("regisrocha3");
-
-        // remove todos os items
-        this.selectAllProfilesAndDeleteAllProfiles(false);
-
-        // clica e para nao selecionar mais um item da lista
-        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-
-        // clica e segura o primeiro item da lista
-        onView(withId(R.id.action_delete)).perform(click());
-
-        // verifica se existe um item na lista
-        onView(withText("thalesbm")).check(matches(isDisplayed()));
-    }
+//    @Test
+//    public void searchThreeProfilesAndSelectThreeAndRemoveTwo() {
+//        // pesquisa um novo perfil
+//        this.searchAnItem("thalesbm2");
+//        this.searchAnItem("thalesbm");
+//        this.searchAnItem("regisrocha3");
+//
+//        // remove todos os items
+//        this.selectAllProfilesAndDeleteAllProfiles(false);
+//
+//        // clica e para nao selecionar mais um item da lista
+//        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+//
+//        // clica e segura o primeiro item da lista
+//        onView(withId(R.id.action_delete)).perform(click());
+//
+//        // verifica se existe um item na lista
+//        onView(withText("thalesbm")).check(matches(isDisplayed()));
+//    }
 
     /**
      * TESTE: Pesquisar 2 perfils, selecionar todos mas remover apenas 1
      * RESULTADO ESPERADO:Verificar se o app vai remover apenas 2 registros e atualizar a lista
      * apenas com um registro
      */
-    @Test
-    public void searchTwoProfilesAndRemoveOneProfile() {
-        // pesquisa um novo perfil
-        this.searchAnItem("thalesbm2");
-        this.searchAnItem("thalesbm");
-
-        // clica e segura um item da lista
-        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, longClick()));
-
-        // remove esse item
-        onView(withId(R.id.action_delete)).perform(click());
-
-        // verifica se existe um item na lista
-        onView(withText("thalesbm2")).check(matches(isDisplayed()));
-    }
+//    @Test
+//    public void searchTwoProfilesAndRemoveOneProfile() {
+//        // pesquisa um novo perfil
+//        this.searchAnItem("thalesbm2");
+//        this.searchAnItem("thalesbm");
+//
+//        // clica e segura um item da lista
+//        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, longClick()));
+//
+//        // remove esse item
+//        onView(withId(R.id.action_delete)).perform(click());
+//
+//        // verifica se existe um item na lista
+//        onView(withText("thalesbm2")).check(matches(isDisplayed()));
+//    }
 
     // ################
     // METODOS PRIVADOS
@@ -190,5 +189,8 @@ public class ListProfilesActivityTest {
             // clica e segura o primeiro item da lista
             onView(withId(R.id.action_delete)).perform(click());
         }
+
+        // verifica se o app exibiu a mensagem de lista vazia
+        onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
     }
 }

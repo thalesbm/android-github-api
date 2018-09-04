@@ -241,22 +241,22 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     }
 
     /**
-     * altera o valor do idleState para true, isso indica que o o applicativo iniciou uma
+     * altera o valor do idleState para false, isso indica que o o applicativo iniciou uma
      * uma segunda thread
      */
     protected void initializedSecondThredIdlingResource() {
         if (mIdlingResource != null) {
-            mIdlingResource.setIdleState(true);
+            mIdlingResource.setIdleState(false);
         }
     }
 
     /**
-     * altera o valor do idleState para false, isso indica que o o applicativo terminou de
+     * altera o valor do idleState para true, isso indica que o o applicativo terminou de
      * executar uma segunda thread
      */
     protected void finishedSecondThredIdlingResource() {
         if (mIdlingResource != null) {
-            mIdlingResource.setIdleState(false);
+            mIdlingResource.setIdleState(true);
         }
     }
 

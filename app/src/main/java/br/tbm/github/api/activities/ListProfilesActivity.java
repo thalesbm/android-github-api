@@ -132,6 +132,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete: {
+                    initializedSecondThredIdlingResource();
                     mController.removeItems(mProfiles);
                     mode.finish();
                     break;
