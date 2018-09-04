@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.activities.ListProfilesActivity;
@@ -35,6 +37,7 @@ import static org.hamcrest.core.AllOf.allOf;
  **/
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProfileActivityTest {
 
     @Rule
@@ -62,7 +65,7 @@ public class ProfileActivityTest {
      * RESULTADO ESPERADO: Aplicativo exibir o nome do usuario na tela
      */
     @Test
-    public void checkIfDisplaysName() {
+    public void test1_checkIfDisplaysName() {
         // clica no botao de buscar perfil
         onView(ViewMatchers.withId(R.id.action_search)).perform(click());
 
@@ -81,7 +84,7 @@ public class ProfileActivityTest {
      * RESULTADO ESPERADO: Aplicativo exibir a mensagem de erro na tela
      */
     @Test
-    public void checkIfListIsEmpty() {
+    public void test2_checkIfListIsEmpty() {
         // clica no botao de buscar perfil
         onView(withId(R.id.action_search)).perform(click());
 

@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.activities.SearchByUsernameActivity;
@@ -33,6 +35,7 @@ import static org.hamcrest.core.AllOf.allOf;
  **/
 @RunWith(AndroidJUnit4.class)
 @LargeTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SearchUserActivityTest {
 
     @Rule
@@ -60,7 +63,7 @@ public class SearchUserActivityTest {
      * RESULTADO ESPERADO: Exibir a mensagem de erro
      */
     @Test
-    public void validateEditText1() {
+    public void test1_validateEditText() {
 
         // preenche o campo de texto
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("   "), closeSoftKeyboard());
@@ -77,7 +80,7 @@ public class SearchUserActivityTest {
      * RESULTADO ESPERADO: Exibir a mensagem de erro
      */
     @Test
-    public void validateEditText2() {
+    public void test2_validateEditText() {
 
         // clica no botao de pesquisar
         onView(withId(R.id.search_activity_button)).perform(click());
@@ -91,7 +94,7 @@ public class SearchUserActivityTest {
      * RESULTADO ESPERADO: Exibir a mensagem de erro
      */
     @Test
-    public void validateWrongUsername() {
+    public void test3_validateWrongUsername() {
 
         // preenche o campo de texto
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm3"), closeSoftKeyboard());
@@ -108,7 +111,7 @@ public class SearchUserActivityTest {
      * RESULTADO ESPERADO: Redirecionar para a proxima tela e exibir o perfil
      */
     @Test
-    public void searchCorrectUsername() {
+    public void test4_searchCorrectUsername() {
 
         // preenche o campo de texto
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm"), closeSoftKeyboard());
