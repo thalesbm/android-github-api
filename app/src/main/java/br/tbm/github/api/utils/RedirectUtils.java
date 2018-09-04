@@ -6,6 +6,7 @@ import android.content.Intent;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.activities.CommitsDetailsActivity;
 import br.tbm.github.api.activities.EventDetailsActivity;
+import br.tbm.github.api.activities.GithubRateLimitActivity;
 import br.tbm.github.api.activities.ListProfilesActivity;
 import br.tbm.github.api.activities.ProfileActivity;
 import br.tbm.github.api.activities.RepositoryDetailsActivity;
@@ -100,6 +101,16 @@ public class RedirectUtils {
         intent.putExtra(Constants.INTENT_USERNAME, username);
         intent.putExtra(Constants.INTENT_REPOSITORY, repositoryName);
         intent.putExtra(Constants.INTENT_SHA, sha);
+        activity.startActivity(intent);
+    }
+
+    /**
+     * Metodo responsavel por redirecionar para a tela de visualizar quantidade de requisicoes restantes
+     *
+     * @param activity Activity
+     */
+    public static void redirectToGithubRateLimitActivity(Activity activity) {
+        Intent intent = new Intent(activity, GithubRateLimitActivity.class);
         activity.startActivity(intent);
     }
 }

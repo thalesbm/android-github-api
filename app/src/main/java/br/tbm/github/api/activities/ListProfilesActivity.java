@@ -82,6 +82,11 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
             return true;
         }
 
+        if (id == R.id.action_rate_info) {
+            RedirectUtils.redirectToGithubRateLimitActivity(this);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

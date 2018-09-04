@@ -18,6 +18,7 @@
     <!-- ######## MENU ######## -->
     <string name="action_search">Pesquisar</string>
     <string name="action_delete">Deletar</string>
+    <string name="action_info">Limite de Requisiçao</string>
     <string name="action_events">Eventos</string>
     <string name="action_tags">Tags</string>
     <string name="action_branches">Branches</string>
@@ -56,4 +57,12 @@
     <!-- ######## TAGS FRAGMENT ######## -->
     <string name="tags_fragment_title">Tags</string>
     <string name="tags_fragment_empty_list">Este repositório não tem nenhuma tag</string>
+
+    <!-- ######## GITHUB RATE LIMIT ACTIVITY ######## -->
+    <string name="github_rate_limit_activity_toolbar">Limite de Requisiçao</string>
+    <string name="github_rate_limit_activity_core">Core</string>
+    <string name="github_rate_limit_activity_search">Search</string>
+    <string name="github_rate_limit_activity_graph">Graph</string>
+    <string name="github_rate_limit_activity_limit">Limit: %1$d</string>
+    <string name="github_rate_limit_activity_remaining">Remaining: %1$d</string>
 </resources>

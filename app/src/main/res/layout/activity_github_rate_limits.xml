@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.GithubRateLimitActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- CORE -->
+
+    <br.tbm.github.api.components.CustomMontserratRegularTextView
+        android:id="@+id/activity_github_core_title"
+        style="@style/github_rate_limit_activity_textview_title"
+        android:text="@string/github_rate_limit_activity_core"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_core_limit"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_core_title" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_core_remaining"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_core_limit" />
+
+    <View
+        android:id="@+id/divider_core"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_core_remaining" />
+
+    <!-- REMAINING -->
+
+    <br.tbm.github.api.components.CustomMontserratRegularTextView
+        android:id="@+id/activity_github_search_title"
+        style="@style/github_rate_limit_activity_textview_title"
+        android:text="@string/github_rate_limit_activity_search"
+        app:layout_constraintTop_toBottomOf="@+id/divider_core" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_search_limit"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_search_title" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_search_remaining"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_search_limit" />
+
+    <View
+        android:id="@+id/divider_search"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_search_remaining" />
+
+    <!-- GRAPH -->
+
+    <br.tbm.github.api.components.CustomMontserratRegularTextView
+        android:id="@+id/activity_github_graph_title"
+        style="@style/github_rate_limit_activity_textview_title"
+        android:text="@string/github_rate_limit_activity_graph"
+        app:layout_constraintTop_toBottomOf="@+id/divider_search" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_graph_limit"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_graph_title" />
+
+    <br.tbm.github.api.components.CustomMontserratLightTextView
+        android:id="@+id/activity_github_graph_remaining"
+        style="@style/github_rate_limit_activity_textview_item"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_graph_limit" />
+
+    <View
+        android:id="@+id/divider_graph"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/light_grey"
+        app:layout_constraintTop_toBottomOf="@+id/activity_github_graph_remaining" />
+
+</android.support.constraint.ConstraintLayout>
