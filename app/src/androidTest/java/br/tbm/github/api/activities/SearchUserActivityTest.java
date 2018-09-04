@@ -1,14 +1,19 @@
-package br.tbm.github.api;
+package br.tbm.github.api.activities;
 
+import android.support.test.espresso.IdlingRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.TextView;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.tbm.github.api.R;
 import br.tbm.github.api.activities.SearchByUsernameActivity;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -33,6 +38,22 @@ public class SearchUserActivityTest {
     @Rule
     public ActivityTestRule<SearchByUsernameActivity> mActivityRule =
             new ActivityTestRule<>(SearchByUsernameActivity.class, true, true);
+
+    private IdlingResource mIdlingResource;
+
+    @Before
+    public void before() {
+        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
+
+        IdlingRegistry.getInstance().register(mIdlingResource);
+    }
+
+    @After
+    public void after() {
+        if (mIdlingResource != null) {
+            IdlingRegistry.getInstance().unregister(mIdlingResource);
+        }
+    }
 
     /**
      * TESTE: Usuario preencheu o campo apenas com espaços e clicou no botao de pesquisar

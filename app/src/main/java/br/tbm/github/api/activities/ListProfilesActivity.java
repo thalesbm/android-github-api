@@ -1,6 +1,7 @@
 package br.tbm.github.api.activities;
 
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -150,6 +151,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
      *
      * @return int
      */
+    @VisibleForTesting
     public int getListSize() {
         return mProfiles.size();
     }

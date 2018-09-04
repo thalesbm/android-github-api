@@ -1,6 +1,9 @@
-package br.tbm.github.api;
+package br.tbm.github.api.activities;
 
+import android.support.test.espresso.IdlingRegistry;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.RecyclerViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -11,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.tbm.github.api.R;
 import br.tbm.github.api.activities.ListProfilesActivity;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -35,14 +39,26 @@ public class ListProfilesActivityTest {
     public ActivityTestRule<ListProfilesActivity> mActivityRule =
             new ActivityTestRule<>(ListProfilesActivity.class, true, true);
 
+//    private IdlingResource mIdlingResource;
+
     @Before
     public void before() {
+//        mIdlingResource = mActivityRule.getActivity().getIdlingResource();
+//
+//        IdlingRegistry.getInstance().register(mIdlingResource);
+
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
+
     }
 
     @After
     public void after() {
+
+//        if (mIdlingResource != null) {
+//            IdlingRegistry.getInstance().unregister(mIdlingResource);
+//        }
+
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
     }
@@ -61,7 +77,7 @@ public class ListProfilesActivityTest {
         this.selectAllProfilesAndDeleteAllProfiles(true);
 
         // verifica se o app exibiu a mensagem de lista vazia
-        onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
+        onView(ViewMatchers.withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
     }
 
     /**

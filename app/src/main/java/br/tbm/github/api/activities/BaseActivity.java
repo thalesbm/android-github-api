@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.TextInputLayout;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.interfaces.ControllerCallbacks;
+import br.tbm.github.api.utils.SimpleIdlingResource;
 
 import static br.tbm.github.api.Constants.HTTP_FORBIDDEN;
 import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
@@ -32,6 +36,9 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     protected abstract void init();
 
     private ProgressDialog progressDialog;
+
+    @Nullable
+    protected SimpleIdlingResource mIdlingResource;
 
     /**
      * Adiciona a toolbar no objeto setSupportActionBar
@@ -220,32 +227,70 @@ public abstract class BaseActivity<T> extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // ###################
+    // METODOS PARA TESTES
+    // ###################
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
+
+    /**
+     * altera o valor do idleState para true, isso indica que o o applicativo iniciou uma
+     * uma segunda thread
+     */
+    protected void initializedSecondThredIdlingResource() {
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(true);
+        }
+    }
+
+    /**
+     * altera o valor do idleState para false, isso indica que o o applicativo terminou de
+     * executar uma segunda thread
+     */
+    protected void finishedSecondThredIdlingResource() {
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(false);
+        }
+    }
+
     // ######################
     // CALLBACK DO CONTROLLER
     // ######################
 
     @Override
     public void displayAlertDialog(int id, boolean closeActivity) {
+        this.finishedSecondThredIdlingResource();
         showAlertDialog(getString(id), closeActivity);
     }
 
     @Override
     public void displayAlertDialog(String message, boolean closeActivity) {
+        this.finishedSecondThredIdlingResource();
         showAlertDialog(message, closeActivity);
     }
 
     @Override
     public void networkIssue(int code, boolean closeActivity) {
+        this.finishedSecondThredIdlingResource();
         analiseRetrofitFailureResponse(code, closeActivity);
     }
 
     @Override
     public void success(T t) {
+        this.finishedSecondThredIdlingResource();
         dismissProgressDialog();
     }
 
     @Override
     public void success(ArrayList<T> t) {
+        this.finishedSecondThredIdlingResource();
         dismissProgressDialog();
     }
 }

@@ -24,6 +24,15 @@ android {
         unitTests.returnDefaultValues = true
     }
 
+    // OUTPUT: android-github-api/app/build/reports
+    // A api do github é um tanto quanto limitada no quesito de quantidade de requisicoes, caso
+    // atinja o maximo nao vai mais ser possivel utilizar o app por um determinado tempo e se rodar
+    // os testes quase todos vao falhar
+    task runTests(dependsOn: ['clean', 'test', 'connectedAndroidTest']) {
+        group = 'Github API Tasks'
+        description = "Executa todos os testes relacionados com o aplicativo"
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -59,6 +68,9 @@ dependencies {
     implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     // TEST
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
+
+    // TEST IMPLEMENTATION
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
 
