@@ -42,7 +42,7 @@ public class BranchFragmentTest {
      * a esse fragment
      */
     @Test
-    public void addNewItem() {
+    public void preTest1_addNewItem() {
         // clica no botao de buscar perfil
         onView(ViewMatchers.withId(R.id.action_search)).perform(click());
 
@@ -58,7 +58,7 @@ public class BranchFragmentTest {
      * RESULTADO ESPERADO: Verifica se o app vai exibir uma branch na lista com o nome correto
      */
     @Test
-    public void checkIfRepositoryExist() {
+    public void test1_checkIfRepositoryExist() {
         // clica e para nao selecionar mais um item da lista
         onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 

@@ -51,7 +51,6 @@ public class ListProfilesActivityTest {
 
         // remove todos os items
         this.selectAllProfilesAndDeleteAllProfiles(true);
-
     }
 
     @After
@@ -184,9 +183,9 @@ public class ListProfilesActivityTest {
         if (size > 0 && needsToRemove) {
             // clica e segura o primeiro item da lista
             onView(withId(R.id.action_delete)).perform(click());
-        }
 
-        // verifica se o app exibiu a mensagem de lista vazia
-        onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
+            // verifica se o app exibiu a mensagem de lista vazia
+            onView(withText(R.string.main_activity_list_empty)).check(matches(isDisplayed()));
+        }
     }
 }

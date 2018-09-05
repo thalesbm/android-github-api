@@ -73,7 +73,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
      */
     private void searchProfileByName() {
         showProgressDialog(getString(R.string.loading));
-
+        initializedSecondThreadIdlingResource();
         mController.search(mProfile.getLogin());
     }
 

@@ -45,8 +45,6 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> {
         mTvProfile = findViewById(R.id.search_activity_search_textlayout);
         mEdProfile = findViewById(R.id.search_activity_search_edittext);
 
-        // mEdProfile.setText("thalesbm2");
-
         mEdProfile.addTextChangedListener(new CustomTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -99,7 +97,7 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> {
      */
     private void searchProfileByName(String profileName) {
         showProgressDialog(getString(R.string.loading));
-
+        initializedSecondThreadIdlingResource();
         mController.search(profileName);
     }
 

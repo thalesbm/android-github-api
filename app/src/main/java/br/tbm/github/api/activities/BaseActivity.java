@@ -244,7 +244,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity
      * altera o valor do idleState para false, isso indica que o o applicativo iniciou uma
      * uma segunda thread
      */
-    protected void initializedSecondThredIdlingResource() {
+    protected void initializedSecondThreadIdlingResource() {
         if (mIdlingResource != null) {
             mIdlingResource.setIdleState(false);
         }
@@ -254,7 +254,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity
      * altera o valor do idleState para true, isso indica que o o applicativo terminou de
      * executar uma segunda thread
      */
-    protected void finishedSecondThredIdlingResource() {
+    protected void finishedSecondThreadIdlingResource() {
         if (mIdlingResource != null) {
             mIdlingResource.setIdleState(true);
         }
@@ -266,31 +266,31 @@ public abstract class BaseActivity<T> extends AppCompatActivity
 
     @Override
     public void displayAlertDialog(int id, boolean closeActivity) {
-        this.finishedSecondThredIdlingResource();
+        this.finishedSecondThreadIdlingResource();
         showAlertDialog(getString(id), closeActivity);
     }
 
     @Override
     public void displayAlertDialog(String message, boolean closeActivity) {
-        this.finishedSecondThredIdlingResource();
+        this.finishedSecondThreadIdlingResource();
         showAlertDialog(message, closeActivity);
     }
 
     @Override
     public void networkIssue(int code, boolean closeActivity) {
-        this.finishedSecondThredIdlingResource();
+        this.finishedSecondThreadIdlingResource();
         analiseRetrofitFailureResponse(code, closeActivity);
     }
 
     @Override
     public void success(T t) {
-        this.finishedSecondThredIdlingResource();
+        this.finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 
     @Override
     public void success(ArrayList<T> t) {
-        this.finishedSecondThredIdlingResource();
+        this.finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 }

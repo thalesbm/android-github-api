@@ -1,6 +1,5 @@
 package br.tbm.github.api.activities;
 
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -18,7 +17,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.activities.ListProfilesActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;

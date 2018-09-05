@@ -47,7 +47,7 @@ public class TagFragmentTest {
      * a esse fragment
      */
     @Test
-    public void addNewItem() {
+    public void preTest1_addNewItem() {
         // clica no botao de buscar perfil
         onView(ViewMatchers.withId(R.id.action_search)).perform(click());
 
@@ -63,18 +63,12 @@ public class TagFragmentTest {
      * RESULTADO ESPERADO: Verifica se o app vai exibir uma tag na lista com o nome correto
      */
     @Test
-    public void checkIfRepositoryExist() {
+    public void test1_checkIfRepositoryExist() {
         // clica e para nao selecionar mais um item da lista
         onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // seleciona um repositorio
         onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-//
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 
         // altera o fragment
         mActivityRule.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.nav_drawer_container, new TagFragment()).commit();
