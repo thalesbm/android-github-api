@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Github - API</string>
-
     <!-- ######## DEFAULT ########-->
     <string name="alert">Alert</string>
     <string name="ok">OK</string>
@@ -57,5 +55,8 @@
     <!-- ######## TAGS FRAGMENT ######## -->
     <string name="tags_fragment_title">Tags</string>
     <string name="tags_fragment_empty_list">This repository does not have any tag</string>
+
+    <!-- ######## GITHUB RATE LIMIT ACTIVITY ######## -->
+    <string name="github_rate_limit_activity_toolbar">Rate Limit</string>
 
 </resources>

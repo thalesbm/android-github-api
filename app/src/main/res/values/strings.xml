@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Github - API</string>
+    <string name="app_name" translatable="false">Github - API</string>
 
     <!-- ######## DEFAULT ######## -->
     <string name="alert">Alerta</string>
@@ -10,7 +10,7 @@
     <string name="loading">Carregando&#8230;</string>
 
     <!-- ######## GENERIC ISSUE ######## -->
-    <string name="generic_internet_issue">A network error has occurred. Check your Internet connection and try again later</string>
+    <string name="generic_internet_issue">Ocorreu um erro com a conexao, verifica se você esta conectado e tente novamente</string>
     <string name="generic_connection_issue">Não foi possível completar a requisiçao, tente novamente mais tarde</string>
     <string name="generic_database_issue">Não foi possível conectar com o banco de dados, tente novamente mais tarde</string>
     <string name="generic_connection_forbidden">Você excedeu o numero maximo de requisiçoes, tente novamente mais tarde</string>
@@ -60,9 +60,9 @@
 
     <!-- ######## GITHUB RATE LIMIT ACTIVITY ######## -->
     <string name="github_rate_limit_activity_toolbar">Limite de Requisiçao</string>
-    <string name="github_rate_limit_activity_core">Core</string>
-    <string name="github_rate_limit_activity_search">Search</string>
-    <string name="github_rate_limit_activity_graph">Graph</string>
-    <string name="github_rate_limit_activity_limit">Limit: %1$d</string>
-    <string name="github_rate_limit_activity_remaining">Remaining: %1$d</string>
+    <string name="github_rate_limit_activity_core" translatable="false">Core</string>
+    <string name="github_rate_limit_activity_search" translatable="false">Search</string>
+    <string name="github_rate_limit_activity_graph" translatable="false">Graph</string>
+    <string name="github_rate_limit_activity_limit" translatable="false">Limit: %1$d</string>
+    <string name="github_rate_limit_activity_remaining" translatable="false">Remaining: %1$d</string>
 </resources>

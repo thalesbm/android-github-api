@@ -254,7 +254,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity
      * altera o valor do idleState para true, isso indica que o o applicativo terminou de
      * executar uma segunda thread
      */
-    protected void finishedSecondThreadIdlingResource() {
+    public void finishedSecondThreadIdlingResource() {
         if (mIdlingResource != null) {
             mIdlingResource.setIdleState(true);
         }

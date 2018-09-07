@@ -66,6 +66,6 @@ public class BranchFragmentTest {
         onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
         // verifica se o repositorio selecionado tem o nome de master
-        // onView(withText("master")).check(matches(isDisplayed()));
+        onView(withText("master")).check(matches(isDisplayed()));
     }
 }

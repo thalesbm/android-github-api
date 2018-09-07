@@ -1,14 +1,11 @@
 package br.tbm.github.api.fragments;
 
-import android.support.test.espresso.IdlingRegistry;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,8 +14,6 @@ import org.junit.runners.MethodSorters;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.activities.ListProfilesActivity;
-import br.tbm.github.api.activities.RepositoryDetailsActivity;
-import br.tbm.github.api.fragments.TagFragment;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -70,10 +65,10 @@ public class TagFragmentTest {
         // seleciona um repositorio
         onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // altera o fragment
-        mActivityRule.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.nav_drawer_container, new TagFragment()).commit();
+        // clica na tab de TAGS
+        onView(withId(R.id.navigation_tags)).perform(click());
 
-        // verifica se o repositorio selecionado tem o nome de master
-        onView(withText("master")).check(matches(isDisplayed()));
+        // verifica se a lista está vazia para aquele repositorio
+        onView(withText(R.string.tags_fragment_empty_list)).check(matches(isDisplayed()));
     }
 }
