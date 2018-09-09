@@ -49,7 +49,7 @@ public class BranchFragmentTest {
         // digita um perfil valido na busca
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm"), closeSoftKeyboard());
 
-        // clica para bsucar
+        // clica para buscar
         onView(withId(R.id.search_activity_button)).perform(click());
     }
 
@@ -65,7 +65,7 @@ public class BranchFragmentTest {
         // seleciona um repositorio
         onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // verifica se o repositorio selecionado tem o nome de master
+        // verifica se o repositorio selecionado tem uma branch chamada master
         onView(withText("master")).check(matches(isDisplayed()));
     }
 }

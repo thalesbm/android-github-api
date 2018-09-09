@@ -25,12 +25,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Created by thalesbertolini on 04/09/2018
+ * Created by thalesbertolini on 07/09/2018
  **/
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TagFragmentTest {
+public class EventFragmentTest {
 
     @Rule
     public ActivityTestRule<ListProfilesActivity> mActivityRule =
@@ -49,7 +49,7 @@ public class TagFragmentTest {
         // digita um perfil valido na busca
         onView(withId(R.id.search_activity_search_edittext)).perform(typeText("thalesbm"), closeSoftKeyboard());
 
-        // clica para buscar
+        // clica para bsucar
         onView(withId(R.id.search_activity_button)).perform(click());
     }
 
@@ -62,13 +62,15 @@ public class TagFragmentTest {
         // clica e para nao selecionar mais um item da lista
         onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // seleciona um repositorio
-        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.scrollToPosition(5));
 
-        // clica na tab de TAGS
-        onView(withId(R.id.navigation_tags)).perform(click());
+        // seleciona um repositorio
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItem(withText("thalesbm.github.io"), click()));
+
+        // clica na tab de EVENTS
+        onView(withId(R.id.navigation_events)).perform(click());
 
         // verifica se a lista está vazia para aquele repositorio
-        onView(withText(R.string.tags_fragment_empty_list)).check(matches(isDisplayed()));
+        onView(withText(R.string.events_fragment_empty_list)).check(matches(isDisplayed()));
     }
 }
