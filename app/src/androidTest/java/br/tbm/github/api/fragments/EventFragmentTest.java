@@ -58,7 +58,7 @@ public class EventFragmentTest {
      * RESULTADO ESPERADO: Verifica se ao clicar no evento o app redireciona
      */
     @Test
-    public void test1_test() {
+    public void test1_checkIfAppRedirects() {
         // clica e para nao selecionar mais um item da lista
         onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
