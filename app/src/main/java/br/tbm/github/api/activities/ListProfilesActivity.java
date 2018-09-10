@@ -150,6 +150,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             mode.finish();
+            listProfilesFromDatabase();
         }
     };
 
