@@ -54,18 +54,40 @@ public class EventFragmentTest {
     }
 
     /**
-     * TESTE: Verifica se o repositorio tem uma branch chamada master
-     * RESULTADO ESPERADO: Verifica se o app vai exibir a mensagem de lista vazia
+     * TESTE: Verifica se o repositorio tem nenhum evento
+     * RESULTADO ESPERADO: Verifica se ao clicar no evento o app redireciona
      */
     @Test
-    public void test1_checkIfRepositoryExist() {
+    public void test1_test() {
         // clica e para nao selecionar mais um item da lista
         onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.scrollToPosition(5));
+        // seleciona um repositorio
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        // clica na tab de EVENTS
+        onView(withId(R.id.navigation_events)).perform(click());
 
         // seleciona um repositorio
-        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItem(withText("thalesbm.github.io"), click()));
+        onView(withId(R.id.fragment_events_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+    }
+
+    /**
+     * TESTE: Verifica se o repositorio nao tem nenhum evento
+     * RESULTADO ESPERADO: Verifica se o app vai exibir a mensagem de lista vazia
+     */
+    @Test
+    public void test2_checkIfRepositoryExist() {
+        // clica e para nao selecionar mais um item da lista
+        onView(withId(R.id.main_activity_recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        int lastItem = mActivityRule.getActivity().getListSize() - 1;
+
+        // scroll para o ultimo item da tela
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.scrollToPosition(lastItem));
+
+        // seleciona um repositorio
+        onView(withId(R.id.recycler_view)).perform(RecyclerViewActions.actionOnItemAtPosition(lastItem, click()));
 
         // clica na tab de EVENTS
         onView(withId(R.id.navigation_events)).perform(click());
