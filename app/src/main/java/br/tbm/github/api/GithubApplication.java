@@ -2,8 +2,8 @@ package br.tbm.github.api;
 
 import android.app.Application;
 
-import br.tbm.github.api.dao.DatabaseHelper;
-import br.tbm.github.api.rest.RestAPI;
+import br.tbm.github.api.database.dao.DatabaseHelper;
+import br.tbm.github.api.network.rest.RestAPI;
 import retrofit2.Retrofit;
 
 /**

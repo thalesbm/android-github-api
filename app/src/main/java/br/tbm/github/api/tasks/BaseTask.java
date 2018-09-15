@@ -3,7 +3,7 @@ package br.tbm.github.api.tasks;
 import android.os.AsyncTask;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.dao.DatabaseHelper;
+import br.tbm.github.api.database.dao.DatabaseHelper;
 
 /**
  * Created by thalesbertolini on 23/08/2018

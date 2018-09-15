@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:fitsSystemWindows="true"
-	tools:context="br.tbm.github.api.activities.ProfileActivity">
+	tools:context=".ui.activities.ProfileActivity">
 
 	<android.support.design.widget.AppBarLayout
 		android:id="@+id/app_bar"
@@ -59,7 +59,7 @@
 				android:overScrollMode="never"
 				android:scrollbars="vertical" />
 
-			<br.tbm.github.api.components.CustomMontserratRegularTextView
+			<br.tbm.github.api.ui.components.CustomMontserratRegularTextView
 				android:id="@+id/profile_activity_no_repository"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"

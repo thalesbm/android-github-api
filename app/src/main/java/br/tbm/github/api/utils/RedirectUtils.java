@@ -4,15 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 
 import br.tbm.github.api.Constants;
-import br.tbm.github.api.activities.CommitsDetailsActivity;
-import br.tbm.github.api.activities.EventDetailsActivity;
-import br.tbm.github.api.activities.GithubRateLimitActivity;
-import br.tbm.github.api.activities.ListProfilesActivity;
-import br.tbm.github.api.activities.ProfileActivity;
-import br.tbm.github.api.activities.RepositoryDetailsActivity;
-import br.tbm.github.api.activities.SearchByUsernameActivity;
-import br.tbm.github.api.entities.EventPayloadResponse;
-import br.tbm.github.api.models.Profile;
+import br.tbm.github.api.ui.activities.CommitsDetailsActivity;
+import br.tbm.github.api.ui.activities.EventDetailsActivity;
+import br.tbm.github.api.ui.activities.GithubRateLimitActivity;
+import br.tbm.github.api.ui.activities.ListProfilesActivity;
+import br.tbm.github.api.ui.activities.ProfileActivity;
+import br.tbm.github.api.ui.activities.RepositoryDetailsActivity;
+import br.tbm.github.api.ui.activities.SearchByUsernameActivity;
+import br.tbm.github.api.network.entities.EventPayloadResponse;
+import br.tbm.github.api.database.data.Profile;
 
 /**
  * Created by thalesbertolini on 23/08/2018

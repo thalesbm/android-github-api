@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name=".ui.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,37 +22,37 @@
         </activity>
 
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name=".ui.activities.ProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.ListProfilesActivity"
+            android:name=".ui.activities.ListProfilesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.SearchByUsernameActivity"
+            android:name=".ui.activities.SearchByUsernameActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.RepositoryDetailsActivity"
+            android:name=".ui.activities.RepositoryDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.CommitsDetailsActivity"
+            android:name=".ui.activities.CommitsDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.EventDetailsActivity"
+            android:name=".ui.activities.EventDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".activities.GithubRateLimitActivity"
+            android:name=".ui.activities.GithubRateLimitActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

@@ -5,8 +5,8 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.Date;
 
-import br.tbm.github.api.models.Profile;
-import br.tbm.github.api.interfaces.TasksCallbacks;
+import br.tbm.github.api.database.data.Profile;
+import br.tbm.github.api.interfaces.generic.TasksCallbacks;
 
 /**
  * Created by thalesbertolini on 23/08/2018
