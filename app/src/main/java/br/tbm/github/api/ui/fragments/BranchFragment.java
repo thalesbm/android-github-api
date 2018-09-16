@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.adapters.BranchesTagsAdapter;
-import br.tbm.github.api.interfaces.BranchMVP;
+import br.tbm.github.api.interfaces.fragments.BranchMVP;
 import br.tbm.github.api.presenter.fragments.BranchPresenter;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 

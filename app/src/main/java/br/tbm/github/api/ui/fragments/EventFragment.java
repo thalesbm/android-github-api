@@ -16,7 +16,7 @@ import java.util.List;
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.adapters.EventsAdapter;
-import br.tbm.github.api.interfaces.EventMVP;
+import br.tbm.github.api.interfaces.fragments.EventMVP;
 import br.tbm.github.api.presenter.fragments.EventPresenter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
 import br.tbm.github.api.network.entities.EventsResponse;

@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.TagMVP;
+import br.tbm.github.api.interfaces.fragments.TagMVP;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.network.rest.RestRepository;
 import retrofit2.Call;

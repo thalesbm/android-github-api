@@ -1,4 +1,4 @@
-package br.tbm.github.api.interfaces;
+package br.tbm.github.api.interfaces.activities;
 
 import java.util.List;
 

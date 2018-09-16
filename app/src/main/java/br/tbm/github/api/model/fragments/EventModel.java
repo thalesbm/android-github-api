@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.EventMVP;
+import br.tbm.github.api.interfaces.fragments.EventMVP;
 import br.tbm.github.api.network.entities.EventsResponse;
 import br.tbm.github.api.network.rest.RestRepository;
 import retrofit2.Call;

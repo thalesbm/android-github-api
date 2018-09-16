@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.interfaces.GithubRateLimitMVP;
+import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.activities.GithubRateLimitPresenter;
 import br.tbm.github.api.network.entities.ResourcesResponse;
 

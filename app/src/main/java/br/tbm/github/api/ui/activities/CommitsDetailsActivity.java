@@ -16,7 +16,7 @@ import br.tbm.github.api.ui.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.presenter.activities.CommitsDetailsPresenter;
 import br.tbm.github.api.network.entities.CommitsResponse;
-import br.tbm.github.api.interfaces.CommitDetailsMVP;
+import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
 import br.tbm.github.api.utils.DateUtils;
 
 /**

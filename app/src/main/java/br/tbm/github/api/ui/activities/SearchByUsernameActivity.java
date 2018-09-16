@@ -11,7 +11,7 @@ import android.widget.EditText;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.components.CustomTextWatcher;
 import br.tbm.github.api.presenter.activities.SearchByUsernamePresenter;
-import br.tbm.github.api.interfaces.SearchByUsernameMVP;
+import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
 

@@ -3,7 +3,7 @@ package br.tbm.github.api.presenter.activities;
 import java.util.ArrayList;
 
 import br.tbm.github.api.model.activities.ProfileModel;
-import br.tbm.github.api.interfaces.ProfileMVP;
+import br.tbm.github.api.interfaces.activities.ProfileMVP;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.presenter.BasePresenter;
 

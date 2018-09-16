@@ -3,7 +3,7 @@ package br.tbm.github.api.model.activities;
 import android.support.annotation.NonNull;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.CommitDetailsMVP;
+import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
 import br.tbm.github.api.network.entities.CommitsResponse;
 import br.tbm.github.api.network.rest.RestRepository;
 import retrofit2.Call;

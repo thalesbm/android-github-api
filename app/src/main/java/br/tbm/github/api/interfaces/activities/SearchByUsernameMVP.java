@@ -1,19 +1,21 @@
-package br.tbm.github.api.interfaces;
+package br.tbm.github.api.interfaces.activities;
 
 import br.tbm.github.api.interfaces.generic.BasePresenterCallbacks;
-import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
+import br.tbm.github.api.database.data.Profile;
 
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public interface ProfileMVP {
+public interface SearchByUsernameMVP {
 
-    interface View extends BaseViewCallbacks<RepositoriesResponse> {
+    interface View extends BaseViewCallbacks<Profile> {
+
     }
 
-    interface Presenter extends BasePresenterCallbacks<RepositoriesResponse> {
+    interface Presenter extends BasePresenterCallbacks<Profile> {
         void search(String profileName);
+
     }
 
     interface Model {

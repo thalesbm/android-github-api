@@ -1,4 +1,4 @@
-package br.tbm.github.api.tasks;
+package br.tbm.github.api.database.tasks;
 
 import android.util.Log;
 

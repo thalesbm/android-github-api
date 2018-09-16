@@ -17,7 +17,7 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.ui.adapters.ProfileAdapter;
 import br.tbm.github.api.ui.components.CustomActionMode;
 import br.tbm.github.api.presenter.activities.ListProfilesPresenter;
-import br.tbm.github.api.interfaces.ListProfilesMVP;
+import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;

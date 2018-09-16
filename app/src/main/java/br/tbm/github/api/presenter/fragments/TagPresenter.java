@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.model.fragments.TagModel;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
-import br.tbm.github.api.interfaces.TagMVP;
+import br.tbm.github.api.interfaces.fragments.TagMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

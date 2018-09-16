@@ -16,7 +16,7 @@ import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.adapters.RepositoryAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
-import br.tbm.github.api.interfaces.ProfileMVP;
+import br.tbm.github.api.interfaces.activities.ProfileMVP;
 import br.tbm.github.api.presenter.activities.ProfilePresenter;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;

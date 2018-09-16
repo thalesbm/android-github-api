@@ -1,19 +1,9 @@
 package br.tbm.github.api.presenter.activities;
 
-import android.support.annotation.NonNull;
-
-import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.R;
-import br.tbm.github.api.interfaces.SearchByUsernameMVP;
-import br.tbm.github.api.interfaces.generic.TasksCallbacks;
+import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.model.activities.SearchByUsernameModel;
-import br.tbm.github.api.network.rest.RestUser;
 import br.tbm.github.api.presenter.BasePresenter;
-import br.tbm.github.api.tasks.SaveGithubUserTask;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 03/09/2018

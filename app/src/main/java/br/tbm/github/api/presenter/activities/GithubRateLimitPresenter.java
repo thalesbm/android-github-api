@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.activities;
 
 import br.tbm.github.api.model.activities.GithubRateLimitModel;
 import br.tbm.github.api.network.entities.ResourcesResponse;
-import br.tbm.github.api.interfaces.GithubRateLimitMVP;
+import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.activities;
 
 import br.tbm.github.api.model.activities.CommitDetailsModel;
 import br.tbm.github.api.network.entities.CommitsResponse;
-import br.tbm.github.api.interfaces.CommitDetailsMVP;
+import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

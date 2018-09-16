@@ -4,10 +4,10 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.ListProfilesMVP;
+import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
 import br.tbm.github.api.interfaces.generic.TasksCallbacks;
-import br.tbm.github.api.tasks.ListGithubUsersTask;
-import br.tbm.github.api.tasks.RemoveUsersTask;
+import br.tbm.github.api.database.tasks.ListGithubUsersTask;
+import br.tbm.github.api.database.tasks.RemoveUsersTask;
 
 /**
  * Created by thalesbertolini on 15/09/2018
