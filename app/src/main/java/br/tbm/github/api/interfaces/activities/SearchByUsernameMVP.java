@@ -20,5 +20,7 @@ public interface SearchByUsernameMVP {
 
     interface Model {
         void searchInServer(String profileName);
+
+        void setCallback(SearchByUsernameMVP.Presenter presenter);
     }
 }

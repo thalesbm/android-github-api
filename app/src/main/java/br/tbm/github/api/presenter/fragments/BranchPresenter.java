@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.fragments;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.model.fragments.BranchModel;
+import br.tbm.github.api.repository.fragments.BranchRepository;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.interfaces.fragments.BranchMVP;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -16,9 +16,10 @@ public class BranchPresenter extends BasePresenter<BranchesTagsResponse> impleme
     private BranchMVP.View mView;
     private BranchMVP.Model mModel;
 
-    public BranchPresenter(BranchMVP.View view) {
+    public BranchPresenter(BranchMVP.View view, BranchMVP.Model model) {
         this.mView = view;
-        this.mModel = new BranchModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = true;
     }

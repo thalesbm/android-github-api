@@ -18,5 +18,7 @@ public interface ProfileMVP {
 
     interface Model {
         void searchInServer(String profileName);
+
+        void setCallback(ProfileMVP.Presenter presenter);
     }
 }

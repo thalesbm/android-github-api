@@ -1,11 +1,11 @@
-package br.tbm.github.api.model.fragments;
+package br.tbm.github.api.repository.fragments;
 
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.fragments.TagMVP;
+import br.tbm.github.api.interfaces.fragments.BranchMVP;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.network.rest.RestRepository;
 import retrofit2.Call;
@@ -15,18 +15,14 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class TagModel implements TagMVP.Model {
+public class BranchRepository implements BranchMVP.Model {
 
-    private TagMVP.Presenter mPresenter;
-
-    public TagModel(TagMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
+    private BranchMVP.Presenter mPresenter;
 
     @Override
     public void searchInServer(String profileName, String repositoryName) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<ArrayList<BranchesTagsResponse>> responseCall = service.listTags(profileName, repositoryName);
+        Call<ArrayList<BranchesTagsResponse>> responseCall = service.listBranches(profileName, repositoryName);
         responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Response<ArrayList<BranchesTagsResponse>> response) {
@@ -42,5 +38,15 @@ public class TagModel implements TagMVP.Model {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter BranchMVP.Presenter
+     */
+    @Override
+    public void setCallback(BranchMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }

@@ -19,5 +19,7 @@ public interface CommitDetailsMVP {
 
     interface Model {
         void searchInServer(String username, String repositoryName, String sha);
+
+        void setCallback(CommitDetailsMVP.Presenter presenter);
     }
 }

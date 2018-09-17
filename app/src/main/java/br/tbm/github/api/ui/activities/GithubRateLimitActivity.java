@@ -9,6 +9,7 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.activities.GithubRateLimitPresenter;
 import br.tbm.github.api.network.entities.ResourcesResponse;
+import br.tbm.github.api.repository.activities.GithubRateLimitRepository;
 
 /**
  * Created by thalesbertolini on 04/09/2018
@@ -30,7 +31,7 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.github_rate_limit_activity_toolbar));
 
-        this.mController = new GithubRateLimitPresenter(this);
+        this.mController = new GithubRateLimitPresenter(this, new GithubRateLimitRepository());
 
         this.init();
         this.searchEvents();

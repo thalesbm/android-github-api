@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.fragments;
+package br.tbm.github.api.repository.fragments;
 
 import android.support.annotation.NonNull;
 
@@ -15,14 +15,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class EventModel implements EventMVP.Model {
+public class EventRepository implements EventMVP.Model {
 
     private EventMVP.Presenter mPresenter;
-
-    public EventModel(EventMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
-
 
     @Override
     public void searchInServer(String profileName, String repositoryName) {
@@ -43,5 +38,15 @@ public class EventModel implements EventMVP.Model {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter EventMVP.Presenter
+     */
+    @Override
+    public void setCallback(EventMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }

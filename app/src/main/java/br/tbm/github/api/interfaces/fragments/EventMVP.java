@@ -18,5 +18,7 @@ public interface EventMVP {
 
     interface Model {
         void searchInServer(String profileName, String repositoryName);
+
+        void setCallback(EventMVP.Presenter presenter);
     }
 }

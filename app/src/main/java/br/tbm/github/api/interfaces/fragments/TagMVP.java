@@ -19,5 +19,7 @@ public interface TagMVP {
 
     interface Model {
         void searchInServer(String profileName, String repositoryName);
+
+        void setCallback(TagMVP.Presenter presenter);
     }
 }

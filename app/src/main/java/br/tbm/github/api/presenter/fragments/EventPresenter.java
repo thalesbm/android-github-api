@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.fragments;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.model.fragments.EventModel;
+import br.tbm.github.api.repository.fragments.EventRepository;
 import br.tbm.github.api.network.entities.EventsResponse;
 import br.tbm.github.api.interfaces.fragments.EventMVP;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -16,9 +16,10 @@ public class EventPresenter extends BasePresenter<EventsResponse> implements
     private EventMVP.View mView;
     private EventMVP.Model mModel;
 
-    public EventPresenter(EventMVP.View view) {
+    public EventPresenter(EventMVP.View view, EventMVP.Model model) {
         this.mView = view;
-        this.mModel = new EventModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = true;
     }

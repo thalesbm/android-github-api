@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.activities.ProfileRepository;
 import br.tbm.github.api.ui.adapters.RepositoryAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.interfaces.activities.ProfileMVP;
@@ -47,7 +48,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
 
         mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
-        mController = new ProfilePresenter(this);
+        mController = new ProfilePresenter(this, new ProfileRepository());
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties();

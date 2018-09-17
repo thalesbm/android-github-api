@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.fragments;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.model.fragments.TagModel;
+import br.tbm.github.api.repository.fragments.TagRepository;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.interfaces.fragments.TagMVP;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -16,10 +16,10 @@ public class TagPresenter extends BasePresenter<BranchesTagsResponse>
     private TagMVP.View mView;
     private TagMVP.Model mModel;
 
-
-    public TagPresenter(TagMVP.View view) {
+    public TagPresenter(TagMVP.View view, TagMVP.Model model) {
         this.mView = view;
-        this.mModel = new TagModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = true;
     }

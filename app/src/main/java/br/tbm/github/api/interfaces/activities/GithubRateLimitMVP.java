@@ -19,5 +19,7 @@ public interface GithubRateLimitMVP {
 
     interface Model {
         void searchInServer();
+
+        void setCallback(GithubRateLimitMVP.Presenter presenter);
     }
 }

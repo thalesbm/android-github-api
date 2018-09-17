@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.activities;
+package br.tbm.github.api.repository.activities;
 
 import android.support.annotation.NonNull;
 
@@ -16,15 +16,11 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class SearchByUsernameModel implements
+public class SearchByUsernameRepository implements
         SearchByUsernameMVP.Model,
         TasksCallbacks.SaveGithubUserTaskCallback {
 
     private SearchByUsernameMVP.Presenter mPresenter;
-
-    public SearchByUsernameModel(SearchByUsernameMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
 
     @Override
     public void searchInServer(String profileName) {
@@ -75,5 +71,13 @@ public class SearchByUsernameModel implements
         mPresenter.displayAlertDialog(R.string.generic_database_issue);
     }
 
-
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter SearchByUsernameMVP.Presenter
+     */
+    @Override
+    public void setCallback(SearchByUsernameMVP.Presenter presenter) {
+        this.mPresenter = presenter;
+    }
 }

@@ -27,5 +27,7 @@ public interface ListProfilesMVP {
         void listProfilesFromDatabase();
 
         void removeProfilesFromDatabase(List<Profile> profiles);
+
+        void setCallback(ListProfilesMVP.Presenter presenter);
     }
 }

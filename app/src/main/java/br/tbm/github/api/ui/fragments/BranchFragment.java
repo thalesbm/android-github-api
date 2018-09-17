@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.fragments.BranchRepository;
 import br.tbm.github.api.ui.adapters.BranchesTagsAdapter;
 import br.tbm.github.api.interfaces.fragments.BranchMVP;
 import br.tbm.github.api.presenter.fragments.BranchPresenter;
@@ -43,7 +44,7 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mController = new BranchPresenter(this);
+        mController = new BranchPresenter(this, new BranchRepository());
 
         getAppActivity().changeToolbarTitle(getString(R.string.branches_fragment_title));
 

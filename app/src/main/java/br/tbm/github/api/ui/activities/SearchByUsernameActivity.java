@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.activities.SearchByUsernameRepository;
 import br.tbm.github.api.ui.components.CustomTextWatcher;
 import br.tbm.github.api.presenter.activities.SearchByUsernamePresenter;
 import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
@@ -31,7 +32,7 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_username);
 
-        mController = new SearchByUsernamePresenter(this);
+        mController = new SearchByUsernamePresenter(this, new SearchByUsernameRepository());
 
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.search_activity_toolbar));

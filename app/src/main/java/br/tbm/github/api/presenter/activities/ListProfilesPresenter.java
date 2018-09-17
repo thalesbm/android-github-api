@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.model.activities.ListProfilesModel;
+import br.tbm.github.api.repository.activities.ListProfilesRepository;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**
@@ -17,9 +17,10 @@ public class ListProfilesPresenter extends BasePresenter<List<Profile>> implemen
     private ListProfilesMVP.View mView;
     private ListProfilesMVP.Model mModel;
 
-    public ListProfilesPresenter(ListProfilesMVP.View view) {
+    public ListProfilesPresenter(ListProfilesMVP.View view, ListProfilesMVP.Model model) {
         this.mView = view;
-        this.mModel = new ListProfilesModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = false;
     }

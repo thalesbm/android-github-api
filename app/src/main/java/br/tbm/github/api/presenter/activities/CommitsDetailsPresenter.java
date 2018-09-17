@@ -1,6 +1,5 @@
 package br.tbm.github.api.presenter.activities;
 
-import br.tbm.github.api.model.activities.CommitDetailsModel;
 import br.tbm.github.api.network.entities.CommitsResponse;
 import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -14,9 +13,10 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
     private CommitDetailsMVP.View mView;
     private CommitDetailsMVP.Model mModel;
 
-    public CommitsDetailsPresenter(CommitDetailsMVP.View view) {
+    public CommitsDetailsPresenter(CommitDetailsMVP.View view, CommitDetailsMVP.Model model) {
         this.mView = view;
-        this.mModel = new CommitDetailsModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = true;
     }

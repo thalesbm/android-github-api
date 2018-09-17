@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.activities.CommitDetailsRepository;
 import br.tbm.github.api.ui.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.presenter.activities.CommitsDetailsPresenter;
@@ -38,7 +39,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commit_details);
 
-        this.mController = new CommitsDetailsPresenter(this);
+        this.mController = new CommitsDetailsPresenter(this, new CommitDetailsRepository());
 
         this.mRepositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
         this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);

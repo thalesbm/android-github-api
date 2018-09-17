@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.activities.ListProfilesRepository;
 import br.tbm.github.api.ui.adapters.ProfileAdapter;
 import br.tbm.github.api.ui.components.CustomActionMode;
 import br.tbm.github.api.presenter.activities.ListProfilesPresenter;
@@ -44,7 +45,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_profiles);
 
-        mPresenter = new ListProfilesPresenter(this);
+        mPresenter = new ListProfilesPresenter(this, new ListProfilesRepository());
 
         setupToolbar(findViewById(R.id.toolbar));
         changeToolbarTitle(getString(R.string.main_activity_toolbar));

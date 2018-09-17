@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.activities;
+package br.tbm.github.api.repository.activities;
 
 import android.support.annotation.NonNull;
 
@@ -13,13 +13,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class GithubRateLimitModel implements GithubRateLimitMVP.Model {
+public class GithubRateLimitRepository implements GithubRateLimitMVP.Model {
 
     private GithubRateLimitMVP.Presenter mPresenter;
-
-    public GithubRateLimitModel(GithubRateLimitMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
 
     @Override
     public void searchInServer() {
@@ -40,5 +36,15 @@ public class GithubRateLimitModel implements GithubRateLimitMVP.Model {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter GithubRateLimitMVP.Presenter
+     */
+    @Override
+    public void setCallback(GithubRateLimitMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }

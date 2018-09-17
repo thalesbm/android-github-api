@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.activities;
+package br.tbm.github.api.repository.activities;
 
 import android.support.annotation.NonNull;
 
@@ -13,20 +13,16 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class CommitDetailsModel implements CommitDetailsMVP.Model {
+public class CommitDetailsRepository implements CommitDetailsMVP.Model {
 
     private CommitDetailsMVP.Presenter mPresenter;
-
-    public CommitDetailsModel(CommitDetailsMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
 
     /**
      * Metodo para pesquisar todos os commits de um especifico repositorio
      *
-     * @param username String
+     * @param username       String
      * @param repositoryName String
-     * @param sha String
+     * @param sha            String
      */
     @Override
     public void searchInServer(String username, String repositoryName, String sha) {
@@ -48,5 +44,15 @@ public class CommitDetailsModel implements CommitDetailsMVP.Model {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter CommitDetailsMVP.Presenter
+     */
+    @Override
+    public void setCallback(CommitDetailsMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.repository.fragments.EventRepository;
 import br.tbm.github.api.ui.adapters.EventsAdapter;
 import br.tbm.github.api.interfaces.fragments.EventMVP;
 import br.tbm.github.api.presenter.fragments.EventPresenter;
@@ -50,7 +51,7 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mController = new EventPresenter(this);
+        mController = new EventPresenter(this, new EventRepository());
 
         getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
 

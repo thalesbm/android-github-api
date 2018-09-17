@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.activities;
+package br.tbm.github.api.repository.activities;
 
 import android.support.annotation.NonNull;
 
@@ -15,13 +15,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class ProfileModel implements ProfileMVP.Model {
+public class ProfileRepository implements ProfileMVP.Model {
 
     private ProfileMVP.Presenter mPresenter;
-
-    public ProfileModel(ProfileMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
 
     /**
      * Metodo para pesquisar um perfil pelo nome
@@ -48,5 +44,15 @@ public class ProfileModel implements ProfileMVP.Model {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter ProfileMVP.Presenter
+     */
+    @Override
+    public void setCallback(ProfileMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }

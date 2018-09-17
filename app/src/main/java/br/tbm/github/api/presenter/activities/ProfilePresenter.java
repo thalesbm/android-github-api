@@ -2,7 +2,7 @@ package br.tbm.github.api.presenter.activities;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.model.activities.ProfileModel;
+import br.tbm.github.api.repository.activities.ProfileRepository;
 import br.tbm.github.api.interfaces.activities.ProfileMVP;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -16,9 +16,10 @@ public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implem
     private ProfileMVP.View mView;
     private ProfileMVP.Model mModel;
 
-    public ProfilePresenter(ProfileMVP.View view) {
+    public ProfilePresenter(ProfileMVP.View view, ProfileMVP.Model model) {
         this.mView = view;
-        this.mModel = new ProfileModel(this);
+        this.mModel = model;
+        this.mModel.setCallback(this);
 
         closeActivity = true;
     }

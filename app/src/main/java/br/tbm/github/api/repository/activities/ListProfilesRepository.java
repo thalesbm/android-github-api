@@ -1,4 +1,4 @@
-package br.tbm.github.api.model.activities;
+package br.tbm.github.api.repository.activities;
 
 import java.util.List;
 
@@ -12,15 +12,11 @@ import br.tbm.github.api.database.tasks.RemoveUsersTask;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class ListProfilesModel implements ListProfilesMVP.Model,
+public class ListProfilesRepository implements ListProfilesMVP.Model,
         TasksCallbacks.RemoveUsersTaskCallback,
         TasksCallbacks.ListGithubUserTaskCallback {
 
     private ListProfilesMVP.Presenter mPresenter;
-
-    public ListProfilesModel(ListProfilesMVP.Presenter presenter) {
-        this.mPresenter = presenter;
-    }
 
     @Override
     public void listProfilesFromDatabase() {
@@ -54,5 +50,15 @@ public class ListProfilesModel implements ListProfilesMVP.Model,
     @Override
     public void removeUserTaskFailure() {
         mPresenter.displayAlertDialog(R.string.generic_database_issue);
+    }
+
+    /**
+     * Metodo responsavel por adicionar a instancia do presenter no repository
+     *
+     * @param presenter ListProfilesMVP.Presenter
+     */
+    @Override
+    public void setCallback(ListProfilesMVP.Presenter presenter) {
+        this.mPresenter = presenter;
     }
 }
