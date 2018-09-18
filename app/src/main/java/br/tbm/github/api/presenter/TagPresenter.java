@@ -1,10 +1,9 @@
-package br.tbm.github.api.presenter.fragments;
+package br.tbm.github.api.presenter;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.repository.fragments.TagRepository;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
-import br.tbm.github.api.interfaces.fragments.TagMVP;
+import br.tbm.github.api.interfaces.TagMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

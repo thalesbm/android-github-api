@@ -1,11 +1,11 @@
-package br.tbm.github.api.repository.activities;
+package br.tbm.github.api.repository;
 
 import android.support.annotation.NonNull;
 
 import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
+import br.tbm.github.api.interfaces.SearchByUsernameMVP;
 import br.tbm.github.api.interfaces.generic.TasksCallbacks;
 import br.tbm.github.api.network.rest.RestUser;
 import br.tbm.github.api.database.tasks.SaveGithubUserTask;

@@ -1,4 +1,4 @@
-package br.tbm.github.api.interfaces.activities;
+package br.tbm.github.api.interfaces;
 
 import br.tbm.github.api.interfaces.generic.BasePresenterCallbacks;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;

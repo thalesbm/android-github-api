@@ -27,9 +27,6 @@ public class RepositoryDetailsActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repository_details);
 
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties();
-
         this.mRepositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
         this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
 
@@ -44,6 +41,9 @@ public class RepositoryDetailsActivity extends BaseActivity implements
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
     }

@@ -1,11 +1,11 @@
-package br.tbm.github.api.repository.activities;
+package br.tbm.github.api.repository;
 
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.activities.ProfileMVP;
+import br.tbm.github.api.interfaces.ProfileMVP;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.network.rest.RestUser;
 import retrofit2.Call;

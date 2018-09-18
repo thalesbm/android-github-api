@@ -1,10 +1,9 @@
-package br.tbm.github.api.presenter.fragments;
+package br.tbm.github.api.presenter;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.repository.fragments.EventRepository;
 import br.tbm.github.api.network.entities.EventsResponse;
-import br.tbm.github.api.interfaces.fragments.EventMVP;
+import br.tbm.github.api.interfaces.EventMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

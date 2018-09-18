@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
-import br.tbm.github.api.presenter.activities.GithubRateLimitPresenter;
+import br.tbm.github.api.interfaces.GithubRateLimitMVP;
+import br.tbm.github.api.presenter.GithubRateLimitPresenter;
 import br.tbm.github.api.network.entities.ResourcesResponse;
-import br.tbm.github.api.repository.activities.GithubRateLimitRepository;
+import br.tbm.github.api.repository.GithubRateLimitRepository;
 
 /**
  * Created by thalesbertolini on 04/09/2018
@@ -17,7 +17,9 @@ import br.tbm.github.api.repository.activities.GithubRateLimitRepository;
 public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> implements
         GithubRateLimitMVP.View {
 
-    private GithubRateLimitPresenter mController;
+    // TODO: UPDATE THIS CLASS WITH MVP
+
+    private GithubRateLimitPresenter mPresenter;
 
     private TextView mTvCoreLimit, mTvCoreRemaining,
             mTvSearchLimit, mTvSearchRemaining,
@@ -28,10 +30,7 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github_rate_limits);
 
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties(getString(R.string.github_rate_limit_activity_toolbar));
-
-        this.mController = new GithubRateLimitPresenter(this, new GithubRateLimitRepository());
+        this.mPresenter = new GithubRateLimitPresenter(this, new GithubRateLimitRepository());
 
         this.init();
         this.searchEvents();
@@ -42,6 +41,9 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties(getString(R.string.github_rate_limit_activity_toolbar));
+
         this.mTvCoreLimit = findViewById(R.id.activity_github_core_limit);
         this.mTvCoreRemaining = findViewById(R.id.activity_github_core_remaining);
         this.mTvSearchLimit = findViewById(R.id.activity_github_search_limit);
@@ -58,7 +60,7 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
      */
     private void searchEvents() {
         showProgressDialog(getString(R.string.loading));
-        mController.search();
+        mPresenter.search();
     }
 
     /**
@@ -107,7 +109,7 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
     }
 
     // ######################
-    // CALLBACK DO CONTROLLER
+    // CALLBACK DO PRESENTER
     // ######################
 
     @Override

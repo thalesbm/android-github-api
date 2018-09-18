@@ -1,8 +1,9 @@
-package br.tbm.github.api.presenter.activities;
+package br.tbm.github.api.presenter;
 
+import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.CommitsResponse;
-import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
-import br.tbm.github.api.presenter.BasePresenter;
+import br.tbm.github.api.interfaces.CommitDetailsMVP;
+import br.tbm.github.api.utils.DateUtils;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -30,6 +31,7 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
      */
     @Override
     public void search(String username, String repositoryName, String sha) {
+        mView.updateProgressDialog(R.string.loading);
         mModel.searchInServer(username, repositoryName, sha);
     }
 
@@ -38,9 +40,27 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
     // ######################
 
     @Override
-    public void success(CommitsResponse commitsResponses) {
-        super.success(commitsResponses);
-        mView.success(commitsResponses);
+    public void success(CommitsResponse response) {
+        super.success(response);
+
+        if (response.getCommitFilesResponse() != null) {
+            mView.setCommitterName(response.getOwnerResponse().getLogin());
+            mView.setCommitDescription(response.getCommitDetailsResponse().getMessage());
+            mView.setCommitterDate(DateUtils.formatDate(response.getCommitDetailsResponse().getCommitterResponse().getDate()));
+
+            if (!response.getOwnerResponse().getAvatarUrl().equals("")) {
+                mView.downloadProfileImage(response.getOwnerResponse().getAvatarUrl());
+            }
+
+            if (response.getCommitFilesResponse().isEmpty()) {
+                mView.listCommitsEmpty();
+            } else {
+                mView.listCommits(response.getCommitFilesResponse());
+            }
+
+        } else {
+            mView.displayAlertDialog(R.string.generic_connection_issue, true);
+        }
     }
 
     @Override

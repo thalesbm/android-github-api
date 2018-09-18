@@ -13,4 +13,10 @@ public interface BaseViewCallbacks<T> {
     void success(T t);
 
     void success(ArrayList<T> t);
+
+    boolean checkConnection();
+
+    void hideKeyboard();
+
+    void updateProgressDialog(int message);
 }

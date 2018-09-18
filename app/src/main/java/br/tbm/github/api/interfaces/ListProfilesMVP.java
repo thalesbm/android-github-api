@@ -1,4 +1,4 @@
-package br.tbm.github.api.interfaces.activities;
+package br.tbm.github.api.interfaces;
 
 import java.util.List;
 
@@ -12,7 +12,9 @@ import br.tbm.github.api.database.data.Profile;
 public interface ListProfilesMVP {
 
     interface View extends BaseViewCallbacks<List<Profile>> {
+        void listProfilesSuccess(List<Profile> profiles);
 
+        void listProfilesEmpty();
     }
 
     interface Presenter extends BasePresenterCallbacks<List<Profile>> {

@@ -3,16 +3,14 @@ package br.tbm.github.api.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.activities.SearchByUsernameRepository;
-import br.tbm.github.api.ui.components.CustomTextWatcher;
-import br.tbm.github.api.presenter.activities.SearchByUsernamePresenter;
-import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
+import br.tbm.github.api.repository.SearchByUsernameRepository;
+import br.tbm.github.api.presenter.SearchByUsernamePresenter;
+import br.tbm.github.api.interfaces.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
 
@@ -22,7 +20,7 @@ import br.tbm.github.api.utils.RedirectUtils;
 public class SearchByUsernameActivity extends BaseActivity<Profile> implements
         SearchByUsernameMVP.View {
 
-    private SearchByUsernamePresenter mController;
+    private SearchByUsernamePresenter mPresenter;
 
     private TextInputLayout mTvProfile;
     private EditText mEdProfile;
@@ -32,10 +30,7 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_username);
 
-        mController = new SearchByUsernamePresenter(this, new SearchByUsernameRepository());
-
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties(getString(R.string.search_activity_toolbar));
+        this.mPresenter = new SearchByUsernamePresenter(this, new SearchByUsernameRepository());
 
         this.init();
     }
@@ -45,67 +40,30 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties(getString(R.string.search_activity_toolbar));
+
         mTvProfile = findViewById(R.id.search_activity_search_textlayout);
         mEdProfile = findViewById(R.id.search_activity_search_edittext);
 
-        mEdProfile.addTextChangedListener(new CustomTextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                switch (mEdProfile.getId()) {
-                    case R.id.search_activity_search_textlayout:
-                        validateProfile();
-                        break;
-                }
-            }
-        });
-
         Button btnSearch = findViewById(R.id.search_activity_button);
         btnSearch.setOnClickListener((View v) -> {
-            this.redirectToSearchProfile();
+            mPresenter.validateFields(mEdProfile.getText().toString());
         });
     }
 
-    /**
-     * valida se o perfil foi preenchido ou nao
-     * caso SIM, retorna true
-     * caso NAO, retorna false
-     *
-     * @return boolean
-     */
-    private boolean validateProfile() {
-        return validate(getString(R.string.search_activity_profile_validation), mEdProfile, mTvProfile);
+    @Override
+    public void validateNotPassed(int message) {
+        mTvProfile.setError(getString(message));
     }
 
-    /**
-     * verifica se o dispositivo esta conectado a internet,
-     * caso SIM redireciona para a tela de pesquisar perfil, verifica se o perfil foi preenchido
-     * caso NAO, chama o metodo para exibir o dialog
-     */
-    private void redirectToSearchProfile() {
-        if (isOnline()) {
-            if (validateProfile()) {
-                hideKeyboard();
-                this.searchProfileByName(mEdProfile.getText().toString());
-            }
-
-        } else {
-            showAlertDialog(getString(R.string.generic_internet_issue), false);
-        }
-    }
-
-    /**
-     * Metodo responsavel por buscar no servidor a lista de repositorios
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void searchProfileByName(String profileName) {
-        showProgressDialog(getString(R.string.loading));
-        initializedSecondThreadIdlingResource();
-        mController.search(profileName);
+    @Override
+    public void validatePassed() {
+        mTvProfile.setErrorEnabled(false);
     }
 
     // ######################
-    // CALLBACK DO CONTROLLER
+    // CALLBACK DO PRESENTER
     // ######################
 
     @Override

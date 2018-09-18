@@ -14,11 +14,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.activities.ListProfilesRepository;
+import br.tbm.github.api.repository.ListProfilesRepository;
 import br.tbm.github.api.ui.adapters.ProfileAdapter;
 import br.tbm.github.api.ui.components.CustomActionMode;
-import br.tbm.github.api.presenter.activities.ListProfilesPresenter;
-import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
+import br.tbm.github.api.presenter.ListProfilesPresenter;
+import br.tbm.github.api.interfaces.ListProfilesMVP;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
@@ -29,6 +29,8 @@ import br.tbm.github.api.utils.RedirectUtils;
 public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         AdaptersCallbacks.ProfileAdapterCallback,
         ListProfilesMVP.View {
+
+    // TODO: CHECK IF I NEED TO UPDATE THIS CLASS WITH MVP
 
     private final String TAG = ListProfilesActivity.class.getSimpleName();
 
@@ -47,9 +49,6 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
 
         mPresenter = new ListProfilesPresenter(this, new ListProfilesRepository());
 
-        setupToolbar(findViewById(R.id.toolbar));
-        changeToolbarTitle(getString(R.string.main_activity_toolbar));
-
         this.init();
     }
 
@@ -64,6 +63,9 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        changeToolbarTitle(getString(R.string.main_activity_toolbar));
+
         mRecyclerView = findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
@@ -98,25 +100,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
      */
     private void listProfilesFromDatabase() {
         initializedSecondThreadIdlingResource();
-        showProgressDialog(getString(R.string.loading));
         mPresenter.getProfiles();
-    }
-
-    /**
-     * Metodo responsavel por exibir na tela todos os usuarios ja pesquisados e salvos na base de dados
-     *
-     * @param profiles List<Profile>
-     */
-    private void listGithubUserSuccess(List<Profile> profiles) {
-        this.mProfiles = profiles;
-        if (profiles.isEmpty()) {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mTvListEmpty.setVisibility(View.GONE);
-            mRecyclerView.setAdapter(new ProfileAdapter(profiles, this));
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
     }
 
     /**
@@ -203,12 +187,23 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
     }
 
     // ######################
-    // CALLBACK DO CONTROLLER
+    // CALLBACK DO PRESENTER
     // ######################
 
     @Override
-    public void success(List<Profile> profiles) {
-        super.success(profiles);
-        this.listGithubUserSuccess(profiles);
+    public void listProfilesEmpty() {
+        dismissProgressDialog();
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void listProfilesSuccess(List<Profile> profiles) {
+        dismissProgressDialog();
+        this.mProfiles = profiles;
+
+        mTvListEmpty.setVisibility(View.GONE);
+        mRecyclerView.setAdapter(new ProfileAdapter(profiles, this));
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 }

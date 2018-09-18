@@ -1,11 +1,11 @@
-package br.tbm.github.api.presenter.activities;
+package br.tbm.github.api.presenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
+import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.ListProfilesMVP;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.repository.activities.ListProfilesRepository;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**
@@ -30,6 +30,7 @@ public class ListProfilesPresenter extends BasePresenter<List<Profile>> implemen
      */
     @Override
     public void getProfiles() {
+        mView.updateProgressDialog(R.string.loading);
         mModel.listProfilesFromDatabase();
     }
 
@@ -76,6 +77,11 @@ public class ListProfilesPresenter extends BasePresenter<List<Profile>> implemen
     @Override
     public void success(List<Profile> profiles) {
         super.success(profiles);
-        mView.success(profiles);
+
+        if (profiles.isEmpty()) {
+            mView.listProfilesEmpty();
+        } else {
+            mView.listProfilesSuccess(profiles);
+        }
     }
 }

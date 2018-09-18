@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.activities.ProfileRepository;
+import br.tbm.github.api.repository.ProfileRepository;
 import br.tbm.github.api.ui.adapters.RepositoryAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
-import br.tbm.github.api.interfaces.activities.ProfileMVP;
-import br.tbm.github.api.presenter.activities.ProfilePresenter;
+import br.tbm.github.api.interfaces.ProfileMVP;
+import br.tbm.github.api.presenter.ProfilePresenter;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
@@ -31,7 +31,9 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
         AdaptersCallbacks.DefaultAdapterCallback,
         ProfileMVP.View {
 
-    private ProfilePresenter mController;
+    // TODO: UPDATE THIS CLASS WITH MVP
+
+    private ProfilePresenter mPresenter;
 
     private RecyclerView mRecyclerView;
     private ImageView mIvProfile;
@@ -46,12 +48,9 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
+        this.mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
-        mController = new ProfilePresenter(this, new ProfileRepository());
-
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties();
+        this.mPresenter = new ProfilePresenter(this, new ProfileRepository());
 
         this.init();
         this.searchProfileByName();
@@ -62,6 +61,9 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties();
+
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
@@ -77,7 +79,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
     private void searchProfileByName() {
         showProgressDialog(getString(R.string.loading));
         initializedSecondThreadIdlingResource();
-        mController.search(mProfile.getLogin());
+        mPresenter.search(mProfile.getLogin());
     }
 
     /**

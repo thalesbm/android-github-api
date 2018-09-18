@@ -1,25 +1,24 @@
-package br.tbm.github.api.interfaces.fragments;
+package br.tbm.github.api.interfaces;
 
 import br.tbm.github.api.interfaces.generic.BasePresenterCallbacks;
-import br.tbm.github.api.network.entities.BranchesTagsResponse;
+import br.tbm.github.api.network.entities.EventsResponse;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
 
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public interface BranchMVP {
+public interface EventMVP {
 
-    interface View extends BaseViewCallbacks<BranchesTagsResponse> {
-
+    interface View extends BaseViewCallbacks<EventsResponse> {
     }
 
-    interface Presenter extends BasePresenterCallbacks<BranchesTagsResponse> {
+    interface Presenter extends BasePresenterCallbacks<EventsResponse> {
         void search(String profileName, String repositoryName);
     }
 
     interface Model {
         void searchInServer(String profileName, String repositoryName);
 
-        void setCallback(BranchMVP.Presenter presenter);
+        void setCallback(EventMVP.Presenter presenter);
     }
 }

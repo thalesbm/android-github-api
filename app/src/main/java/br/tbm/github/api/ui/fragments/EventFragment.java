@@ -15,10 +15,10 @@ import java.util.List;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.fragments.EventRepository;
+import br.tbm.github.api.repository.EventRepository;
 import br.tbm.github.api.ui.adapters.EventsAdapter;
-import br.tbm.github.api.interfaces.fragments.EventMVP;
-import br.tbm.github.api.presenter.fragments.EventPresenter;
+import br.tbm.github.api.interfaces.EventMVP;
+import br.tbm.github.api.presenter.EventPresenter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
 import br.tbm.github.api.network.entities.EventsResponse;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
@@ -31,7 +31,7 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
         AdaptersCallbacks.DefaultAdapterCallback,
         EventMVP.View {
 
-    private EventPresenter mController;
+    private EventPresenter mPresenter;
 
     private String mRepositoryName, mUserName;
 
@@ -51,12 +51,12 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mController = new EventPresenter(this, new EventRepository());
+        this.mPresenter = new EventPresenter(this, new EventRepository());
 
         getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
 
-        mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
-        mUserName = getArguments().getString(Constants.INTENT_USERNAME);
+        this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
+        this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
         this.getEventsFromServer();
@@ -80,7 +80,7 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
      */
     private void getEventsFromServer() {
         showProgressDialog(getString(R.string.loading));
-        mController.search(mUserName, mRepositoryName);
+        mPresenter.search(mUserName, mRepositoryName);
     }
 
     /**

@@ -10,25 +10,23 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.activities.CommitDetailsRepository;
+import br.tbm.github.api.network.entities.CommitFilesResponse;
+import br.tbm.github.api.repository.CommitDetailsRepository;
 import br.tbm.github.api.ui.adapters.CommitDetailsAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
-import br.tbm.github.api.presenter.activities.CommitsDetailsPresenter;
+import br.tbm.github.api.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.network.entities.CommitsResponse;
-import br.tbm.github.api.interfaces.activities.CommitDetailsMVP;
-import br.tbm.github.api.utils.DateUtils;
+import br.tbm.github.api.interfaces.CommitDetailsMVP;
 
 /**
  * Created by thalesbertolini on 29/08/2018
  **/
 public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implements
         CommitDetailsMVP.View {
-
-    private CommitsDetailsPresenter mController;
-
-    private String mRepositoryName, mUserName, mSha;
 
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty, mTvCommitterName, mTvCommitterDate, mTvCommitDescription;
@@ -39,17 +37,15 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commit_details);
 
-        this.mController = new CommitsDetailsPresenter(this, new CommitDetailsRepository());
+        CommitsDetailsPresenter presenter = new CommitsDetailsPresenter(this, new CommitDetailsRepository());
 
-        this.mRepositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
-        this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
-        this.mSha = getIntent().getExtras().getString(Constants.INTENT_SHA);
-
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties(getString(R.string.commit_details_activity_toolbar));
+        String repositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
+        String userName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
+        String sha = getIntent().getExtras().getString(Constants.INTENT_SHA);
 
         this.init();
-        this.getCommitDetailsFromServer();
+
+        presenter.search(userName, repositoryName, sha);
     }
 
     /**
@@ -57,6 +53,9 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties(getString(R.string.commit_details_activity_toolbar));
+
         mRecyclerView = findViewById(R.id.activity_commits_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
@@ -68,61 +67,42 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
         mIvCommitterProfile = findViewById(R.id.activity_commit_details_imageview);
     }
 
-    /**
-     * Metodo responsavel por buscar no servidor a lista de commits
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void getCommitDetailsFromServer() {
-        showProgressDialog(getString(R.string.loading));
-        mController.search(mUserName, mRepositoryName, mSha);
+    @Override
+    public void setCommitterName(String login) {
+        mTvCommitterName.setText(login);
     }
-
-    /**
-     * Metodo para carregar a lista de commits na tela ou exibir a mensagem de lista vazia e
-     * carregar o autor do commit
-     *
-     * @param body CommitsResponse
-     */
-    private void updateScreen(CommitsResponse body) {
-        if (body.getCommitFilesResponse() != null) {
-
-            mTvCommitterName.setText(body.getOwnerResponse().getLogin());
-            mTvCommitterDate.setText(DateUtils.formatDate(body.getCommitDetailsResponse().getCommitterResponse().getDate()));
-            mTvCommitDescription.setText(body.getCommitDetailsResponse().getMessage());
-
-            // baixa a imagem usando picasso library
-            if (!body.getOwnerResponse().getAvatarUrl().equals("")) {
-                Picasso.with(this)
-                        .load(body.getOwnerResponse().getAvatarUrl())
-                        .fit()
-                        .error(R.drawable.img_user_not_found)
-                        .transform(new CircleTransform())
-                        .into(mIvCommitterProfile);
-            }
-
-            if (!body.getCommitFilesResponse().isEmpty()) {
-                mTvListEmpty.setVisibility(View.GONE);
-
-                mRecyclerView.setAdapter(new CommitDetailsAdapter(body.getCommitFilesResponse()));
-                mRecyclerView.setVisibility(View.VISIBLE);
-            } else {
-                mTvListEmpty.setVisibility(View.VISIBLE);
-                mRecyclerView.setVisibility(View.GONE);
-            }
-
-        } else {
-            displayGenericNetworkIssue(getString(R.string.generic_connection_issue), true);
-        }
-    }
-
-    // ######################
-    // CALLBACK DO CONTROLLER
-    // ######################
 
     @Override
-    public void success(CommitsResponse response) {
-        super.success(response);
-        this.updateScreen(response);
+    public void setCommitDescription(String message) {
+        mTvCommitDescription.setText(message);
+    }
+
+    @Override
+    public void setCommitterDate(String date) {
+        mTvCommitterDate.setText(date);
+    }
+
+    @Override
+    public void listCommitsEmpty() {
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void downloadProfileImage(String avatarUrl) {
+        Picasso.with(this)
+                .load(avatarUrl)
+                .fit()
+                .error(R.drawable.img_user_not_found)
+                .transform(new CircleTransform())
+                .into(mIvCommitterProfile);
+    }
+
+    @Override
+    public void listCommits(List<CommitFilesResponse> commits) {
+        mTvListEmpty.setVisibility(View.GONE);
+
+        mRecyclerView.setAdapter(new CommitDetailsAdapter(commits));
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 }

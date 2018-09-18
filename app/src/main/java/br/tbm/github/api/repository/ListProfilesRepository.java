@@ -1,10 +1,10 @@
-package br.tbm.github.api.repository.activities;
+package br.tbm.github.api.repository;
 
 import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.activities.ListProfilesMVP;
+import br.tbm.github.api.interfaces.ListProfilesMVP;
 import br.tbm.github.api.interfaces.generic.TasksCallbacks;
 import br.tbm.github.api.database.tasks.ListGithubUsersTask;
 import br.tbm.github.api.database.tasks.RemoveUsersTask;

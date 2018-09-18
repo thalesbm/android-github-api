@@ -1,9 +1,9 @@
-package br.tbm.github.api.repository.activities;
+package br.tbm.github.api.repository;
 
 import android.support.annotation.NonNull;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
+import br.tbm.github.api.interfaces.GithubRateLimitMVP;
 import br.tbm.github.api.network.entities.ResourcesResponse;
 import br.tbm.github.api.network.rest.RestGithub;
 import retrofit2.Call;

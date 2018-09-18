@@ -1,8 +1,7 @@
-package br.tbm.github.api.presenter.activities;
+package br.tbm.github.api.presenter;
 
-import br.tbm.github.api.repository.activities.GithubRateLimitRepository;
 import br.tbm.github.api.network.entities.ResourcesResponse;
-import br.tbm.github.api.interfaces.activities.GithubRateLimitMVP;
+import br.tbm.github.api.interfaces.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**

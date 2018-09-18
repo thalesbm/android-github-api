@@ -122,4 +122,19 @@ public abstract class BaseFragment<T> extends Fragment
         getAppActivity().finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
+
+    @Override
+    public boolean checkConnection() {
+        return isOnline();
+    }
+
+    @Override
+    public void updateProgressDialog(int message) {
+        showProgressDialog(getString(message));
+    }
+
+    @Override
+    public void hideKeyboard() {
+
+    }
 }

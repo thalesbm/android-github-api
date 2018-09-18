@@ -1,12 +1,12 @@
-package br.tbm.github.api.repository.fragments;
+package br.tbm.github.api.repository;
 
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
 import br.tbm.github.api.GithubApplication;
-import br.tbm.github.api.interfaces.fragments.EventMVP;
-import br.tbm.github.api.network.entities.EventsResponse;
+import br.tbm.github.api.interfaces.TagMVP;
+import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.network.rest.RestRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,17 +15,17 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class EventRepository implements EventMVP.Model {
+public class TagRepository implements TagMVP.Model {
 
-    private EventMVP.Presenter mPresenter;
+    private TagMVP.Presenter mPresenter;
 
     @Override
     public void searchInServer(String profileName, String repositoryName) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<ArrayList<EventsResponse>> responseCall = service.listEvents(profileName, repositoryName);
-        responseCall.enqueue(new Callback<ArrayList<EventsResponse>>() {
+        Call<ArrayList<BranchesTagsResponse>> responseCall = service.listTags(profileName, repositoryName);
+        responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {
             @Override
-            public void onResponse(@NonNull Call<ArrayList<EventsResponse>> call, @NonNull Response<ArrayList<EventsResponse>> response) {
+            public void onResponse(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Response<ArrayList<BranchesTagsResponse>> response) {
                 if (response.isSuccessful()) {
                     mPresenter.success(response.body());
                 } else {
@@ -34,7 +34,7 @@ public class EventRepository implements EventMVP.Model {
             }
 
             @Override
-            public void onFailure(@NonNull Call<ArrayList<EventsResponse>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ArrayList<BranchesTagsResponse>> call, @NonNull Throwable t) {
                 mPresenter.displayAlertDialog(t.getMessage());
             }
         });
@@ -43,10 +43,10 @@ public class EventRepository implements EventMVP.Model {
     /**
      * Metodo responsavel por adicionar a instancia do presenter no repository
      *
-     * @param presenter EventMVP.Presenter
+     * @param presenter TagMVP.Presenter
      */
     @Override
-    public void setCallback(EventMVP.Presenter presenter) {
+    public void setCallback(TagMVP.Presenter presenter) {
         this.mPresenter = presenter;
     }
 }

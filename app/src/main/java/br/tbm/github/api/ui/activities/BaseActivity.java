@@ -171,7 +171,8 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     /**
      * metodo responsavel por esconder o teclado
      */
-    protected void hideKeyboard() {
+    @Override
+    public void hideKeyboard() {
         View view = findViewById(android.R.id.content);
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -292,5 +293,15 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     public void success(ArrayList<T> t) {
         this.finishedSecondThreadIdlingResource();
         dismissProgressDialog();
+    }
+
+    @Override
+    public boolean checkConnection() {
+        return isOnline();
+    }
+
+    @Override
+    public void updateProgressDialog(int message) {
+        showProgressDialog(getString(message));
     }
 }

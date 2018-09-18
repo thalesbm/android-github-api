@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.EventDetailsMVP;
+import br.tbm.github.api.presenter.EventDetailsPresenter;
 import br.tbm.github.api.ui.adapters.EventsDetailsAdapter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
 import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
@@ -18,7 +20,7 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 28/08/2018
  **/
 public class EventDetailsActivity extends BaseActivity implements
-        AdaptersCallbacks.DefaultAdapterCallback {
+        AdaptersCallbacks.DefaultAdapterCallback, EventDetailsMVP.View {
 
     private String mRepositoryName, mUserName;
     private EventPayloadResponse mSelectedEvent;
@@ -35,11 +37,10 @@ public class EventDetailsActivity extends BaseActivity implements
         this.mUserName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);
         this.mSelectedEvent = getIntent().getExtras().getParcelable(Constants.INTENT_EVENT);
 
-        setupToolbar(findViewById(R.id.toolbar));
-        setToolbarProperties(mSelectedEvent.getEventType());
-
         this.init();
-        this.listEvents();
+
+        EventDetailsMVP.Presenter presenter = new EventDetailsPresenter(this);
+        presenter.validateEventsList(mSelectedEvent.getEventCommitsResponse());
     }
 
     /**
@@ -47,26 +48,27 @@ public class EventDetailsActivity extends BaseActivity implements
      */
     @Override
     protected void init() {
+        setupToolbar(findViewById(R.id.toolbar));
+        setToolbarProperties(mSelectedEvent.getEventType());
+
         mRecyclerView = findViewById(R.id.activity_event_details_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
         mTvListEmpty = findViewById(R.id.activity_event_details_empty_list);
     }
 
-    /**
-     * Metodo para carregar a lista de eventos na tela ou exibir a mensagem de lista vazia
-     */
-    private void listEvents() {
-        if (mSelectedEvent.getEventCommitsResponse() != null && !mSelectedEvent.getEventCommitsResponse().isEmpty()) {
-            mTvListEmpty.setVisibility(View.GONE);
+    @Override
+    public void listEvents() {
+        mTvListEmpty.setVisibility(View.GONE);
 
-            mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse(), this));
-            mRecyclerView.setVisibility(View.VISIBLE);
+        mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse(), this));
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
 
-        } else {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        }
+    @Override
+    public void listEventsEmpty() {
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 
     // ###################

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.fragments.TagRepository;
+import br.tbm.github.api.repository.TagRepository;
 import br.tbm.github.api.ui.adapters.BranchesTagsAdapter;
-import br.tbm.github.api.interfaces.fragments.TagMVP;
-import br.tbm.github.api.presenter.fragments.TagPresenter;
+import br.tbm.github.api.interfaces.TagMVP;
+import br.tbm.github.api.presenter.TagPresenter;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 
 /**
@@ -26,7 +26,7 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
         TagMVP.View {
 
-    private TagPresenter mController;
+    private TagPresenter mPresenter;
 
     private String mRepositoryName, mUserName;
 
@@ -44,12 +44,12 @@ public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mController = new TagPresenter(this, new TagRepository());
+        this.mPresenter = new TagPresenter(this, new TagRepository());
 
         getAppActivity().changeToolbarTitle(getString(R.string.tags_fragment_title));
 
-        mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
-        mUserName = getArguments().getString(Constants.INTENT_USERNAME);
+        this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
+        this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
         this.getTagsFromServer();
@@ -73,7 +73,7 @@ public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
      */
     private void getTagsFromServer() {
         showProgressDialog(getString(R.string.loading));
-        mController.search(mUserName, mRepositoryName);
+        mPresenter.search(mUserName, mRepositoryName);
     }
 
     /**

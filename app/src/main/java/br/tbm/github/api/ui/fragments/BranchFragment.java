@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
-import br.tbm.github.api.repository.fragments.BranchRepository;
+import br.tbm.github.api.repository.BranchRepository;
 import br.tbm.github.api.ui.adapters.BranchesTagsAdapter;
-import br.tbm.github.api.interfaces.fragments.BranchMVP;
-import br.tbm.github.api.presenter.fragments.BranchPresenter;
+import br.tbm.github.api.interfaces.BranchMVP;
+import br.tbm.github.api.presenter.BranchPresenter;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 
 /**
@@ -26,7 +26,7 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public class BranchFragment extends BaseFragment<BranchesTagsResponse> implements
         BranchMVP.View {
 
-    private BranchPresenter mController;
+    private BranchPresenter mPresenter;
 
     private String mRepositoryName, mUserName;
 
@@ -44,12 +44,12 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mController = new BranchPresenter(this, new BranchRepository());
+        this.mPresenter = new BranchPresenter(this, new BranchRepository());
 
         getAppActivity().changeToolbarTitle(getString(R.string.branches_fragment_title));
 
-        mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
-        mUserName = getArguments().getString(Constants.INTENT_USERNAME);
+        this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
+        this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
         this.getBranchesFromServer();
@@ -73,7 +73,7 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
      */
     private void getBranchesFromServer() {
         showProgressDialog(getString(R.string.loading));
-        mController.search(mUserName, mRepositoryName);
+        mPresenter.search(mUserName, mRepositoryName);
     }
 
     /**

@@ -1,8 +1,8 @@
-package br.tbm.github.api.presenter.activities;
+package br.tbm.github.api.presenter;
 
-import br.tbm.github.api.interfaces.activities.SearchByUsernameMVP;
+import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.repository.activities.SearchByUsernameRepository;
 import br.tbm.github.api.presenter.BasePresenter;
 
 /**
@@ -30,6 +30,22 @@ public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
     @Override
     public void search(String profileName) {
         mModel.searchInServer(profileName);
+    }
+
+    @Override
+    public void validateFields(String field) {
+        if (field.trim().isEmpty()) {
+            mView.validateNotPassed(R.string.search_activity_profile_validation);
+        } else {
+            mView.validatePassed();
+            if (mView.checkConnection()) {
+                mView.hideKeyboard();
+
+                this.search(field);
+            } else {
+                mView.displayAlertDialog(R.string.generic_internet_issue, true);
+            }
+        }
     }
 
     // ####################
