@@ -19,13 +19,13 @@ import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
  **/
 public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.ViewHolder> {
 
-    private AdaptersCallbacks.DefaultAdapterCallback mCallback;
+    private AdaptersCallbacks.DefaultAdapterCallback<RepositoriesResponse> mCallback;
     private List<RepositoriesResponse> mList;
 
     public RepositoryAdapter() {
     }
 
-    public RepositoryAdapter(List<RepositoriesResponse> list, AdaptersCallbacks.DefaultAdapterCallback callback) {
+    public RepositoryAdapter(List<RepositoriesResponse> list, AdaptersCallbacks.DefaultAdapterCallback<RepositoriesResponse> callback) {
         this.mList = list;
         this.mCallback = callback;
     }
@@ -57,7 +57,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
         holder.mTvLanguage.setText(git.getLanguage());
 
         holder.mConstraintLayout.setOnClickListener((View v) -> {
-            mCallback.onClick(position);
+            mCallback.onClick(mList.get(position));
         });
     }
 

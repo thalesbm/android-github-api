@@ -48,9 +48,6 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
         presenter.search(userName, repositoryName, sha);
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
         setupToolbar(findViewById(R.id.toolbar));
@@ -84,6 +81,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
 
     @Override
     public void listCommitsEmpty() {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
     }
@@ -100,6 +98,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
 
     @Override
     public void listCommits(List<CommitFilesResponse> commits) {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.GONE);
 
         mRecyclerView.setAdapter(new CommitDetailsAdapter(commits));

@@ -43,9 +43,6 @@ public class EventDetailsActivity extends BaseActivity implements
         presenter.validateEventsList(mSelectedEvent.getEventCommitsResponse());
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
         setupToolbar(findViewById(R.id.toolbar));
@@ -59,6 +56,7 @@ public class EventDetailsActivity extends BaseActivity implements
 
     @Override
     public void listEvents() {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.GONE);
 
         mRecyclerView.setAdapter(new EventsDetailsAdapter(mSelectedEvent.getEventCommitsResponse(), this));
@@ -67,6 +65,7 @@ public class EventDetailsActivity extends BaseActivity implements
 
     @Override
     public void listEventsEmpty() {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
     }

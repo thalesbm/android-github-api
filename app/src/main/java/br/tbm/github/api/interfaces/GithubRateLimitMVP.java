@@ -10,8 +10,19 @@ import br.tbm.github.api.network.entities.ResourcesResponse;
 public interface GithubRateLimitMVP {
 
     interface View extends BaseViewCallbacks<ResourcesResponse> {
+        void setCoreLimit(int message, int limit);
+        void setCoreRemaining(int message, int remaining);
+        void hideCoreFields();
 
+        void setSearchLimit(int message, int limit);
+        void setSearchRemaining(int message, int remaining);
+        void hideSearchFields();
+
+        void setGraphLimit(int message, int limit);
+        void setGraphRemaining(int message, int remaining);
+        void hideGraphFields();
     }
+
 
     interface Presenter extends BasePresenterCallbacks<ResourcesResponse> {
         void search();

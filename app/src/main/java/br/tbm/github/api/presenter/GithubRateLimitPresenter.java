@@ -1,5 +1,6 @@
 package br.tbm.github.api.presenter;
 
+import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.ResourcesResponse;
 import br.tbm.github.api.interfaces.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.BasePresenter;
@@ -26,6 +27,7 @@ public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> i
      */
     @Override
     public void search() {
+        mView.updateProgressDialog(R.string.loading);
         mModel.searchInServer();
     }
 
@@ -36,7 +38,32 @@ public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> i
     @Override
     public void success(ResourcesResponse response) {
         super.success(response);
-        mView.success(response);
+        if (response.getRateLimitResponse() != null) {
+
+            // verifica se o objeto core é null, caso nao seja preencha com as informacoes do servidor
+            if (response.getRateLimitResponse().getCore() != null) {
+                mView.setCoreLimit(R.string.github_rate_limit_activity_limit, response.getRateLimitResponse().getCore().getLimit());
+                mView.setCoreRemaining(R.string.github_rate_limit_activity_remaining, response.getRateLimitResponse().getCore().getRemaining());
+            } else {
+                mView.hideCoreFields();
+            }
+
+            // verifica se o objeto search é null, caso nao seja preencha com as informacoes do servidor
+            if (response.getRateLimitResponse().getSearch() != null) {
+                mView.setSearchLimit(R.string.github_rate_limit_activity_limit, response.getRateLimitResponse().getSearch().getLimit());
+                mView.setSearchRemaining(R.string.github_rate_limit_activity_remaining, response.getRateLimitResponse().getSearch().getRemaining());
+            } else {
+                mView.hideSearchFields();
+            }
+
+            // verifica se o objeto graph é null, caso nao seja preencha com as informacoes do servidor
+            if (response.getRateLimitResponse().getGraphql() != null) {
+                mView.setGraphLimit(R.string.github_rate_limit_activity_limit, response.getRateLimitResponse().getGraphql().getLimit());
+                mView.setGraphRemaining(R.string.github_rate_limit_activity_remaining, response.getRateLimitResponse().getGraphql().getRemaining());
+            } else {
+                mView.hideGraphFields();
+            }
+        }
     }
 
     @Override

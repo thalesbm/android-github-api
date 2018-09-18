@@ -10,14 +10,16 @@ import android.support.v7.app.AlertDialog;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.ui.activities.BaseActivity;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
 
 /**
  * Created by thalesbertolini on 26/08/2018
  **/
-public abstract class BaseFragment<T> extends Fragment
-        implements BaseViewCallbacks<T> {
+public abstract class BaseFragment<T> extends Fragment implements
+        BaseViewCallbacks<T>,
+        AdaptersCallbacks.DefaultAdapterCallback<T> {
 
     protected abstract void init();
 
@@ -135,6 +137,16 @@ public abstract class BaseFragment<T> extends Fragment
 
     @Override
     public void hideKeyboard() {
+
+    }
+
+    @Override
+    public void onClick(int position) {
+
+    }
+
+    @Override
+    public void onClick(T t) {
 
     }
 }

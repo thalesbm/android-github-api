@@ -21,7 +21,9 @@ public interface AdaptersCallbacks {
     /**
      * Interface para retornar para a activity eventos do adapter the RepositoryAdapter.class
      */
-    interface DefaultAdapterCallback {
+    interface DefaultAdapterCallback<T> {
         void onClick(int position);
+
+        void onClick(T t);
     }
 }

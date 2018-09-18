@@ -21,7 +21,10 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
+import br.tbm.github.api.network.entities.RepositoriesResponse;
+import br.tbm.github.api.utils.RedirectUtils;
 import br.tbm.github.api.utils.SimpleIdlingResource;
 
 import static br.tbm.github.api.Constants.HTTP_FORBIDDEN;
@@ -30,8 +33,9 @@ import static br.tbm.github.api.Constants.HTTP_NOT_FOUND;
 /**
  * Created by thalesbertolini on 21/08/2018
  **/
-public abstract class BaseActivity<T> extends AppCompatActivity
-        implements BaseViewCallbacks<T> {
+public abstract class BaseActivity<T> extends AppCompatActivity implements
+        BaseViewCallbacks<T>,
+        AdaptersCallbacks.DefaultAdapterCallback<T> {
 
     protected abstract void init();
 
@@ -262,7 +266,7 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     }
 
     // ######################
-    // CALLBACK DO CONTROLLER
+    // CALLBACK DO PRESENTER
     // ######################
 
     @Override
@@ -303,5 +307,17 @@ public abstract class BaseActivity<T> extends AppCompatActivity
     @Override
     public void updateProgressDialog(int message) {
         showProgressDialog(getString(message));
+    }
+
+    // ######################
+    // CALLBACK DO CONTROLLER
+    // ######################
+
+    @Override
+    public void onClick(int position) {
+    }
+
+    @Override
+    public void onClick(T response) {
     }
 }

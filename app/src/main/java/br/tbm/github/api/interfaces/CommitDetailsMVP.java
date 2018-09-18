@@ -13,7 +13,6 @@ import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
 public interface CommitDetailsMVP {
 
     interface View extends BaseViewCallbacks<CommitsResponse> {
-
         void setCommitterName(String login);
         void setCommitDescription(String message);
         void setCommitterDate(String date);

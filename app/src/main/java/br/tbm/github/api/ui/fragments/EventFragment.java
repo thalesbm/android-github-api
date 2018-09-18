@@ -28,7 +28,6 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 26/08/2018
  **/
 public class EventFragment extends BaseFragment<EventsResponse> implements
-        AdaptersCallbacks.DefaultAdapterCallback,
         EventMVP.View {
 
     private EventPresenter mPresenter;

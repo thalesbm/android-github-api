@@ -28,20 +28,14 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 21/08/2018
  **/
 public class ProfileActivity extends BaseActivity<RepositoriesResponse> implements
-        AdaptersCallbacks.DefaultAdapterCallback,
+//        AdaptersCallbacks.DefaultAdapterCallback<RepositoriesResponse>,
         ProfileMVP.View {
-
-    // TODO: UPDATE THIS CLASS WITH MVP
-
-    private ProfilePresenter mPresenter;
 
     private RecyclerView mRecyclerView;
     private ImageView mIvProfile;
     private TextView mTvEmptyDescription;
 
     private Profile mProfile;
-
-    private ArrayList<RepositoriesResponse> mBody;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,15 +44,14 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
 
         this.mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
-        this.mPresenter = new ProfilePresenter(this, new ProfileRepository());
-
         this.init();
-        this.searchProfileByName();
+
+        initializedSecondThreadIdlingResource();
+        ProfilePresenter presenter = new ProfilePresenter(this, new ProfileRepository());
+        presenter.searchPublicRepositories(mProfile.getLogin());
+        presenter.updateScreen(mProfile);
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
         setupToolbar(findViewById(R.id.toolbar));
@@ -71,51 +64,13 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
         mTvEmptyDescription = findViewById(R.id.profile_activity_no_repository);
     }
 
-    /**
-     * Metodo responsavel por buscar no servidor a lista de repositorios
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void searchProfileByName() {
-        showProgressDialog(getString(R.string.loading));
-        initializedSecondThreadIdlingResource();
-        mPresenter.search(mProfile.getLogin());
-    }
-
-    /**
-     * metodo responsavel por receber a lista de repositorios do servidor e carregar na tela
-     *
-     * @param body lista de repositorios
-     */
-    private void updateScreen(ArrayList<RepositoriesResponse> body) {
-        this.mBody = body;
-
-        if (body.isEmpty()) {
-            mTvEmptyDescription.setVisibility(View.VISIBLE);
-        } else {
-            mRecyclerView.setAdapter(new RepositoryAdapter(body, this));
-        }
-
-        // baixa a imagem usando picasso library
-        if (!mProfile.getAvatarUrl().equals("")) {
-            Picasso.with(this)
-                    .load(mProfile.getAvatarUrl())
-                    .fit()
-                    .error(R.drawable.img_user_not_found)
-                    .transform(new CircleTransform())
-                    .into(mIvProfile);
-        }
-
-        changeToolbarTitle(mProfile.getName());
-    }
-
     // ###################
     // CALLBACK DO ADAPTER
     // ###################
 
     @Override
-    public void onClick(int position) {
-        RedirectUtils.redirectToRepositoryDetailsActivity(this, mBody.get(position).getName(), mProfile.getLogin());
+    public void onClick(RepositoriesResponse response) {
+        RedirectUtils.redirectToRepositoryDetailsActivity(this, response.getName(), mProfile.getLogin());
     }
 
     // ######################
@@ -123,8 +78,29 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
     // ######################
 
     @Override
-    public void success(ArrayList<RepositoriesResponse> repositories) {
-        super.success(repositories);
-        this.updateScreen(repositories);
+    public void repositoriesListEmpty() {
+        dismissProgressDialog();
+        mTvEmptyDescription.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void displayRepositories(ArrayList<RepositoriesResponse> repositories) {
+        dismissProgressDialog();
+        mRecyclerView.setAdapter(new RepositoryAdapter(repositories, this));
+    }
+
+    @Override
+    public void downloadProfileImage(String avatarUrl) {
+        Picasso.with(this)
+                .load(avatarUrl)
+                .fit()
+                .error(R.drawable.img_user_not_found)
+                .transform(new CircleTransform())
+                .into(mIvProfile);
+    }
+
+    @Override
+    public void updateToolbarTitle(String name) {
+        changeToolbarTitle(name);
     }
 }

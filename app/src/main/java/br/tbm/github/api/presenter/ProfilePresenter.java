@@ -2,9 +2,10 @@ package br.tbm.github.api.presenter;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.R;
+import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.interfaces.ProfileMVP;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
-import br.tbm.github.api.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -29,8 +30,18 @@ public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implem
      * @param profileName String
      */
     @Override
-    public void search(String profileName) {
+    public void searchPublicRepositories(String profileName) {
+        mView.updateProgressDialog(R.string.loading);
         mModel.searchInServer(profileName);
+    }
+
+    @Override
+    public void updateScreen(Profile profile) {
+        mView.updateToolbarTitle(profile.getName());
+
+        if (!profile.getAvatarUrl().equals("")) {
+            mView.downloadProfileImage(profile.getAvatarUrl());
+        }
     }
 
     // ######################
@@ -40,7 +51,12 @@ public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implem
     @Override
     public void success(ArrayList<RepositoriesResponse> repositories) {
         super.success(repositories);
-        mView.success(repositories);
+
+        if (repositories.isEmpty()) {
+            mView.repositoriesListEmpty();
+        } else {
+            mView.displayRepositories(repositories);
+        }
     }
 
     @Override
