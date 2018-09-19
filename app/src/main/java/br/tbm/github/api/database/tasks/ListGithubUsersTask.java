@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.generic.TasksCallbacks;
 
 /**
  * Created by thalesbertolini on 23/08/2018

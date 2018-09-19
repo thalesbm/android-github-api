@@ -13,14 +13,13 @@ import br.tbm.github.api.interfaces.EventDetailsMVP;
 import br.tbm.github.api.presenter.EventDetailsPresenter;
 import br.tbm.github.api.ui.adapters.EventsDetailsAdapter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.utils.RedirectUtils;
 
 /**
  * Created by thalesbertolini on 28/08/2018
  **/
 public class EventDetailsActivity extends BaseActivity implements
-        AdaptersCallbacks.DefaultAdapterCallback, EventDetailsMVP.View {
+        EventDetailsMVP.View {
 
     private String mRepositoryName, mUserName;
     private EventPayloadResponse mSelectedEvent;

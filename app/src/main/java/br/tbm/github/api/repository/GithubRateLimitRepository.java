@@ -18,7 +18,7 @@ public class GithubRateLimitRepository implements GithubRateLimitMVP.Model {
     private GithubRateLimitMVP.Presenter mPresenter;
 
     @Override
-    public void searchInServer() {
+    public void searchRateLimitInServer() {
         RestGithub service = GithubApplication.getRetrofitInstance().create(RestGithub.class);
         Call<ResourcesResponse> responseCall = service.getRateLimit();
         responseCall.enqueue(new Callback<ResourcesResponse>() {

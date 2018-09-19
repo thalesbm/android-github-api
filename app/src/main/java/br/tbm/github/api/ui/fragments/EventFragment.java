@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.tbm.github.api.Constants;
 import br.tbm.github.api.R;
@@ -21,7 +20,6 @@ import br.tbm.github.api.interfaces.EventMVP;
 import br.tbm.github.api.presenter.EventPresenter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
 import br.tbm.github.api.network.entities.EventsResponse;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.utils.RedirectUtils;
 
 /**
@@ -30,11 +28,7 @@ import br.tbm.github.api.utils.RedirectUtils;
 public class EventFragment extends BaseFragment<EventsResponse> implements
         EventMVP.View {
 
-    private EventPresenter mPresenter;
-
     private String mRepositoryName, mUserName;
-
-    private List<EventsResponse> mEventsResponse;
 
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty;
@@ -50,54 +44,38 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        this.mPresenter = new EventPresenter(this, new EventRepository());
-
-        getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
-
         this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
         this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
-        this.getEventsFromServer();
+
+        EventPresenter presenter = new EventPresenter(this, new EventRepository());
+        presenter.searchEventsInServer(mUserName, mRepositoryName);
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
+        getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
+
         mRecyclerView = getAppActivity().findViewById(R.id.fragment_events_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
         mTvListEmpty = getAppActivity().findViewById(R.id.fragment_events_textview);
     }
 
-    /**
-     * Metodo responsavel por buscar no servidor a lista de eventos
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void getEventsFromServer() {
-        showProgressDialog(getString(R.string.loading));
-        mPresenter.search(mUserName, mRepositoryName);
+    @Override
+    public void listEvents(ArrayList<EventsResponse> events) {
+        dismissProgressDialog();
+        mTvListEmpty.setVisibility(View.GONE);
+        mRecyclerView.setAdapter(new EventsAdapter(events, this));
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * Metodo para carregar a lista de eventos na tela ou exibir a mensagem de lista vazia
-     *
-     * @param body ArrayList<EventsResponse>
-     */
-    private void loadList(ArrayList<EventsResponse> body) {
-        this.mEventsResponse = body;
-        if (body.isEmpty()) {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mTvListEmpty.setVisibility(View.GONE);
-
-            mRecyclerView.setAdapter(new EventsAdapter(body, this));
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
+    @Override
+    public void listEventsEmpty() {
+        dismissProgressDialog();
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 
     // ###################
@@ -105,20 +83,12 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
     // ###################
 
     @Override
-    public void onClick(int position) {
-        EventPayloadResponse selectedEvent = this.mEventsResponse.get(position).getEventPayloadResponse();
-        selectedEvent.setEventType(this.mEventsResponse.get(position).getType());
+    public void onClick(EventsResponse eventsResponse) {
+        super.onClick(eventsResponse);
 
-        RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, selectedEvent);
-    }
+        EventPayloadResponse eventPayloadResponse = eventsResponse.getEventPayloadResponse();
+        eventPayloadResponse.setEventType(eventsResponse.getType());
 
-    // ######################
-    // CALLBACK DO CONTROLLER
-    // ######################
-
-    @Override
-    public void success(ArrayList<EventsResponse> response) {
-        super.success(response);
-        this.loadList(response);
+        RedirectUtils.redirectToEventsDetailsActivity(getAppActivity(), mRepositoryName, mUserName, eventPayloadResponse);
     }
 }

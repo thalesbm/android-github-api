@@ -15,28 +15,25 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
     private CommitDetailsMVP.Model mModel;
 
     public CommitsDetailsPresenter(CommitDetailsMVP.View view, CommitDetailsMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = true;
     }
 
-    /**
-     * Metodo para pesquisar todos os commits de um especifico repositorio
-     *
-     * @param username       String
-     * @param repositoryName String
-     * @param sha            String
-     */
     @Override
-    public void search(String username, String repositoryName, String sha) {
+    public void searchCommitDetailsInServer(String username, String repositoryName, String sha) {
         mView.updateProgressDialog(R.string.loading);
-        mModel.searchInServer(username, repositoryName, sha);
+        mModel.searchCommitDetailsInServer(username, repositoryName, sha);
     }
 
     // ######################
-    // CALLBACK DO MODEL
+    // CALLBACK DO REPOSITORY
     // ######################
 
     @Override

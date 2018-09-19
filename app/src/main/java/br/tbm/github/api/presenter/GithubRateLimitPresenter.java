@@ -3,7 +3,6 @@ package br.tbm.github.api.presenter;
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.ResourcesResponse;
 import br.tbm.github.api.interfaces.GithubRateLimitMVP;
-import br.tbm.github.api.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 04/09/2018
@@ -15,24 +14,25 @@ public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> i
     private GithubRateLimitMVP.Model mModel;
 
     public GithubRateLimitPresenter(GithubRateLimitMVP.View view, GithubRateLimitMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = true;
     }
 
-    /**
-     * Metodo para verificar quantas requisicoes ainda posso fazer
-     */
     @Override
-    public void search() {
+    public void searchRateLimitInServer() {
         mView.updateProgressDialog(R.string.loading);
-        mModel.searchInServer();
+        mModel.searchRateLimitInServer();
     }
 
     // ######################
-    // CALLBACK DO MODEL
+    // CALLBACK DO REPOSITORY
     // ######################
 
     @Override
@@ -48,7 +48,7 @@ public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> i
                 mView.hideCoreFields();
             }
 
-            // verifica se o objeto search é null, caso nao seja preencha com as informacoes do servidor
+            // verifica se o objeto searchEventsInServer é null, caso nao seja preencha com as informacoes do servidor
             if (response.getRateLimitResponse().getSearch() != null) {
                 mView.setSearchLimit(R.string.github_rate_limit_activity_limit, response.getRateLimitResponse().getSearch().getLimit());
                 mView.setSearchRemaining(R.string.github_rate_limit_activity_remaining, response.getRateLimitResponse().getSearch().getRemaining());

@@ -26,10 +26,6 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
         TagMVP.View {
 
-    private TagPresenter mPresenter;
-
-    private String mRepositoryName, mUserName;
-
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty;
 
@@ -44,61 +40,36 @@ public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        this.mPresenter = new TagPresenter(this, new TagRepository());
-
-        getAppActivity().changeToolbarTitle(getString(R.string.tags_fragment_title));
-
-        this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
-        this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
+        String repositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
+        String userName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
-        this.getTagsFromServer();
+
+        TagPresenter presenter = new TagPresenter(this, new TagRepository());
+        presenter.searchTagsInServer(userName, repositoryName);
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
+        getAppActivity().changeToolbarTitle(getString(R.string.tags_fragment_title));
+
         mRecyclerView = getAppActivity().findViewById(R.id.fragment_tags_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
         mTvListEmpty = getAppActivity().findViewById(R.id.fragment_tags_textview);
     }
 
-    /**
-     * Metodo responsavel por buscar no servidor a lista de tags
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void getTagsFromServer() {
-        showProgressDialog(getString(R.string.loading));
-        mPresenter.search(mUserName, mRepositoryName);
+    @Override
+    public void listTags(ArrayList<BranchesTagsResponse> tags) {
+        dismissProgressDialog();
+        mTvListEmpty.setVisibility(View.GONE);
+        mRecyclerView.setAdapter(new BranchesTagsAdapter(tags, false));
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
-
-    /**
-     * Metodo para carregar a lista de tags na tela ou exibir a mensagem de lista vazia
-     *
-     * @param body ArrayList<BranchesTagsResponse>
-     */
-    private void loadList(ArrayList<BranchesTagsResponse> body) {
-        if (body.isEmpty()) {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mTvListEmpty.setVisibility(View.GONE);
-            mRecyclerView.setAdapter(new BranchesTagsAdapter(body, false));
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    // ######################
-    // CALLBACK DO CONTROLLER
-    // ######################
 
     @Override
-    public void success(ArrayList<BranchesTagsResponse> response) {
-        super.success(response);
-        this.loadList(response);
+    public void listTagsEmpty() {
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 }

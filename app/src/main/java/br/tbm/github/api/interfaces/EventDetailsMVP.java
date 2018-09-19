@@ -11,7 +11,6 @@ public interface EventDetailsMVP {
 
     interface View {
         void listEventsEmpty();
-
         void listEvents();
     }
 

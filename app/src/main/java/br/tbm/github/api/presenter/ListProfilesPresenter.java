@@ -6,7 +6,6 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.interfaces.ListProfilesMVP;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -18,20 +17,21 @@ public class ListProfilesPresenter extends BasePresenter<List<Profile>> implemen
     private ListProfilesMVP.Model mModel;
 
     public ListProfilesPresenter(ListProfilesMVP.View view, ListProfilesMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = false;
     }
 
-    /**
-     * Metodo para listar todos os perfils salvos no app
-     */
     @Override
-    public void getProfiles() {
+    public void getProfilesInDatabase() {
         mView.updateProgressDialog(R.string.loading);
-        mModel.listProfilesFromDatabase();
+        mModel.listProfilesInDatabase();
     }
 
     /**
@@ -65,7 +65,7 @@ public class ListProfilesPresenter extends BasePresenter<List<Profile>> implemen
     }
 
     // ######################
-    // CALLBACK DO MODEL
+    // CALLBACK DO REPOSITORY
     // ######################
 
     @Override

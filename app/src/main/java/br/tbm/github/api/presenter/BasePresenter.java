@@ -18,6 +18,16 @@ public abstract class BasePresenter<T> implements BasePresenterCallbacks<T> {
      */
     protected boolean closeActivity;
 
+    /**
+     * Metodo para ser implementado em todos Presenters, esse metodo vai ser responsavel por popular
+     * o closeActivity com a informacao se vai ou nao fechar a activity caso o app desse erro
+     */
+    abstract void needsToCloseCurrentActivity();
+
+    BasePresenter(){
+        this.needsToCloseCurrentActivity();
+    }
+
     @Override
     public void displayAlertDialog(int id) {
         Log.d(TAG, "displayAlertDialog() id: " + id);

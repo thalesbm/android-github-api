@@ -12,7 +12,6 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 
 /**
  * Created by thalesbertolini on 21/08/2018

@@ -1,4 +1,4 @@
-package br.tbm.github.api.interfaces.generic;
+package br.tbm.github.api.database.tasks;
 
 import java.util.List;
 

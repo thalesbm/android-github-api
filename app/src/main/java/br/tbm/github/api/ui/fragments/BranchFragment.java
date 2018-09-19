@@ -26,10 +26,6 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public class BranchFragment extends BaseFragment<BranchesTagsResponse> implements
         BranchMVP.View {
 
-    private BranchPresenter mPresenter;
-
-    private String mRepositoryName, mUserName;
-
     private RecyclerView mRecyclerView;
     private TextView mTvListEmpty;
 
@@ -44,61 +40,36 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        this.mPresenter = new BranchPresenter(this, new BranchRepository());
-
-        getAppActivity().changeToolbarTitle(getString(R.string.branches_fragment_title));
-
-        this.mRepositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
-        this.mUserName = getArguments().getString(Constants.INTENT_USERNAME);
+        String repositoryName = getArguments().getString(Constants.INTENT_REPOSITORY);
+        String userName = getArguments().getString(Constants.INTENT_USERNAME);
 
         this.init();
-        this.getBranchesFromServer();
+
+        BranchPresenter presenter = new BranchPresenter(this, new BranchRepository());
+        presenter.searchBranchesInServer(userName, repositoryName);
     }
 
-    /**
-     * Metodo responsavel por inicializar os componentes da tela
-     */
     @Override
     protected void init() {
+        getAppActivity().changeToolbarTitle(getString(R.string.branches_fragment_title));
+
         mRecyclerView = getAppActivity().findViewById(R.id.fragment_branches_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
 
         mTvListEmpty = getAppActivity().findViewById(R.id.fragment_branches_textview);
     }
 
-    /**
-     * Metodo responsavel por buscar no servidor a lista de branches
-     * caso de algum erro durante a chamada o app vai exibir um dialog e voltar para a tela anterior
-     * caso seja sucesso o app vai carregar a lista na tela
-     */
-    private void getBranchesFromServer() {
-        showProgressDialog(getString(R.string.loading));
-        mPresenter.search(mUserName, mRepositoryName);
+    @Override
+    public void branchesListEmpty() {
+        dismissProgressDialog();
+        mTvListEmpty.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
-
-    /**
-     * Metodo para carregar a lista de branches na tela ou exibir a mensagem de lista vazia
-     *
-     * @param body ArrayList<BranchesTagsResponse>
-     */
-    private void loadList(ArrayList<BranchesTagsResponse> body) {
-        if (body.isEmpty()) {
-            mTvListEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mTvListEmpty.setVisibility(View.GONE);
-            mRecyclerView.setAdapter(new BranchesTagsAdapter(body, true));
-            mRecyclerView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    // ######################
-    // CALLBACK DO CONTROLLER
-    // ######################
 
     @Override
-    public void success(ArrayList<BranchesTagsResponse> response) {
-        super.success(response);
-        this.loadList(response);
+    public void branchesList(ArrayList<BranchesTagsResponse> branches) {
+        mTvListEmpty.setVisibility(View.GONE);
+        mRecyclerView.setAdapter(new BranchesTagsAdapter(branches, true));
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 }

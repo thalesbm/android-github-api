@@ -1,4 +1,4 @@
-package br.tbm.github.api.interfaces.generic;
+package br.tbm.github.api.ui.adapters;
 
 /**
  * Created by thalesbertolini on 24/08/2018
@@ -19,7 +19,7 @@ public interface AdaptersCallbacks {
     }
 
     /**
-     * Interface para retornar para a activity eventos do adapter the RepositoryAdapter.class
+     * Interface para retornar para a activity/fragment eventos dos adapters
      */
     interface DefaultAdapterCallback<T> {
         void onClick(int position);

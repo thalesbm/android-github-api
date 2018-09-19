@@ -3,7 +3,6 @@ package br.tbm.github.api.presenter;
 import br.tbm.github.api.R;
 import br.tbm.github.api.interfaces.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -15,21 +14,20 @@ public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
     private SearchByUsernameMVP.Model mModel;
 
     public SearchByUsernamePresenter(SearchByUsernameMVP.View view, SearchByUsernameMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = false;
     }
 
-    /**
-     * Metodo para pesquisar um perfil pelo nome
-     *
-     * @param profileName String
-     */
     @Override
-    public void search(String profileName) {
-        mModel.searchInServer(profileName);
+    public void searchUsernameInServer(String profileName) {
+        mModel.searchUsernameInServer(profileName);
     }
 
     @Override
@@ -41,16 +39,17 @@ public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
             if (mView.checkConnection()) {
                 mView.hideKeyboard();
 
-                this.search(field);
+                this.searchUsernameInServer(field);
             } else {
                 mView.displayAlertDialog(R.string.generic_internet_issue, true);
             }
         }
     }
 
-    // ####################
-    // CALLBACK DO MODEL
-    // ####################
+    // ######################
+    // CALLBACK DO REPOSITORY
+    // ######################
+
     @Override
     public void displayAlertDialog(int id) {
         super.displayAlertDialog(id);

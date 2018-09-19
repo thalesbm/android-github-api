@@ -20,7 +20,7 @@ public class EventRepository implements EventMVP.Model {
     private EventMVP.Presenter mPresenter;
 
     @Override
-    public void searchInServer(String profileName, String repositoryName) {
+    public void searchEventsInServer(String profileName, String repositoryName) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<ArrayList<EventsResponse>> responseCall = service.listEvents(profileName, repositoryName);
         responseCall.enqueue(new Callback<ArrayList<EventsResponse>>() {

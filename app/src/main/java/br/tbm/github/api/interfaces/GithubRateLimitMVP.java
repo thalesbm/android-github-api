@@ -23,14 +23,12 @@ public interface GithubRateLimitMVP {
         void hideGraphFields();
     }
 
-
     interface Presenter extends BasePresenterCallbacks<ResourcesResponse> {
-        void search();
+        void searchRateLimitInServer();
     }
 
     interface Model {
-        void searchInServer();
-
+        void searchRateLimitInServer();
         void setCallback(GithubRateLimitMVP.Presenter presenter);
     }
 }

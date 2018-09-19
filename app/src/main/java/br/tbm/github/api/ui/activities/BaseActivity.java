@@ -21,10 +21,8 @@ import android.widget.EditText;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
+import br.tbm.github.api.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
-import br.tbm.github.api.network.entities.RepositoriesResponse;
-import br.tbm.github.api.utils.RedirectUtils;
 import br.tbm.github.api.utils.SimpleIdlingResource;
 
 import static br.tbm.github.api.Constants.HTTP_FORBIDDEN;

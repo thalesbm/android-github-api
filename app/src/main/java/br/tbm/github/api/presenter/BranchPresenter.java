@@ -2,9 +2,9 @@ package br.tbm.github.api.presenter;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
 import br.tbm.github.api.interfaces.BranchMVP;
-import br.tbm.github.api.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -16,31 +16,36 @@ public class BranchPresenter extends BasePresenter<BranchesTagsResponse> impleme
     private BranchMVP.Model mModel;
 
     public BranchPresenter(BranchMVP.View view, BranchMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = true;
     }
 
-    /**
-     * Metodo para pesquisar as branches de um determinado perfil
-     *
-     * @param profileName String
-     */
     @Override
-    public void search(String profileName, String repositoryName) {
-        this.mModel.searchInServer(profileName, repositoryName);
+    public void searchBranchesInServer(String profileName, String repositoryName) {
+        mView.updateProgressDialog(R.string.loading);
+        mModel.searchBranchesInServer(profileName, repositoryName);
     }
 
     // ######################
-    // CALLBACK DO MODEL
+    // CALLBACK DO REPOSITORY
     // ######################
 
     @Override
     public void success(ArrayList<BranchesTagsResponse> response) {
         super.success(response);
-        mView.success(response);
+
+        if (response.isEmpty()) {
+            mView.branchesListEmpty();
+        } else {
+            mView.branchesList(response);
+        }
     }
 
     @Override

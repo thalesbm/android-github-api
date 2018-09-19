@@ -6,7 +6,7 @@ import br.tbm.github.api.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.interfaces.SearchByUsernameMVP;
-import br.tbm.github.api.interfaces.generic.TasksCallbacks;
+import br.tbm.github.api.database.tasks.TasksCallbacks;
 import br.tbm.github.api.network.rest.RestUser;
 import br.tbm.github.api.database.tasks.SaveGithubUserTask;
 import retrofit2.Call;
@@ -23,7 +23,7 @@ public class SearchByUsernameRepository implements
     private SearchByUsernameMVP.Presenter mPresenter;
 
     @Override
-    public void searchInServer(String profileName) {
+    public void searchUsernameInServer(String profileName) {
         RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
         Call<Profile> responseCall = service.getProfile(profileName);
         responseCall.enqueue(new Callback<Profile>() {

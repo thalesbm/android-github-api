@@ -20,7 +20,7 @@ public class TagRepository implements TagMVP.Model {
     private TagMVP.Presenter mPresenter;
 
     @Override
-    public void searchInServer(String profileName, String repositoryName) {
+    public void searchTagsInServer(String profileName, String repositoryName) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<ArrayList<BranchesTagsResponse>> responseCall = service.listTags(profileName, repositoryName);
         responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {

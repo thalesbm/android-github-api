@@ -22,12 +22,11 @@ public interface CommitDetailsMVP {
     }
 
     interface Presenter extends BasePresenterCallbacks<CommitsResponse> {
-        void search(String username, String repositoryName, String sha);
+        void searchCommitDetailsInServer(String username, String repositoryName, String sha);
     }
 
     interface Model {
-        void searchInServer(String username, String repositoryName, String sha);
-
+        void searchCommitDetailsInServer(String username, String repositoryName, String sha);
         void setCallback(CommitDetailsMVP.Presenter presenter);
     }
 }

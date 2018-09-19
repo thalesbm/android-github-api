@@ -11,19 +11,16 @@ public interface SearchByUsernameMVP {
 
     interface View extends BaseViewCallbacks<Profile> {
         void validateNotPassed(int message);
-
         void validatePassed();
     }
 
     interface Presenter extends BasePresenterCallbacks<Profile> {
-        void search(String profileName);
-
+        void searchUsernameInServer(String profileName);
         void validateFields(String field);
     }
 
     interface Model {
-        void searchInServer(String profileName);
-
+        void searchUsernameInServer(String profileName);
         void setCallback(SearchByUsernameMVP.Presenter presenter);
     }
 }

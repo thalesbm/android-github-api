@@ -13,7 +13,7 @@ public class RateLimitResponse implements Parcelable {
     @SerializedName("core")
     private RateLimitItemsResponse core;
 
-    @SerializedName("search")
+    @SerializedName("searchEventsInServer")
     private RateLimitItemsResponse search;
 
     @SerializedName("graphql")

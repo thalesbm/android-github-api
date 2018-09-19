@@ -45,7 +45,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
 
         this.init();
 
-        presenter.search(userName, repositoryName, sha);
+        presenter.searchCommitDetailsInServer(userName, repositoryName, sha);
     }
 
     @Override

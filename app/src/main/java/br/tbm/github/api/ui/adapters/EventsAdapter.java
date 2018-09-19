@@ -17,7 +17,6 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.network.entities.EventsResponse;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 
 import static br.tbm.github.api.utils.DateUtils.formatDate;
 
@@ -26,14 +25,14 @@ import static br.tbm.github.api.utils.DateUtils.formatDate;
  **/
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder> {
 
-    private AdaptersCallbacks.DefaultAdapterCallback mCallback;
+    private AdaptersCallbacks.DefaultAdapterCallback<EventsResponse> mCallback;
     private List<EventsResponse> mList;
     private Context mContext;
 
     public EventsAdapter() {
     }
 
-    public EventsAdapter(List<EventsResponse> list, AdaptersCallbacks.DefaultAdapterCallback callback) {
+    public EventsAdapter(List<EventsResponse> list, AdaptersCallbacks.DefaultAdapterCallback<EventsResponse> callback) {
         this.mList = list;
         this.mCallback = callback;
     }
@@ -70,7 +69,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
         holder.mTvCreated.setText(formatDate(git.getCreated()));
 
         holder.mConstraintLayout.setOnClickListener((View v) -> {
-            mCallback.onClick(position);
+            mCallback.onClick(mList.get(position));
         });
 
         Picasso.with(mContext)

@@ -18,7 +18,6 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.components.CircleTransform;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 
 /**

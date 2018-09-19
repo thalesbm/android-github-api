@@ -19,7 +19,6 @@ import br.tbm.github.api.ui.adapters.RepositoryAdapter;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.interfaces.ProfileMVP;
 import br.tbm.github.api.presenter.ProfilePresenter;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.utils.RedirectUtils;
@@ -28,7 +27,6 @@ import br.tbm.github.api.utils.RedirectUtils;
  * Created by thalesbertolini on 21/08/2018
  **/
 public class ProfileActivity extends BaseActivity<RepositoriesResponse> implements
-//        AdaptersCallbacks.DefaultAdapterCallback<RepositoriesResponse>,
         ProfileMVP.View {
 
     private RecyclerView mRecyclerView;
@@ -48,7 +46,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
 
         initializedSecondThreadIdlingResource();
         ProfilePresenter presenter = new ProfilePresenter(this, new ProfileRepository());
-        presenter.searchPublicRepositories(mProfile.getLogin());
+        presenter.searchPublicRepositoriesInServer(mProfile.getLogin());
         presenter.updateScreen(mProfile);
     }
 

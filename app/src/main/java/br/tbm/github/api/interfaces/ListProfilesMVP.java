@@ -13,23 +13,19 @@ public interface ListProfilesMVP {
 
     interface View extends BaseViewCallbacks<List<Profile>> {
         void listProfilesSuccess(List<Profile> profiles);
-
         void listProfilesEmpty();
     }
 
     interface Presenter extends BasePresenterCallbacks<List<Profile>> {
-        void getProfiles();
-
+        void getProfilesInDatabase();
         void removeItems(List<Profile> profiles);
 
         String checkNumberOfItemsHasBeenChecked(List<Profile> profiles);
     }
 
     interface Model {
-        void listProfilesFromDatabase();
-
+        void listProfilesInDatabase();
         void removeProfilesFromDatabase(List<Profile> profiles);
-
         void setCallback(ListProfilesMVP.Presenter presenter);
     }
 }

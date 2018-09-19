@@ -1,5 +1,7 @@
 package br.tbm.github.api.interfaces;
 
+import java.util.ArrayList;
+
 import br.tbm.github.api.interfaces.generic.BasePresenterCallbacks;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
@@ -10,16 +12,16 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public interface TagMVP {
 
     interface View extends BaseViewCallbacks<BranchesTagsResponse> {
-
+        void listTagsEmpty();
+        void listTags(ArrayList<BranchesTagsResponse> tags);
     }
 
     interface Presenter extends BasePresenterCallbacks<BranchesTagsResponse> {
-        void search(String profileName, String repositoryName);
+        void searchTagsInServer(String profileName, String repositoryName);
     }
 
     interface Model {
-        void searchInServer(String profileName, String repositoryName);
-
+        void searchTagsInServer(String profileName, String repositoryName);
         void setCallback(TagMVP.Presenter presenter);
     }
 }

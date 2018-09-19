@@ -19,7 +19,7 @@ import br.tbm.github.api.ui.adapters.ProfileAdapter;
 import br.tbm.github.api.ui.components.CustomActionMode;
 import br.tbm.github.api.presenter.ListProfilesPresenter;
 import br.tbm.github.api.interfaces.ListProfilesMVP;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
+import br.tbm.github.api.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
 
@@ -100,7 +100,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
      */
     private void listProfilesFromDatabase() {
         initializedSecondThreadIdlingResource();
-        mPresenter.getProfiles();
+        mPresenter.getProfilesInDatabase();
     }
 
     /**

@@ -5,7 +5,7 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.interfaces.ListProfilesMVP;
-import br.tbm.github.api.interfaces.generic.TasksCallbacks;
+import br.tbm.github.api.database.tasks.TasksCallbacks;
 import br.tbm.github.api.database.tasks.ListGithubUsersTask;
 import br.tbm.github.api.database.tasks.RemoveUsersTask;
 
@@ -19,7 +19,7 @@ public class ListProfilesRepository implements ListProfilesMVP.Model,
     private ListProfilesMVP.Presenter mPresenter;
 
     @Override
-    public void listProfilesFromDatabase() {
+    public void listProfilesInDatabase() {
         new ListGithubUsersTask(this).execute();
     }
 

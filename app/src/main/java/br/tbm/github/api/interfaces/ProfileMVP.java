@@ -20,12 +20,12 @@ public interface ProfileMVP {
     }
 
     interface Presenter extends BasePresenterCallbacks<RepositoriesResponse> {
-        void searchPublicRepositories(String profileName);
+        void searchPublicRepositoriesInServer(String profileName);
         void updateScreen(Profile mProfile);
     }
 
     interface Model {
-        void searchInServer(String profileName);
+        void searchPublicRepositoriesInServer(String profileName);
         void setCallback(ProfileMVP.Presenter presenter);
     }
 }

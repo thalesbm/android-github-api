@@ -13,6 +13,7 @@ public class EventDetailsPresenter implements EventDetailsMVP.Presenter {
     private EventDetailsMVP.View mView;
 
     public EventDetailsPresenter(EventDetailsMVP.View view) {
+        super();
         this.mView = view;
     }
 

@@ -25,7 +25,7 @@ public class ProfileRepository implements ProfileMVP.Model {
      * @param profileName String
      */
     @Override
-    public void searchInServer(String profileName) {
+    public void searchPublicRepositoriesInServer(String profileName) {
         RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
         Call<ArrayList<RepositoriesResponse>> responseCall = service.listRepositories(profileName);
         responseCall.enqueue(new Callback<ArrayList<RepositoriesResponse>>() {

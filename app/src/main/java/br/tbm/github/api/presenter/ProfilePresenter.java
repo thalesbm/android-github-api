@@ -17,22 +17,21 @@ public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implem
     private ProfileMVP.Model mModel;
 
     public ProfilePresenter(ProfileMVP.View view, ProfileMVP.Model model) {
+        super();
         this.mView = view;
         this.mModel = model;
         this.mModel.setCallback(this);
+    }
 
+    @Override
+    void needsToCloseCurrentActivity() {
         closeActivity = true;
     }
 
-    /**
-     * Metodo para pesquisar um perfil pelo nome
-     *
-     * @param profileName String
-     */
     @Override
-    public void searchPublicRepositories(String profileName) {
+    public void searchPublicRepositoriesInServer(String profileName) {
         mView.updateProgressDialog(R.string.loading);
-        mModel.searchInServer(profileName);
+        mModel.searchPublicRepositoriesInServer(profileName);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implem
     }
 
     // ######################
-    // CALLBACK DO MODEL
+    // CALLBACK DO REPOSITORY
     // ######################
 
     @Override

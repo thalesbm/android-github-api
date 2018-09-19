@@ -29,7 +29,7 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
         this.init();
 
         GithubRateLimitPresenter presenter = new GithubRateLimitPresenter(this, new GithubRateLimitRepository());
-        presenter.search();
+        presenter.searchRateLimitInServer();
     }
 
     @Override

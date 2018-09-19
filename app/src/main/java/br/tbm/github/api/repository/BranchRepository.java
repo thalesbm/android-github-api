@@ -20,7 +20,7 @@ public class BranchRepository implements BranchMVP.Model {
     private BranchMVP.Presenter mPresenter;
 
     @Override
-    public void searchInServer(String profileName, String repositoryName) {
+    public void searchBranchesInServer(String profileName, String repositoryName) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<ArrayList<BranchesTagsResponse>> responseCall = service.listBranches(profileName, repositoryName);
         responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {

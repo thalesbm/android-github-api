@@ -5,7 +5,6 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.tbm.github.api.interfaces.generic.TasksCallbacks;
 import br.tbm.github.api.database.data.Profile;
 
 /**

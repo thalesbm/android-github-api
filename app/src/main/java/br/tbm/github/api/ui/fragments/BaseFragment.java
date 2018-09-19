@@ -10,7 +10,7 @@ import android.support.v7.app.AlertDialog;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.interfaces.generic.AdaptersCallbacks;
+import br.tbm.github.api.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.ui.activities.BaseActivity;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
 

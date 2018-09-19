@@ -25,7 +25,7 @@ public class CommitDetailsRepository implements CommitDetailsMVP.Model {
      * @param sha            String
      */
     @Override
-    public void searchInServer(String username, String repositoryName, String sha) {
+    public void searchCommitDetailsInServer(String username, String repositoryName, String sha) {
         RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
         Call<CommitsResponse> responseCall = service.listCommits(username, repositoryName, sha);
         responseCall.enqueue(new Callback<CommitsResponse>() {
