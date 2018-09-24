@@ -69,6 +69,7 @@ public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
 
     @Override
     public void listTagsEmpty() {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
     }

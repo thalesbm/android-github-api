@@ -68,6 +68,7 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
 
     @Override
     public void branchesList(ArrayList<BranchesTagsResponse> branches) {
+        dismissProgressDialog();
         mTvListEmpty.setVisibility(View.GONE);
         mRecyclerView.setAdapter(new BranchesTagsAdapter(branches, true));
         mRecyclerView.setVisibility(View.VISIBLE);
