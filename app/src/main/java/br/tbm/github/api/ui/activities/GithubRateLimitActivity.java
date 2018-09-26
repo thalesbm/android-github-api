@@ -94,4 +94,9 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
     public void hideGraphFields() {
         this.hideFields(mTvGraphLimit, mTvGraphRemaining);
     }
+
+    @Override
+    public void hideProgressDialog() {
+        dismissProgressDialog();
+    }
 }

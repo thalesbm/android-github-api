@@ -36,13 +36,9 @@ public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
             mView.validateNotPassed(R.string.search_activity_profile_validation);
         } else {
             mView.validatePassed();
-            if (mView.checkConnection()) {
-                mView.hideKeyboard();
+            mView.hideKeyboard();
 
-                this.searchUsernameInServer(field);
-            } else {
-                mView.displayAlertDialog(R.string.generic_internet_issue, true);
-            }
+            this.searchUsernameInServer(field);
         }
     }
 

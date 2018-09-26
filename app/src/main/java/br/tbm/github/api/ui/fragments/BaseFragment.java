@@ -126,11 +126,6 @@ public abstract class BaseFragment<T> extends Fragment implements
     }
 
     @Override
-    public boolean checkConnection() {
-        return isOnline();
-    }
-
-    @Override
     public void updateProgressDialog(int message) {
         showProgressDialog(getString(message));
     }

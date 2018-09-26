@@ -21,6 +21,8 @@ public interface GithubRateLimitMVP {
         void setGraphLimit(int message, int limit);
         void setGraphRemaining(int message, int remaining);
         void hideGraphFields();
+
+        void hideProgressDialog();
     }
 
     interface Presenter extends BasePresenterCallbacks<ResourcesResponse> {

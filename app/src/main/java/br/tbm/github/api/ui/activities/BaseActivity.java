@@ -143,16 +143,6 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements
     }
 
     /**
-     * verifica se o dispositivo está conectado a internet
-     *
-     * @return boolean
-     */
-    protected boolean isOnline() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm != null && cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected();
-    }
-
-    /**
      * Valida se o edittext foi preenchido ou nao, caso tenha sido preenchido retorna true, caso contrario retorna false
      *
      * @param messageError    String
@@ -297,10 +287,10 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements
         dismissProgressDialog();
     }
 
-    @Override
-    public boolean checkConnection() {
-        return isOnline();
-    }
+//    @Override
+//    public boolean checkConnection() {
+//        return isOnline();
+//    }
 
     @Override
     public void updateProgressDialog(int message) {

@@ -38,6 +38,9 @@ public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> i
     @Override
     public void success(ResourcesResponse response) {
         super.success(response);
+
+        mView.hideProgressDialog();
+
         if (response.getRateLimitResponse() != null) {
 
             // verifica se o objeto core é null, caso nao seja preencha com as informacoes do servidor

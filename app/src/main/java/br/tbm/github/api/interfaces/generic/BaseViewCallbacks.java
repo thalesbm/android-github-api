@@ -14,7 +14,7 @@ public interface BaseViewCallbacks<T> {
 
     void success(ArrayList<T> t);
 
-    boolean checkConnection();
+//    boolean checkConnection();
 
     void hideKeyboard();
 

@@ -30,7 +30,7 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_username);
 
-        this.mPresenter = new SearchByUsernamePresenter(this, new SearchByUsernameRepository());
+        this.mPresenter = new SearchByUsernamePresenter(this, new SearchByUsernameRepository(this));
 
         this.init();
     }
