@@ -13,3 +13,12 @@ Aplicativo de exemplo de uso da API do Github, com esse aplicativo é possível 
 	 - Retrofit
 	 - Picasso
 	 - Espresso
+
+#### branch github_api_v200 (Trabalhando atualmente)
+ - Aplicativo utilizando arquitetura MVP.
+ - Segunda versão do aplicativo, contém as seguintes bibliotecas de terceiro:
+	 - ORMLite Framework
+	 - Retrofit
+	 - Picasso
+	 - Espresso
+	 - Mockito
