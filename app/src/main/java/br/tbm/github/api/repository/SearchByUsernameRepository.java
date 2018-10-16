@@ -31,23 +31,32 @@ public class SearchByUsernameRepository implements
     }
 
     @Override
-    public void searchUsernameInServer(String profileName) {
+    public void searchUsernameInServer(String profileName, SearchByUsernameMVP.Presenter listener) {
         if (AppUtils.isOnline(mContext)) {
             RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
             Call<Profile> responseCall = service.getProfile(profileName);
             responseCall.enqueue(new Callback<Profile>() {
                 @Override
                 public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                    searchProfileResponseSuccess(response);
+                    // searchProfileResponseSuccess(response);
+                    if (response.isSuccessful()) {
+                        if (response.body() != null && response.body().getName() != null) {
+                            new SaveGithubUserTask(SearchByUsernameRepository.this).execute(response.body());
+                        } else {
+                            listener.displayAlertDialog(R.string.search_activity_user_not_found);
+                        }
+                    } else {
+                        listener.networkIssue(response.raw().code());
+                    }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-                    mPresenter.displayAlertDialog(t.getMessage());
+                    listener.displayAlertDialog(t.getMessage());
                 }
             });
         } else {
-            mPresenter.displayAlertDialog(R.string.generic_internet_issue);
+            listener.displayAlertDialog(R.string.generic_internet_issue);
         }
     }
 

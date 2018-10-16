@@ -27,7 +27,7 @@ public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
 
     @Override
     public void searchUsernameInServer(String profileName) {
-        mModel.searchUsernameInServer(profileName);
+        mModel.searchUsernameInServer(profileName, this);
     }
 
     @Override
