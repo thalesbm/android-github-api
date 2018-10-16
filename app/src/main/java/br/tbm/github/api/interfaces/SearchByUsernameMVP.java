@@ -20,7 +20,7 @@ public interface SearchByUsernameMVP {
     }
 
     interface Model {
-        void searchUsernameInServer(String profileName, SearchByUsernameMVP.Presenter listener);
+        void searchUsernameInServer(String profileName);
         void setCallback(SearchByUsernameMVP.Presenter presenter);
     }
 }

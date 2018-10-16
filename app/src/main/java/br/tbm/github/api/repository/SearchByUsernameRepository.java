@@ -31,7 +31,7 @@ public class SearchByUsernameRepository implements
     }
 
     @Override
-    public void searchUsernameInServer(String profileName, SearchByUsernameMVP.Presenter listener) {
+    public void searchUsernameInServer(String profileName) {
         if (AppUtils.isOnline(mContext)) {
             RestUser service = GithubApplication.getRetrofitInstance().create(RestUser.class);
             Call<Profile> responseCall = service.getProfile(profileName);
@@ -43,20 +43,20 @@ public class SearchByUsernameRepository implements
                         if (response.body() != null && response.body().getName() != null) {
                             new SaveGithubUserTask(SearchByUsernameRepository.this).execute(response.body());
                         } else {
-                            listener.displayAlertDialog(R.string.search_activity_user_not_found);
+                            mPresenter.displayAlertDialog(R.string.search_activity_user_not_found);
                         }
                     } else {
-                        listener.networkIssue(response.raw().code());
+                        mPresenter.networkIssue(response.raw().code());
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Profile> call, @NonNull Throwable t) {
-                    listener.displayAlertDialog(t.getMessage());
+                    mPresenter.displayAlertDialog(t.getMessage());
                 }
             });
         } else {
-            listener.displayAlertDialog(R.string.generic_internet_issue);
+            mPresenter.displayAlertDialog(R.string.generic_internet_issue);
         }
     }
 
