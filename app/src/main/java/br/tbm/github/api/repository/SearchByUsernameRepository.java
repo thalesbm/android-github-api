@@ -38,7 +38,16 @@ public class SearchByUsernameRepository implements
             responseCall.enqueue(new Callback<Profile>() {
                 @Override
                 public void onResponse(@NonNull Call<Profile> call, @NonNull Response<Profile> response) {
-                    searchProfileResponseSuccess(response);
+                    // searchProfileResponseSuccess(response);
+                    if (response.isSuccessful()) {
+                        if (response.body() != null && response.body().getName() != null) {
+                            new SaveGithubUserTask(SearchByUsernameRepository.this).execute(response.body());
+                        } else {
+                            mPresenter.displayAlertDialog(R.string.search_activity_user_not_found);
+                        }
+                    } else {
+                        mPresenter.networkIssue(response.raw().code());
+                    }
                 }
 
                 @Override

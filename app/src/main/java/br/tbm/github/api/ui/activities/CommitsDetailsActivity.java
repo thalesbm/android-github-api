@@ -21,6 +21,9 @@ import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.network.entities.CommitsResponse;
 import br.tbm.github.api.interfaces.CommitDetailsMVP;
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 29/08/2018
@@ -28,14 +31,30 @@ import br.tbm.github.api.interfaces.CommitDetailsMVP;
 public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implements
         CommitDetailsMVP.View {
 
-    private RecyclerView mRecyclerView;
-    private TextView mTvListEmpty, mTvCommitterName, mTvCommitterDate, mTvCommitDescription;
-    private ImageView mIvCommitterProfile;
+    @BindView(R.id.activity_commits_recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.activity_commits_empty_text_view)
+    TextView mTvListEmpty;
+
+    @BindView(R.id.activity_commit_details_name_textview)
+    TextView mTvCommitterName;
+
+    @BindView(R.id.activity_commit_created_textview)
+    TextView mTvCommitterDate;
+
+    @BindView(R.id.activity_commit_details_description_textview)
+    TextView mTvCommitDescription;
+
+    @BindView(R.id.activity_commit_details_imageview)
+    ImageView mIvCommitterProfile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commit_details);
+
+        ButterKnife.bind(this);
 
         CommitsDetailsPresenter presenter = new CommitsDetailsPresenter(this, new CommitDetailsRepository());
 
@@ -53,15 +72,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.commit_details_activity_toolbar));
 
-        mRecyclerView = findViewById(R.id.activity_commits_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        mTvListEmpty = findViewById(R.id.activity_commits_empty_text_view);
-        mTvCommitterName = findViewById(R.id.activity_commit_details_name_textview);
-        mTvCommitterDate = findViewById(R.id.activity_commit_created_textview);
-        mTvCommitDescription = findViewById(R.id.activity_commit_details_description_textview);
-
-        mIvCommitterProfile = findViewById(R.id.activity_commit_details_imageview);
     }
 
     @Override

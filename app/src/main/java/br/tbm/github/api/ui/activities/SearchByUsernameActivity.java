@@ -13,6 +13,8 @@ import br.tbm.github.api.presenter.SearchByUsernamePresenter;
 import br.tbm.github.api.interfaces.SearchByUsernameMVP;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 23/08/2018
@@ -22,13 +24,18 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
 
     private SearchByUsernamePresenter mPresenter;
 
-    private TextInputLayout mTvProfile;
-    private EditText mEdProfile;
+    @BindView(R.id.search_activity_search_textlayout)
+    TextInputLayout mTvProfile;
+
+    @BindView(R.id.search_activity_search_edittext)
+    EditText mEdProfile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_username);
+
+        ButterKnife.bind(this);
 
         this.mPresenter = new SearchByUsernamePresenter(this, new SearchByUsernameRepository(this));
 
@@ -42,9 +49,6 @@ public class SearchByUsernameActivity extends BaseActivity<Profile> implements
     protected void init() {
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.search_activity_toolbar));
-
-        mTvProfile = findViewById(R.id.search_activity_search_textlayout);
-        mEdProfile = findViewById(R.id.search_activity_search_edittext);
 
         Button btnSearch = findViewById(R.id.search_activity_button);
         btnSearch.setOnClickListener((View v) -> {

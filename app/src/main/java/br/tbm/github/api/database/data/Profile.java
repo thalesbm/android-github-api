@@ -45,6 +45,10 @@ public class Profile implements Parcelable {
     public Profile() {
     }
 
+    public Profile(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

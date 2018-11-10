@@ -22,6 +22,8 @@ import br.tbm.github.api.presenter.ProfilePresenter;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
 import br.tbm.github.api.utils.RedirectUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 21/08/2018
@@ -29,16 +31,23 @@ import br.tbm.github.api.utils.RedirectUtils;
 public class ProfileActivity extends BaseActivity<RepositoriesResponse> implements
         ProfileMVP.View {
 
-    private RecyclerView mRecyclerView;
-    private ImageView mIvProfile;
-    private TextView mTvEmptyDescription;
-
     private Profile mProfile;
+
+    @BindView(R.id.recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.activity_profile_imageview)
+    ImageView mIvProfile;
+
+    @BindView(R.id.profile_activity_no_repository)
+    TextView mTvEmptyDescription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        ButterKnife.bind(this);
 
         this.mProfile = getIntent().getExtras().getParcelable(Constants.INTENT_PROFILE);
 
@@ -55,11 +64,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties();
 
-        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        mIvProfile = findViewById(R.id.activity_profile_imageview);
-        mTvEmptyDescription = findViewById(R.id.profile_activity_no_repository);
     }
 
     // ###################

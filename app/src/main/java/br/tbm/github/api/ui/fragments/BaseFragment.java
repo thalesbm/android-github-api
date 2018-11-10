@@ -13,6 +13,7 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.ui.activities.BaseActivity;
 import br.tbm.github.api.interfaces.generic.BaseViewCallbacks;
+import butterknife.Unbinder;
 
 /**
  * Created by thalesbertolini on 26/08/2018
@@ -24,6 +25,8 @@ public abstract class BaseFragment<T> extends Fragment implements
     protected abstract void init();
 
     private ProgressDialog progressDialog;
+
+    protected Unbinder mUnbinder;
 
     /**
      * Metodo responsavel por retornar uma instancia do BaseActivity
@@ -143,5 +146,13 @@ public abstract class BaseFragment<T> extends Fragment implements
     @Override
     public void onClick(T t) {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
     }
 }

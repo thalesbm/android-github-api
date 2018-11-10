@@ -21,6 +21,8 @@ import br.tbm.github.api.presenter.EventPresenter;
 import br.tbm.github.api.network.entities.EventPayloadResponse;
 import br.tbm.github.api.network.entities.EventsResponse;
 import br.tbm.github.api.utils.RedirectUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 26/08/2018
@@ -30,14 +32,19 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
 
     private String mRepositoryName, mUserName;
 
-    private RecyclerView mRecyclerView;
-    private TextView mTvListEmpty;
+    @BindView(R.id.fragment_events_recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.fragment_events_textview)
+    TextView mTvListEmpty;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        mUnbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -57,10 +64,7 @@ public class EventFragment extends BaseFragment<EventsResponse> implements
     protected void init() {
         getAppActivity().changeToolbarTitle(getString(R.string.events_fragment_title));
 
-        mRecyclerView = getAppActivity().findViewById(R.id.fragment_events_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        mTvListEmpty = getAppActivity().findViewById(R.id.fragment_events_textview);
     }
 
     @Override

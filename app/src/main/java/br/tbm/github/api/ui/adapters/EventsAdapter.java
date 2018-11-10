@@ -17,6 +17,8 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.network.entities.EventsResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static br.tbm.github.api.utils.DateUtils.formatDate;
 
@@ -38,17 +40,24 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvType, mTvLogin, mTvCreated;
-        private ImageView mIvProfile;
-        private ConstraintLayout mConstraintLayout;
+        @BindView(R.id.adapter_type_textview)
+        TextView mTvType;
+
+        @BindView(R.id.adapter_login_textview)
+        TextView mTvLogin;
+
+        @BindView(R.id.adapter_created_textview)
+        TextView mTvCreated;
+
+        @BindView(R.id.adapter_profile_imageview)
+        ImageView mIvProfile;
+
+        @BindView(R.id.adapter_main_layout)
+        ConstraintLayout mConstraintLayout;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvType = vi.findViewById(R.id.adapter_type_textview);
-            mTvLogin = vi.findViewById(R.id.adapter_login_textview);
-            mTvCreated = vi.findViewById(R.id.adapter_created_textview);
-            mIvProfile = vi.findViewById(R.id.adapter_profile_imageview);
-            mConstraintLayout = vi.findViewById(R.id.adapter_main_layout);
+            ButterKnife.bind(this, vi);
         }
     }
 

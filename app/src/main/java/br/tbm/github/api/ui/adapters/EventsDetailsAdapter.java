@@ -12,6 +12,8 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.EventCommitsResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 27/08/2018
@@ -30,14 +32,18 @@ public class EventsDetailsAdapter extends RecyclerView.Adapter<EventsDetailsAdap
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvName, mTvDescription;
-        private ConstraintLayout mConstraintLayout;
+        @BindView(R.id.adapter_name_textview)
+        TextView mTvName;
+
+        @BindView(R.id.adapter_description_textview)
+        TextView mTvDescription;
+
+        @BindView(R.id.adapter_main_layout)
+        ConstraintLayout mConstraintLayout;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvName = vi.findViewById(R.id.adapter_name_textview);
-            mTvDescription = vi.findViewById(R.id.adapter_description_textview);
-            mConstraintLayout = vi.findViewById(R.id.adapter_main_layout);
+            ButterKnife.bind(this, vi);
         }
     }
 
