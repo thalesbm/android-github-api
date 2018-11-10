@@ -10,6 +10,8 @@ import br.tbm.github.api.interfaces.GithubRateLimitMVP;
 import br.tbm.github.api.presenter.GithubRateLimitPresenter;
 import br.tbm.github.api.network.entities.ResourcesResponse;
 import br.tbm.github.api.repository.GithubRateLimitRepository;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 04/09/2018
@@ -17,14 +19,30 @@ import br.tbm.github.api.repository.GithubRateLimitRepository;
 public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> implements
         GithubRateLimitMVP.View {
 
-    private TextView mTvCoreLimit, mTvCoreRemaining,
-            mTvSearchLimit, mTvSearchRemaining,
-            mTvGraphLimit, mTvGraphRemaining;
+    @BindView(R.id.activity_github_core_limit)
+    TextView mTvCoreLimit;
+
+    @BindView(R.id.activity_github_core_remaining)
+    TextView mTvCoreRemaining;
+
+    @BindView(R.id.activity_github_search_limit)
+    TextView mTvSearchLimit;
+
+    @BindView(R.id.activity_github_search_remaining)
+    TextView mTvSearchRemaining;
+
+    @BindView(R.id.activity_github_graph_limit)
+    TextView mTvGraphLimit;
+
+    @BindView(R.id.activity_github_graph_remaining)
+    TextView mTvGraphRemaining;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github_rate_limits);
+
+        ButterKnife.bind(this);
 
         this.init();
 
@@ -36,13 +54,6 @@ public class GithubRateLimitActivity extends BaseActivity<ResourcesResponse> imp
     protected void init() {
         setupToolbar(findViewById(R.id.toolbar));
         setToolbarProperties(getString(R.string.github_rate_limit_activity_toolbar));
-
-        this.mTvCoreLimit = findViewById(R.id.activity_github_core_limit);
-        this.mTvCoreRemaining = findViewById(R.id.activity_github_core_remaining);
-        this.mTvSearchLimit = findViewById(R.id.activity_github_search_limit);
-        this.mTvSearchRemaining = findViewById(R.id.activity_github_search_remaining);
-        this.mTvGraphLimit = findViewById(R.id.activity_github_graph_limit);
-        this.mTvGraphRemaining = findViewById(R.id.activity_github_graph_remaining);
     }
 
     private void hideFields(TextView tvLimit, TextView tvRemaining) {

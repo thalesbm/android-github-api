@@ -12,6 +12,8 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 27/08/2018
@@ -30,13 +32,15 @@ public class BranchesTagsAdapter extends RecyclerView.Adapter<BranchesTagsAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvName;
-        private ImageView mIvIcon;
+        @BindView(R.id.adapter_name_textview)
+        TextView mTvName;
+
+        @BindView(R.id.adapter_imageview)
+        ImageView mIvIcon;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvName = vi.findViewById(R.id.adapter_name_textview);
-            mIvIcon = vi.findViewById(R.id.adapter_imageview);
+            ButterKnife.bind(this, vi);
         }
     }
 

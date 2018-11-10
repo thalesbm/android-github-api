@@ -12,6 +12,8 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.RepositoriesResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 21/08/2018
@@ -30,14 +32,18 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvName, mTvLanguage;
-        private ConstraintLayout mConstraintLayout;
+        @BindView(R.id.adapter_name_textview)
+        TextView mTvName;
+
+        @BindView(R.id.adapter_language_textview)
+        TextView mTvLanguage;
+
+        @BindView(R.id.adapter_main_layout)
+        ConstraintLayout mConstraintLayout;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvName = vi.findViewById(R.id.adapter_name_textview);
-            mTvLanguage = vi.findViewById(R.id.adapter_language_textview);
-            mConstraintLayout = vi.findViewById(R.id.adapter_main_layout);
+            ButterKnife.bind(this, vi);
         }
     }
 

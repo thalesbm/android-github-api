@@ -19,6 +19,8 @@ import br.tbm.github.api.ui.adapters.BranchesTagsAdapter;
 import br.tbm.github.api.interfaces.TagMVP;
 import br.tbm.github.api.presenter.TagPresenter;
 import br.tbm.github.api.network.entities.BranchesTagsResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 26/08/2018
@@ -26,14 +28,19 @@ import br.tbm.github.api.network.entities.BranchesTagsResponse;
 public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
         TagMVP.View {
 
-    private RecyclerView mRecyclerView;
-    private TextView mTvListEmpty;
+    @BindView(R.id.fragment_tags_recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.fragment_tags_textview)
+    TextView mTvListEmpty;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_tags, container, false);
+        View view = inflater.inflate(R.layout.fragment_tags, container, false);
+        mUnbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -53,10 +60,7 @@ public class TagFragment extends BaseFragment<BranchesTagsResponse> implements
     protected void init() {
         getAppActivity().changeToolbarTitle(getString(R.string.tags_fragment_title));
 
-        mRecyclerView = getAppActivity().findViewById(R.id.fragment_tags_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        mTvListEmpty = getAppActivity().findViewById(R.id.fragment_tags_textview);
     }
 
     @Override

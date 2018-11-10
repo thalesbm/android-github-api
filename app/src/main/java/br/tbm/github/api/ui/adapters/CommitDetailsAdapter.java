@@ -11,6 +11,8 @@ import java.util.List;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.network.entities.CommitFilesResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 30/08/2018
@@ -27,12 +29,15 @@ public class CommitDetailsAdapter extends RecyclerView.Adapter<CommitDetailsAdap
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvName, mTvDescription;
+        @BindView(R.id.adapter_name_textview)
+        TextView mTvName;
+
+        @BindView(R.id.adapter_description_textview)
+        TextView mTvDescription;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvName = vi.findViewById(R.id.adapter_name_textview);
-            mTvDescription = vi.findViewById(R.id.adapter_description_textview);
+            ButterKnife.bind(this, vi);
         }
     }
 

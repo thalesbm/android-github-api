@@ -22,6 +22,8 @@ import br.tbm.github.api.interfaces.ListProfilesMVP;
 import br.tbm.github.api.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.database.data.Profile;
 import br.tbm.github.api.utils.RedirectUtils;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 21/08/2018
@@ -30,22 +32,26 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         AdaptersCallbacks.ProfileAdapterCallback,
         ListProfilesMVP.View {
 
-    // TODO: CHECK IF I NEED TO UPDATE THIS CLASS WITH MVP
-
     private final String TAG = ListProfilesActivity.class.getSimpleName();
 
     private ListProfilesPresenter mPresenter;
 
     private List<Profile> mProfiles;
 
-    private RecyclerView mRecyclerView;
-    private TextView mTvListEmpty;
     private ActionMode mCurrentActionMode;
+
+    @BindView(R.id.main_activity_recycler_view)
+    RecyclerView mRecyclerView;
+
+    @BindView(R.id.main_activity_list_description_text_view)
+    TextView mTvListEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_profiles);
+
+        ButterKnife.bind(this);
 
         mPresenter = new ListProfilesPresenter(this, new ListProfilesRepository());
 
@@ -66,10 +72,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         setupToolbar(findViewById(R.id.toolbar));
         changeToolbarTitle(getString(R.string.main_activity_toolbar));
 
-        mRecyclerView = findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mRecyclerView.getContext()));
-
-        mTvListEmpty = findViewById(R.id.main_activity_list_description_text_view);
     }
 
     @Override

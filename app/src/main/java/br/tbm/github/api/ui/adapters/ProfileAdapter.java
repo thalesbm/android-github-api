@@ -19,6 +19,8 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.ui.components.CircleTransform;
 import br.tbm.github.api.database.data.Profile;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by thalesbertolini on 23/08/2018
@@ -40,16 +42,21 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTvName, mTvLogin;
-        private ImageView mIvProfile;
-        private ConstraintLayout mConstraintLayout;
+        @BindView(R.id.adapter_name_textview)
+        TextView mTvName;
+
+        @BindView(R.id.adapter_login_textview)
+        TextView mTvLogin;
+
+        @BindView(R.id.adapter_profile_imageview)
+        ImageView mIvProfile;
+
+        @BindView(R.id.adapter_main_layout)
+        ConstraintLayout mConstraintLayout;
 
         private ViewHolder(View vi) {
             super(vi);
-            mTvName = vi.findViewById(R.id.adapter_name_textview);
-            mTvLogin = vi.findViewById(R.id.adapter_login_textview);
-            mIvProfile = vi.findViewById(R.id.adapter_profile_imageview);
-            mConstraintLayout = vi.findViewById(R.id.adapter_main_layout);
+            ButterKnife.bind(this, vi);
         }
     }
 
