@@ -21,4 +21,5 @@ Aplicativo de exemplo de uso da API do Github, com esse aplicativo é possível 
 	 - Retrofit
 	 - Picasso
 	 - Espresso
+	 - Butte Knife
 	 - Mockito
