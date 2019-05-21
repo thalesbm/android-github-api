@@ -6,16 +6,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.ListProfilesMVP;
-import br.tbm.github.api.presenter.ListProfilesPresenter;
-import br.tbm.github.api.ui.adapters.ProfileAdapter;
+import br.tbm.github.api.app.listProfiles.ListProfilesMVP;
+import br.tbm.github.api.app.listProfiles.presenter.ListProfilesPresenter;
+import br.tbm.github.api.app.listProfiles.ui.ProfileAdapter;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by thalesbertolini on 16/10/2018

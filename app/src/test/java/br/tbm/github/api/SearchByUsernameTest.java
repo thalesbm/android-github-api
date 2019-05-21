@@ -9,9 +9,9 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
-import br.tbm.github.api.database.data.Profile;
-import br.tbm.github.api.interfaces.SearchByUsernameMVP;
-import br.tbm.github.api.presenter.SearchByUsernamePresenter;
+import br.tbm.github.api.app.profile.repository.model.Profile;
+import br.tbm.github.api.app.searchByUsername.SearchByUsernameMVP;
+import br.tbm.github.api.app.searchByUsername.presenter.SearchByUsernamePresenter;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;

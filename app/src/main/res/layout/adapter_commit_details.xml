@@ -7,7 +7,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp">
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratRegularTextView
         android:id="@+id/adapter_name_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:textColor="@color/dark_grey"
         android:textSize="12sp" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/adapter_description_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

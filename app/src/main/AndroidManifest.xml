@@ -6,14 +6,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".GithubApplication"
+        android:name=".shared.GithubApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activities.SplashActivity">
+        <activity android:name=".app.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,37 +22,37 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.ProfileActivity"
+            android:name=".app.profile.ui.ProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.ListProfilesActivity"
+            android:name=".app.listProfiles.ui.ListProfilesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.SearchByUsernameActivity"
+            android:name=".app.searchByUsername.ui.SearchByUsernameActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.RepositoryDetailsActivity"
+            android:name=".app.profile.ui.RepositoryDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.CommitsDetailsActivity"
+            android:name=".app.commitDetails.ui.CommitsDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.EventDetailsActivity"
+            android:name=".app.eventDetails.ui.EventDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activities.GithubRateLimitActivity"
+            android:name=".app.githubRateLimit.ui.GithubRateLimitActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

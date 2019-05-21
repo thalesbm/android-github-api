@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.GithubRateLimitActivity">
+    tools:context=".app.githubRateLimit.ui.GithubRateLimitActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -15,18 +15,18 @@
 
     <!-- CORE -->
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratRegularTextView
         android:id="@+id/activity_github_core_title"
         style="@style/github_rate_limit_activity_textview_title"
         android:text="@string/github_rate_limit_activity_core"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_core_limit"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_core_title" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_core_remaining"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_core_limit" />
@@ -41,18 +41,18 @@
 
     <!-- REMAINING -->
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratRegularTextView
         android:id="@+id/activity_github_search_title"
         style="@style/github_rate_limit_activity_textview_title"
         android:text="@string/github_rate_limit_activity_search"
         app:layout_constraintTop_toBottomOf="@+id/divider_core" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_search_limit"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_search_title" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_search_remaining"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_search_limit" />
@@ -67,18 +67,18 @@
 
     <!-- GRAPH -->
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratRegularTextView
         android:id="@+id/activity_github_graph_title"
         style="@style/github_rate_limit_activity_textview_title"
         android:text="@string/github_rate_limit_activity_graph"
         app:layout_constraintTop_toBottomOf="@+id/divider_search" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_graph_limit"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_graph_title" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratLightTextView
         android:id="@+id/activity_github_graph_remaining"
         style="@style/github_rate_limit_activity_textview_item"
         app:layout_constraintTop_toBottomOf="@+id/activity_github_graph_limit" />

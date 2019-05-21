@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.EventDetailsActivity">
+    tools:context=".app.eventDetails.ui.EventDetailsActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -13,7 +13,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.shared.ui.components.CustomMontserratRegularTextView
         android:id="@+id/activity_event_details_empty_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
