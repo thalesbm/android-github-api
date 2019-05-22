@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.BranchMVP;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 

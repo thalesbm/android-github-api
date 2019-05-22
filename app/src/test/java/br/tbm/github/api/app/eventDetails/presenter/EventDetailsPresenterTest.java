@@ -9,10 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 
 import br.tbm.github.api.app.event.repository.entity.EventCommitsResponse;
-import br.tbm.github.api.app.event.repository.entity.EventsResponse;
 import br.tbm.github.api.app.eventDetails.EventDetailsMVP;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 

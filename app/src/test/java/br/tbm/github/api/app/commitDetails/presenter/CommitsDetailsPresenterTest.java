@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
