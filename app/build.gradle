@@ -33,6 +33,26 @@ android {
         description = "Executa todos os testes relacionados com o aplicativo"
     }
 
+    tasks.withType(Test) {
+        testLogging {
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+            exceptionFormat "full"
+        }
+
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (" +
+                        "${result.testCount} tested, " +
+                        "${result.successfulTestCount} successed, " +
+                        "${result.failedTestCount} failured, " +
+                        "${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
