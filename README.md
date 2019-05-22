@@ -6,7 +6,7 @@ Aplicativo de exemplo de uso da API do Github, com esse aplicativo é possível 
 
 ## Versões
 
-#### branch github_api_v100
+#### tag github_api_v100
  - Aplicativo utilizando arquitetura MVP.
  - Primeira versão do aplicativo, contém as seguintes bibliotecas de terceiro:
 	 - ORMLite Framework
