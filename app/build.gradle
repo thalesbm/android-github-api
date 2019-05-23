@@ -82,6 +82,7 @@ dependencies {
     // RETROFIT
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation 'com.squareup.retrofit2:retrofit-mock:2.5.0'
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
 
     // PICASSO
@@ -99,6 +100,10 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
     testImplementation "com.android.support.test.espresso:espresso-idling-resource:$androidTestVersion"
     testImplementation "org.mockito:mockito-core:$mockito"
+
+    androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.0.0'
+    androidTestImplementation 'com.squareup.okhttp:mockwebserver:2.7.0'
+    androidTestImplementation 'com.squareup.spoon:spoon-client:1.2.0'
 
     // TEST SCREENS
     androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"

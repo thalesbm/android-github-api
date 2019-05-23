@@ -1,4 +1,4 @@
-package br.tbm.github.api.app;
+package br.tbm.github.api.shared;
 
 import org.junit.experimental.categories.Categories;
 import org.junit.runner.RunWith;
