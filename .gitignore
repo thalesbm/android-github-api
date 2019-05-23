@@ -67,3 +67,5 @@ fastlane/readme.md
 \.idea/
 
 reports/
+
+*.DS_Store
