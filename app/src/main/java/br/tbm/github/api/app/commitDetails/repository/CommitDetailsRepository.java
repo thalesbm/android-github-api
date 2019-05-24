@@ -9,6 +9,7 @@ import br.tbm.github.api.shared.network.RestRepository;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by thalesbertolini on 15/09/2018
@@ -16,6 +17,7 @@ import retrofit2.Response;
 public class CommitDetailsRepository implements CommitDetailsMVP.Model {
 
     private CommitDetailsMVP.Presenter mPresenter;
+    private Retrofit mRetrofit;
 
     /**
      * Metodo para pesquisar todos os commits de um especifico repositorio
@@ -26,8 +28,7 @@ public class CommitDetailsRepository implements CommitDetailsMVP.Model {
      */
     @Override
     public void searchCommitDetailsInServer(String username, String repositoryName, String sha) {
-        RestRepository service = GithubApplication.getRetrofitInstance().create(RestRepository.class);
-        Call<CommitsResponse> responseCall = service.listCommits(username, repositoryName, sha);
+        Call<CommitsResponse> responseCall = mRetrofit.create(RestRepository.class).listCommits(username, repositoryName, sha);
         responseCall.enqueue(new Callback<CommitsResponse>() {
             @Override
             public void onResponse(@NonNull Call<CommitsResponse> call, @NonNull Response<CommitsResponse> response) {
@@ -52,7 +53,8 @@ public class CommitDetailsRepository implements CommitDetailsMVP.Model {
      * @param presenter CommitDetailsMVP.Presenter
      */
     @Override
-    public void setCallback(CommitDetailsMVP.Presenter presenter) {
+    public void setCallback(CommitDetailsMVP.Presenter presenter, Retrofit retrofit) {
         this.mPresenter = presenter;
+        this.mRetrofit = retrofit;
     }
 }

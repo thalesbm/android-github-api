@@ -3,6 +3,7 @@ package br.tbm.github.api.app.commitDetails.presenter;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
+import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 import br.tbm.github.api.shared.utils.DateUtils;
 
@@ -19,7 +20,7 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
         super();
         this.mView = view;
         this.mModel = model;
-        this.mModel.setCallback(this);
+        this.mModel.setCallback(this, GithubApplication.getRetrofitInstance());
     }
 
     @Override

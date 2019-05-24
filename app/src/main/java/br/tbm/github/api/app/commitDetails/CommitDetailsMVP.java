@@ -6,6 +6,7 @@ import br.tbm.github.api.shared.presenter.BasePresenterCallbacks;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.shared.ui.BaseViewCallbacks;
+import retrofit2.Retrofit;
 
 /**
  * Created by thalesbertolini on 15/09/2018
@@ -27,6 +28,6 @@ public interface CommitDetailsMVP {
 
     interface Model {
         void searchCommitDetailsInServer(String username, String repositoryName, String sha);
-        void setCallback(CommitDetailsMVP.Presenter presenter);
+        void setCallback(CommitDetailsMVP.Presenter presenter, Retrofit retrofit);
     }
 }
