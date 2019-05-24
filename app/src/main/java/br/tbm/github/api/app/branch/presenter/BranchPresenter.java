@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.BranchMVP;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
@@ -20,7 +21,7 @@ public class BranchPresenter extends BasePresenter<BranchesTagsResponse> impleme
         super();
         this.mView = view;
         this.mModel = model;
-        this.mModel.setCallback(this);
+        this.mModel.setCallback(this, GithubApplication.getRetrofitInstance());
     }
 
     @Override
