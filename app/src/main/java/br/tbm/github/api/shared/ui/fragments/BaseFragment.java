@@ -100,31 +100,31 @@ public abstract class BaseFragment<T> extends Fragment implements
 
     @Override
     public void displayAlertDialog(int id, boolean closeActivity) {
-        getAppActivity().finishedSecondThreadIdlingResource();
+//        getAppActivity().finishedSecondThreadIdlingResource();
         showAlertDialog(getString(id), closeActivity);
     }
 
     @Override
     public void displayAlertDialog(String message, boolean closeActivity) {
-        getAppActivity().finishedSecondThreadIdlingResource();
+//        getAppActivity().finishedSecondThreadIdlingResource();
         showAlertDialog(message, closeActivity);
     }
 
     @Override
     public void networkIssue(int code, boolean closeActivity) {
-        getAppActivity().finishedSecondThreadIdlingResource();
+//        getAppActivity().finishedSecondThreadIdlingResource();
         getAppActivity().analiseRetrofitFailureResponse(code, closeActivity);
     }
 
     @Override
     public void success(T t) {
-        getAppActivity().finishedSecondThreadIdlingResource();
+//        getAppActivity().finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 
     @Override
     public void success(ArrayList<T> t) {
-        getAppActivity().finishedSecondThreadIdlingResource();
+//        getAppActivity().finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 

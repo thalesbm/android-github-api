@@ -84,7 +84,7 @@ public class RepositoryDetailsActivity extends BaseActivity implements
      * @param addToBackStack Boolean
      */
     private void replaceFragment(Fragment fragment, boolean addToBackStack, Bundle bundle) {
-        initializedSecondThreadIdlingResource();
+//        initializedSecondThreadIdlingResource();
 
         if (bundle != null) {
             fragment.setArguments(bundle);

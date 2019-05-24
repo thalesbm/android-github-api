@@ -53,7 +53,7 @@ public class ProfileActivity extends BaseActivity<RepositoriesResponse> implemen
 
         this.init();
 
-        initializedSecondThreadIdlingResource();
+//        initializedSecondThreadIdlingResource();
         ProfilePresenter presenter = new ProfilePresenter(this, new ProfileRepository());
         presenter.searchPublicRepositoriesInServer(mProfile.getLogin());
         presenter.updateScreen(mProfile);

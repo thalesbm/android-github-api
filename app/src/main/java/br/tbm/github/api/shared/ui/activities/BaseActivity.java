@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import br.tbm.github.api.R;
 import br.tbm.github.api.shared.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.shared.ui.BaseViewCallbacks;
-import br.tbm.github.api.shared.utils.SimpleIdlingResource;
 
 import static br.tbm.github.api.shared.Constants.HTTP_FORBIDDEN;
 import static br.tbm.github.api.shared.Constants.HTTP_NOT_FOUND;
@@ -37,9 +36,9 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements
     protected abstract void init();
 
     private ProgressDialog progressDialog;
-
-    @Nullable
-    protected SimpleIdlingResource mIdlingResource;
+//
+//    @Nullable
+//    protected SimpleIdlingResource mIdlingResource;
 
     /**
      * Adiciona a toolbar no objeto setSupportActionBar
@@ -219,38 +218,38 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    // ###################
-    // METODOS PARA TESTES
-    // ###################
-
-    @VisibleForTesting
-    @NonNull
-    public IdlingResource getIdlingResource() {
-        if (mIdlingResource == null) {
-            mIdlingResource = new SimpleIdlingResource();
-        }
-        return mIdlingResource;
-    }
-
-    /**
-     * altera o valor do idleState para false, isso indica que o o applicativo iniciou uma
-     * uma segunda thread
-     */
-    protected void initializedSecondThreadIdlingResource() {
-        if (mIdlingResource != null) {
-            mIdlingResource.setIdleState(false);
-        }
-    }
-
-    /**
-     * altera o valor do idleState para true, isso indica que o o applicativo terminou de
-     * executar uma segunda thread
-     */
-    public void finishedSecondThreadIdlingResource() {
-        if (mIdlingResource != null) {
-            mIdlingResource.setIdleState(true);
-        }
-    }
+//    // ###################
+//    // METODOS PARA TESTES
+//    // ###################
+//
+//    @VisibleForTesting
+//    @NonNull
+//    public IdlingResource getIdlingResource() {
+//        if (mIdlingResource == null) {
+//            mIdlingResource = new SimpleIdlingResource();
+//        }
+//        return mIdlingResource;
+//    }
+//
+//    /**
+//     * altera o valor do idleState para false, isso indica que o o applicativo iniciou uma
+//     * uma segunda thread
+//     */
+//    protected void initializedSecondThreadIdlingResource() {
+//        if (mIdlingResource != null) {
+//            mIdlingResource.setIdleState(false);
+//        }
+//    }
+//
+//    /**
+//     * altera o valor do idleState para true, isso indica que o o applicativo terminou de
+//     * executar uma segunda thread
+//     */
+//    public void finishedSecondThreadIdlingResource() {
+//        if (mIdlingResource != null) {
+//            mIdlingResource.setIdleState(true);
+//        }
+//    }
 
     // ######################
     // CALLBACK DO PRESENTER
@@ -258,31 +257,31 @@ public abstract class BaseActivity<T> extends AppCompatActivity implements
 
     @Override
     public void displayAlertDialog(int id, boolean closeActivity) {
-        this.finishedSecondThreadIdlingResource();
+//        this.finishedSecondThreadIdlingResource();
         showAlertDialog(getString(id), closeActivity);
     }
 
     @Override
     public void displayAlertDialog(String message, boolean closeActivity) {
-        this.finishedSecondThreadIdlingResource();
+//        this.finishedSecondThreadIdlingResource();
         showAlertDialog(message, closeActivity);
     }
 
     @Override
     public void networkIssue(int code, boolean closeActivity) {
-        this.finishedSecondThreadIdlingResource();
+//        this.finishedSecondThreadIdlingResource();
         analiseRetrofitFailureResponse(code, closeActivity);
     }
 
     @Override
     public void success(T t) {
-        this.finishedSecondThreadIdlingResource();
+//        this.finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 
     @Override
     public void success(ArrayList<T> t) {
-        this.finishedSecondThreadIdlingResource();
+//        this.finishedSecondThreadIdlingResource();
         dismissProgressDialog();
     }
 

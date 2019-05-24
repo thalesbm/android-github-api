@@ -102,7 +102,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
      * Metodo responsavel por listar todos os perfils ja pesquisados na base de dados
      */
     private void listProfilesFromDatabase() {
-        initializedSecondThreadIdlingResource();
+//        initializedSecondThreadIdlingResource();
         mPresenter.getProfilesInDatabase();
     }
 
@@ -128,7 +128,7 @@ public class ListProfilesActivity extends BaseActivity<List<Profile>> implements
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete: {
-                    initializedSecondThreadIdlingResource();
+//                    initializedSecondThreadIdlingResource();
                     mPresenter.removeItems(mProfiles);
                     mode.finish();
                     break;
