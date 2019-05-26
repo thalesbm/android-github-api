@@ -3,74 +3,63 @@ package br.tbm.github.api.app.commitDetails.repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.util.ArrayList;
-
-import br.tbm.github.api.app.branch.repository.BranchRepository;
-import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
+import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
-import br.tbm.github.api.shared.network.RestRepository;
 import br.tbm.github.api.shared.repository.BaseTestsRepository;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyObject;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommitDetailsRepositoryTest extends BaseTestsRepository {
 
     @Mock
-    CommitDetailsMVP.Model mModel;
+    CommitDetailsMVP.View mView;
 
     @Mock
-    CommitDetailsMVP.Presenter mPresenter;
+    CommitDetailsMVP.Model mModel;
 
-    private CommitDetailsRepository mRepository;
-
-    @Captor
-    private ArgumentCaptor<Callback<CommitsResponse>> callbackArgumentCaptor;
+    private CommitDetailsMVP.Presenter mPresenter;
 
     @Before
     public void setUp() {
         super.setUp();
-
-        mRepository = new CommitDetailsRepository();
-        mRepository.setCallback(mPresenter, retrofit);
+        mPresenter = new CommitsDetailsPresenter(mView, mModel);
     }
 
     @Test
-    public void searchCommitDetailsInServer() {
+    public void test1() {
+        CommitDetailsMVP.Presenter presenter = mock(CommitsDetailsPresenter.class);
+        doAnswer(invocation -> {
+            CommitDetailsMVP.Presenter callback = invocation.getArgument(3);
+            callback.success(any(CommitsResponse.class));
+            return null;
 
-        callbackArgumentCaptor.capture();
+        }).when(mModel).searchCommitDetailsInServer(username, repository, sha, mPresenter);
 
-        RestRepository mockedApiInterface = Mockito.mock(RestRepository.class);
-        Call<CommitsResponse> mockedCall = Mockito.mock(Call.class);
+        mPresenter.searchCommitDetailsInServer(username, repository, sha);
 
-        Mockito.when(mockedApiInterface.listCommits(anyString(), anyString(), anyString())).thenReturn(mockedCall);
+        verify(presenter, atLeastOnce()).success(mock(CommitsResponse.class));
+    }
 
-        Mockito.doAnswer(new Answer() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                Callback<CommitsResponse> callback = invocation.getArgument(5);//, Callback.class);
+    @Test
+    public void searchCommitDetailsInServer_Failure_Test() {
+        doAnswer(invocation -> {
+            CommitDetailsMVP.Presenter callback = invocation.getArgument(3);
+            callback.networkIssue(400);
+            return null;
 
-                callback.onResponse(mockedCall, Response.success(new CommitsResponse()));
-                // or callback.onResponse(mockedCall, Response.error(404. ...);
-                // or callback.onFailure(mockedCall, new IOException());
+        }).when(mModel).searchCommitDetailsInServer(username, repository, sha, mPresenter);
 
-                return null;
-            }
-        }).when(mockedCall).enqueue(any(Callback.class));
+        mPresenter.searchCommitDetailsInServer(username, repository, sha);
+
+        verify(mView, atLeastOnce()).networkIssue(400, true);
     }
 }

@@ -6,6 +6,7 @@ import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 import br.tbm.github.api.shared.utils.DateUtils;
+import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 03/09/2018
@@ -20,7 +21,6 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
         super();
         this.mView = view;
         this.mModel = model;
-        this.mModel.setCallback(this, GithubApplication.getRetrofitInstance());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
     @Override
     public void searchCommitDetailsInServer(String username, String repositoryName, String sha) {
         mView.updateProgressDialog(R.string.loading);
-        mModel.searchCommitDetailsInServer(username, repositoryName, sha);
+        mModel.searchCommitDetailsInServer(username, repositoryName, sha, this);
     }
 
     // ######################

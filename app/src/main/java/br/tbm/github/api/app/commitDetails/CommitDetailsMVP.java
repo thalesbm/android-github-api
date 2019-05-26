@@ -2,6 +2,7 @@ package br.tbm.github.api.app.commitDetails;
 
 import java.util.List;
 
+import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.shared.presenter.BasePresenterCallbacks;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
@@ -27,7 +28,6 @@ public interface CommitDetailsMVP {
     }
 
     interface Model {
-        void searchCommitDetailsInServer(String username, String repositoryName, String sha);
-        void setCallback(CommitDetailsMVP.Presenter presenter, Retrofit retrofit);
+        void searchCommitDetailsInServer(String username, String repositoryName, String sha, CommitDetailsMVP.Presenter commitsDetailsPresenter);
     }
 }

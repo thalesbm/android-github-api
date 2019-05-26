@@ -18,6 +18,7 @@ import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 import br.tbm.github.api.app.commitDetails.repository.CommitDetailsRepository;
 import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
+import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.ui.activities.BaseActivity;
 import br.tbm.github.api.shared.ui.components.CircleTransform;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
@@ -55,7 +56,7 @@ public class CommitsDetailsActivity extends BaseActivity<CommitsResponse> implem
 
         ButterKnife.bind(this);
 
-        CommitsDetailsPresenter presenter = new CommitsDetailsPresenter(this, new CommitDetailsRepository());
+        CommitsDetailsPresenter presenter = new CommitsDetailsPresenter(this, new CommitDetailsRepository(GithubApplication.getRetrofitInstance()));
 
         String repositoryName = getIntent().getExtras().getString(Constants.INTENT_REPOSITORY);
         String userName = getIntent().getExtras().getString(Constants.INTENT_USERNAME);

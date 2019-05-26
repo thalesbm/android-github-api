@@ -10,6 +10,7 @@ import br.tbm.github.api.R;
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 
 import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -32,7 +33,7 @@ public class CommitsDetailsPresenterTest {
     public void searchCommitDetailsInServer_Test() {
         mPresenter.searchCommitDetailsInServer("thalesbm92", "android-github-api", "sha-256");
         verify(mView, atLeastOnce()).updateProgressDialog(R.string.loading);
-        verify(mModel, atLeastOnce()).searchCommitDetailsInServer("thalesbm92", "android-github-api", "sha-256");
+        verify(mModel, atLeastOnce()).searchCommitDetailsInServer("thalesbm92", "android-github-api", "sha-256", mPresenter);
     }
 
     @Test
