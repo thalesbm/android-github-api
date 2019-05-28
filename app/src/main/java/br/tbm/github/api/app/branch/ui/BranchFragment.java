@@ -18,6 +18,7 @@ import br.tbm.github.api.app.branch.BranchMVP;
 import br.tbm.github.api.app.branch.presenter.BranchPresenter;
 import br.tbm.github.api.app.branch.repository.BranchRepository;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.ui.fragments.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,7 +53,7 @@ public class BranchFragment extends BaseFragment<BranchesTagsResponse> implement
 
         this.init();
 
-        BranchPresenter presenter = new BranchPresenter(this, new BranchRepository());
+        BranchPresenter presenter = new BranchPresenter(this, new BranchRepository(GithubApplication.getRetrofitInstance()));
         presenter.searchBranchesInServer(userName, repositoryName);
     }
 

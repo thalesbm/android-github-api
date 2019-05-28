@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.BranchMVP;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
-import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
@@ -21,7 +20,6 @@ public class BranchPresenter extends BasePresenter<BranchesTagsResponse> impleme
         super();
         this.mView = view;
         this.mModel = model;
-        this.mModel.setCallback(this, GithubApplication.getRetrofitInstance());
     }
 
     @Override
@@ -32,7 +30,7 @@ public class BranchPresenter extends BasePresenter<BranchesTagsResponse> impleme
     @Override
     public void searchBranchesInServer(String profileName, String repositoryName) {
         mView.updateProgressDialog(R.string.loading);
-        mModel.searchBranchesInServer(profileName, repositoryName);
+        mModel.searchBranchesInServer(profileName, repositoryName, this);
     }
 
     // ######################

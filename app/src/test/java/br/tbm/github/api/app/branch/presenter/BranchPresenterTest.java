@@ -35,7 +35,7 @@ public class BranchPresenterTest {
     public void searchBranchesInServer_Test() {
         mPresenter.searchBranchesInServer("thalesbm92", "android-github-api");
         verify(mView, atLeastOnce()).updateProgressDialog(R.string.loading);
-        verify(mModel, atLeastOnce()).searchBranchesInServer("thalesbm92", "android-github-api");
+        verify(mModel, atLeastOnce()).searchBranchesInServer("thalesbm92", "android-github-api", mPresenter);
     }
 
     @Test
