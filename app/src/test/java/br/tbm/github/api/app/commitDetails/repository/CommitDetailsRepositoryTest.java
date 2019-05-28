@@ -8,14 +8,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
-import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.shared.GithubApiUtils;
 import br.tbm.github.api.shared.repository.BaseTestsRepository;
 
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
