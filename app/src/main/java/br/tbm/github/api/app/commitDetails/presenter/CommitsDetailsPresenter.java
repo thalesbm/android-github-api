@@ -47,7 +47,7 @@ public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> impl
             mView.setCommitDescription(response.getCommitDetailsResponse().getMessage());
             mView.setCommitterDate(DateUtils.formatDate(response.getCommitDetailsResponse().getCommitterResponse().getDate()));
 
-            if (!response.getOwnerResponse().getAvatarUrl().equals("")) {
+            if (response.getOwnerResponse().getAvatarUrl() != null && !response.getOwnerResponse().getAvatarUrl().equals("")) {
                 mView.downloadProfileImage(response.getOwnerResponse().getAvatarUrl());
             }
 
