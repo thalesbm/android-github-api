@@ -16,6 +16,7 @@ import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitterResponse;
 import br.tbm.github.api.app.profile.repository.entity.OwnerResponse;
+import br.tbm.github.api.shared.GithubApiUtils;
 import br.tbm.github.api.shared.utils.DateUtils;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -47,7 +48,7 @@ public class CommitsDetailsPresenterTest {
 
     @Test
     public void success_Input_Test() {
-        CommitsResponse response = this.getCommitsResponse();
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         mPresenter.success(response);
         verify(mView, atLeastOnce()).setCommitterName(response.getOwnerResponse().getLogin());
         verify(mView, atLeastOnce()).setCommitDescription(response.getCommitDetailsResponse().getMessage());
@@ -56,14 +57,14 @@ public class CommitsDetailsPresenterTest {
 
     @Test
     public void success_EmptyList_Test() {
-        CommitsResponse response = this.getCommitsResponse();
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         mPresenter.success(response);
         verify(mView, atLeastOnce()).listCommitsEmpty();
     }
 
     @Test
     public void success_setAvatar_Test() {
-        CommitsResponse response = this.getCommitsResponse();
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         response.getOwnerResponse().setAvatarUrl("url");
         mPresenter.success(response);
         verify(mView, atLeastOnce()).downloadProfileImage(response.getOwnerResponse().getAvatarUrl());
@@ -71,7 +72,7 @@ public class CommitsDetailsPresenterTest {
 
     @Test
     public void success_Test() {
-        CommitsResponse response = this.getCommitsResponse();
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         response.getCommitFilesResponse().add(new CommitFilesResponse());
         mPresenter.success(response);
         verify(mView, atLeastOnce()).listCommits(response.getCommitFilesResponse());
@@ -79,7 +80,7 @@ public class CommitsDetailsPresenterTest {
 
     @Test
     public void success_NullObject_Test() {
-        CommitsResponse response = this.getCommitsResponse();
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         response.setCommitFilesResponse(null);
         mPresenter.success(response);
         verify(mView, atLeastOnce()).displayAlertDialog(R.string.generic_connection_issue, true);
@@ -97,24 +98,5 @@ public class CommitsDetailsPresenterTest {
         verify(mView, atLeastOnce()).displayAlertDialog(500, true);
     }
 
-    private CommitsResponse getCommitsResponse() {
-        CommitsResponse response = new CommitsResponse();
 
-        List<CommitFilesResponse> files = new ArrayList<>();
-
-        OwnerResponse owner = new OwnerResponse();
-        owner.setLogin("Thales Marega");
-
-        CommitterResponse committer = new CommitterResponse();
-        committer.setDate("2018-09-20T09:45:00"); // yyyy-MM-dd'T'HH:mm:ss
-
-        CommitDetailsResponse details = new CommitDetailsResponse();
-        details.setMessage("ADDED TESTS");
-        details.setCommitterResponse(committer);
-
-        response.setCommitDetailsResponse(details);
-        response.setOwnerResponse(owner);
-        response.setCommitFilesResponse(files);
-        return response;
-    }
 }

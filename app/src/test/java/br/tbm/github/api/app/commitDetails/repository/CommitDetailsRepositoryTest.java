@@ -8,10 +8,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
+import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
+import br.tbm.github.api.shared.GithubApiUtils;
 import br.tbm.github.api.shared.repository.BaseTestsRepository;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -35,18 +36,18 @@ public class CommitDetailsRepositoryTest extends BaseTestsRepository {
     }
 
     @Test
-    public void test1() {
-        CommitDetailsMVP.Presenter presenter = mock(CommitsDetailsPresenter.class);
+    public void searchCommitDetailsInServer_Success_Test() {
+        CommitsResponse response = GithubApiUtils.getCommitsResponse();
         doAnswer(invocation -> {
             CommitDetailsMVP.Presenter callback = invocation.getArgument(3);
-            callback.success(any(CommitsResponse.class));
+            callback.success(response);
             return null;
 
         }).when(mModel).searchCommitDetailsInServer(username, repository, sha, mPresenter);
 
         mPresenter.searchCommitDetailsInServer(username, repository, sha);
 
-        verify(presenter, atLeastOnce()).success(mock(CommitsResponse.class));
+        verify(mView, atLeastOnce()).setCommitterName(response.getOwnerResponse().getLogin());
     }
 
     @Test
