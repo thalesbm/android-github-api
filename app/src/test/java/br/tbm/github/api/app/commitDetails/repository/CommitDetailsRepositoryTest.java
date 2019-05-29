@@ -49,7 +49,7 @@ public class CommitDetailsRepositoryTest extends BaseTestsRepository {
     }
 
     @Test
-    public void searchCommitDetailsInServer_Failure_Test() {
+    public void searchCommitDetailsInServer_networkIssue_Test() {
         doAnswer(invocation -> {
             CommitDetailsMVP.Presenter callback = invocation.getArgument(3);
             callback.networkIssue(400);
@@ -60,5 +60,19 @@ public class CommitDetailsRepositoryTest extends BaseTestsRepository {
         mPresenter.searchCommitDetailsInServer(username, repository, sha);
 
         verify(mView, atLeastOnce()).networkIssue(400, true);
+    }
+
+    @Test
+    public void searchCommitDetailsInServer_displayAlertDialog_Test() {
+        doAnswer(invocation -> {
+            CommitDetailsMVP.Presenter callback = invocation.getArgument(3);
+            callback.displayAlertDialog(400);
+            return null;
+
+        }).when(mModel).searchCommitDetailsInServer(username, repository, sha, mPresenter);
+
+        mPresenter.searchCommitDetailsInServer(username, repository, sha);
+
+        verify(mView, atLeastOnce()).displayAlertDialog(400, true);
     }
 }
