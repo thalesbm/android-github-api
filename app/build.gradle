@@ -85,6 +85,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation 'com.squareup.retrofit2:retrofit-mock:2.5.0'
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
 
     // PICASSO
     implementation "com.squareup.picasso:picasso:$picassoVersion"
