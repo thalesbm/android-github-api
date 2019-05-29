@@ -9,7 +9,8 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "br.tbm.github.api.MockRunner"
         multiDexEnabled true
     }
 
@@ -92,16 +93,14 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterKnifeVersion-rc1"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion-rc1"
 
-    // TEST
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
-
     // TEST IMPLEMENTATION
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
-    testImplementation "com.android.support.test.espresso:espresso-idling-resource:$androidTestVersion"
     testImplementation "org.mockito:mockito-core:$mockito"
 
-    androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.0.0'
+    // TEST SQUAREUP
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.14.2'
+    androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.5.0'
     androidTestImplementation 'com.squareup.okhttp:mockwebserver:2.7.0'
     androidTestImplementation 'com.squareup.spoon:spoon-client:1.2.0'
 
@@ -109,15 +108,9 @@ dependencies {
     androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"
     androidTestImplementation "com.android.support.test:runner:$androidTestVersion"
     androidTestImplementation "com.android.support.test:rules:$androidTestVersion"
-    androidTestImplementation("com.android.support.test.espresso:espresso-intents:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
 
     implementation "com.google.guava:guava:$guavaVersion"
 }
