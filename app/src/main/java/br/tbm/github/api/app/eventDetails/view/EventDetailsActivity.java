@@ -7,13 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import br.tbm.github.api.R;
+import br.tbm.github.api.app.event.repository.entity.EventPayloadResponse;
+import br.tbm.github.api.app.eventDetails.presenter.EventDetailsPresenter;
 import br.tbm.github.api.app.eventDetails.presenter.IEventDetailsPresenter;
 import br.tbm.github.api.app.eventDetails.view.adapter.EventsDetailsAdapter;
 import br.tbm.github.api.shared.Constants;
-import br.tbm.github.api.R;
-import br.tbm.github.api.app.eventDetails.presenter.EventDetailsPresenter;
 import br.tbm.github.api.shared.ui.activities.BaseActivity;
-import br.tbm.github.api.app.event.repository.entity.EventPayloadResponse;
 import br.tbm.github.api.shared.utils.RedirectUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

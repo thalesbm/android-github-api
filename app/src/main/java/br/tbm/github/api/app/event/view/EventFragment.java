@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.app.event.view.adapter.EventsAdapter;
-import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.event.presenter.EventPresenter;
 import br.tbm.github.api.app.event.repository.EventRepository;
 import br.tbm.github.api.app.event.repository.entity.EventPayloadResponse;
 import br.tbm.github.api.app.event.repository.entity.EventsResponse;
+import br.tbm.github.api.app.event.view.adapter.EventsAdapter;
+import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.shared.ui.fragments.BaseFragment;
 import br.tbm.github.api.shared.utils.RedirectUtils;
 import butterknife.BindView;

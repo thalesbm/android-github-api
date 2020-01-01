@@ -10,9 +10,9 @@ import android.support.v7.app.AlertDialog;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.shared.ui.adapters.AdaptersCallbacks;
-import br.tbm.github.api.shared.ui.activities.BaseActivity;
 import br.tbm.github.api.shared.ui.BaseViewCallbacks;
+import br.tbm.github.api.shared.ui.activities.BaseActivity;
+import br.tbm.github.api.shared.ui.adapters.AdaptersCallbacks;
 import butterknife.Unbinder;
 
 /**

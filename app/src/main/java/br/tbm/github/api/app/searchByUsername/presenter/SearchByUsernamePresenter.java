@@ -1,10 +1,10 @@
 package br.tbm.github.api.app.searchByUsername.presenter;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.searchByUsername.repository.ISearchByUsernameRepository;
 import br.tbm.github.api.app.searchByUsername.view.ISearchByUsernameView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
-import br.tbm.github.api.app.profile.repository.model.Profile;
 
 /**
  * Created by thalesbertolini on 03/09/2018

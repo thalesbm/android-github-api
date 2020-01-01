@@ -3,13 +3,13 @@ package br.tbm.github.api.app.searchByUsername.repository;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import br.tbm.github.api.app.searchByUsername.presenter.ISearchByUsernamePresenter;
-import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.profile.repository.model.Profile;
-import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
-import br.tbm.github.api.shared.network.RestUser;
 import br.tbm.github.api.app.profile.repository.tasks.SaveGithubUserTask;
+import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
+import br.tbm.github.api.app.searchByUsername.presenter.ISearchByUsernamePresenter;
+import br.tbm.github.api.shared.GithubApplication;
+import br.tbm.github.api.shared.network.RestUser;
 import br.tbm.github.api.shared.utils.AppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;

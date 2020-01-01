@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.repository.IBranchRepository;
-import br.tbm.github.api.app.branch.view.IBranchView;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.app.branch.view.IBranchView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**

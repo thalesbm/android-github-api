@@ -2,8 +2,8 @@ package br.tbm.github.api.shared.network;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
+import br.tbm.github.api.app.profile.repository.model.Profile;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

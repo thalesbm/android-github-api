@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 import br.tbm.github.api.app.tag.presenter.ITagPresenter;
 import br.tbm.github.api.shared.GithubApplication;
-import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 import br.tbm.github.api.shared.network.RestRepository;
 import retrofit2.Call;
 import retrofit2.Callback;

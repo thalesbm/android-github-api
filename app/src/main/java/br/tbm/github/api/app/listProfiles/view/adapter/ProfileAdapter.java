@@ -17,9 +17,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.shared.ui.adapters.AdaptersCallbacks;
 import br.tbm.github.api.shared.ui.components.CircleTransform;
-import br.tbm.github.api.app.profile.repository.model.Profile;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

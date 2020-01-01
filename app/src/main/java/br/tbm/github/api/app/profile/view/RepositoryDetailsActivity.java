@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
-import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.view.BranchFragment;
 import br.tbm.github.api.app.event.view.EventFragment;
 import br.tbm.github.api.app.tag.view.TagFragment;
+import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.shared.ui.activities.BaseActivity;
 
 /**

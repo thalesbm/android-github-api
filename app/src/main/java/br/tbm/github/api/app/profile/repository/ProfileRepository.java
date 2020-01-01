@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
 import br.tbm.github.api.app.profile.presenter.IProfilePresenter;
-import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
+import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.network.RestUser;
 import retrofit2.Call;
 import retrofit2.Callback;

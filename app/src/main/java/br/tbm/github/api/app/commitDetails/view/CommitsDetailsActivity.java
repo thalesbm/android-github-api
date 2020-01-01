@@ -12,16 +12,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import br.tbm.github.api.R;
+import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
+import br.tbm.github.api.app.commitDetails.repository.CommitDetailsRepository;
+import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
+import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.app.commitDetails.view.adapter.CommitDetailsAdapter;
 import br.tbm.github.api.shared.Constants;
-import br.tbm.github.api.R;
-import br.tbm.github.api.app.commitDetails.repository.CommitDetailsRepository;
-import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
-import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.shared.ui.activities.BaseActivity;
 import br.tbm.github.api.shared.ui.components.CircleTransform;
-import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

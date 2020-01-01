@@ -7,8 +7,8 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.tbm.github.api.shared.repository.dao.DatabaseHelper;
 import br.tbm.github.api.app.profile.repository.model.Profile;
+import br.tbm.github.api.shared.repository.dao.DatabaseHelper;
 
 /**
  * Created by thalesbertolini on 23/08/2018

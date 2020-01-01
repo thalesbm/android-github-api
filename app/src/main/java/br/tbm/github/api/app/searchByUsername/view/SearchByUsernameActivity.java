@@ -8,9 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.searchByUsername.presenter.SearchByUsernamePresenter;
 import br.tbm.github.api.app.searchByUsername.repository.SearchByUsernameRepository;
-import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.shared.ui.activities.BaseActivity;
 import br.tbm.github.api.shared.utils.RedirectUtils;
 import butterknife.BindView;

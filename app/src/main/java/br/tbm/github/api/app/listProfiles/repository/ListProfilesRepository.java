@@ -5,9 +5,9 @@ import java.util.List;
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.listProfiles.presenter.IListProfilesPresenter;
 import br.tbm.github.api.app.profile.repository.model.Profile;
-import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
 import br.tbm.github.api.app.profile.repository.tasks.ListGithubUsersTask;
 import br.tbm.github.api.app.profile.repository.tasks.RemoveUsersTask;
+import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
 
 /**
  * Created by thalesbertolini on 15/09/2018

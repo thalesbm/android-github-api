@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.R;
+import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.app.branch.view.adapter.BranchesTagsAdapter;
 import br.tbm.github.api.app.tag.presenter.TagPresenter;
 import br.tbm.github.api.app.tag.repository.TagRepository;
-import br.tbm.github.api.app.branch.view.adapter.BranchesTagsAdapter;
-import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.shared.Constants;
 import br.tbm.github.api.shared.ui.fragments.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;

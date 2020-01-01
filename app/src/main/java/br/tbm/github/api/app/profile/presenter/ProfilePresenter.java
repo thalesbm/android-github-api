@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.profile.repository.IProfileRepository;
-import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
+import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.profile.view.IProfileView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
