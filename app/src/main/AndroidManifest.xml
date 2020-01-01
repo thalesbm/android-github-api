@@ -22,37 +22,37 @@
         </activity>
 
         <activity
-            android:name=".app.profile.ui.ProfileActivity"
+            android:name=".app.profile.view.ProfileActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.listProfiles.ui.ListProfilesActivity"
+            android:name=".app.listProfiles.view.ListProfilesActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.searchByUsername.ui.SearchByUsernameActivity"
+            android:name=".app.searchByUsername.view.SearchByUsernameActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.profile.ui.RepositoryDetailsActivity"
+            android:name=".app.profile.view.RepositoryDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.commitDetails.ui.CommitsDetailsActivity"
+            android:name=".app.commitDetails.view.CommitsDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.eventDetails.ui.EventDetailsActivity"
+            android:name=".app.eventDetails.view.EventDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".app.githubRateLimit.ui.GithubRateLimitActivity"
+            android:name=".app.githubRateLimit.view.GithubRateLimitActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 

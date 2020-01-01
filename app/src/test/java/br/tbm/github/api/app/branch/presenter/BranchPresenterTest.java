@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.branch.BranchMVP;
+import br.tbm.github.api.app.branch.view.IBranchView;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -19,10 +19,10 @@ import static org.mockito.Mockito.verify;
 public class BranchPresenterTest {
 
     @Mock
-    BranchMVP.View mView;
+    IBranchView.View mView;
 
     @Mock
-    BranchMVP.Model mModel;
+    IBranchView.Model mModel;
 
     private BranchPresenter mPresenter;
 

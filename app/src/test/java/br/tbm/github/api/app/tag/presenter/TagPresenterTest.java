@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
-import br.tbm.github.api.app.tag.TagMVP;
 
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;

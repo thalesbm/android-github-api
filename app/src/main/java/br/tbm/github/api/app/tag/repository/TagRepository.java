@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.app.tag.presenter.ITagPresenter;
 import br.tbm.github.api.shared.GithubApplication;
-import br.tbm.github.api.app.tag.TagMVP;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 import br.tbm.github.api.shared.network.RestRepository;
 import retrofit2.Call;
@@ -15,9 +15,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class TagRepository implements TagMVP.Model {
+public class TagRepository implements ITagRepository {
 
-    private TagMVP.Presenter mPresenter;
+    private ITagPresenter mPresenter;
 
     @Override
     public void searchTagsInServer(String profileName, String repositoryName) {
@@ -46,7 +46,7 @@ public class TagRepository implements TagMVP.Model {
      * @param presenter TagMVP.Presenter
      */
     @Override
-    public void setCallback(TagMVP.Presenter presenter) {
+    public void setCallback(ITagPresenter presenter) {
         this.mPresenter = presenter;
     }
 }

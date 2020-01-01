@@ -3,20 +3,21 @@ package br.tbm.github.api.app.tag.presenter;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.tag.TagMVP;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
+import br.tbm.github.api.app.tag.repository.ITagRepository;
+import br.tbm.github.api.app.tag.view.ITagView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
  **/
 public class TagPresenter extends BasePresenter<BranchesTagsResponse>
-        implements TagMVP.Presenter {
+        implements ITagPresenter {
 
-    private TagMVP.View mView;
-    private TagMVP.Model mModel;
+    private ITagView mView;
+    private ITagRepository mModel;
 
-    public TagPresenter(TagMVP.View view, TagMVP.Model model) {
+    public TagPresenter(ITagView view, ITagRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

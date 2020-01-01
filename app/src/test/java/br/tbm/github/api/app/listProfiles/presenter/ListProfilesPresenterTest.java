@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.listProfiles.ListProfilesMVP;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 
 import static org.junit.Assert.*;

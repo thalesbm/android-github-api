@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.githubRateLimit.GithubRateLimitMVP;
 import br.tbm.github.api.app.githubRateLimit.repository.entity.RateLimitItemsResponse;
 import br.tbm.github.api.app.githubRateLimit.repository.entity.RateLimitResponse;
 import br.tbm.github.api.app.githubRateLimit.repository.entity.ResourcesResponse;

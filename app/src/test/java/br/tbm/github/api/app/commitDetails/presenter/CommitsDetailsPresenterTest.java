@@ -6,16 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
-import br.tbm.github.api.app.commitDetails.repository.entity.CommitDetailsResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitFilesResponse;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
-import br.tbm.github.api.app.commitDetails.repository.entity.CommitterResponse;
-import br.tbm.github.api.app.profile.repository.entity.OwnerResponse;
 import br.tbm.github.api.shared.GithubApiUtils;
 import br.tbm.github.api.shared.utils.DateUtils;
 

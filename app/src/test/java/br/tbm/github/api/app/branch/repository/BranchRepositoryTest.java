@@ -8,11 +8,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.app.branch.BranchMVP;
+import br.tbm.github.api.app.branch.view.IBranchView;
 import br.tbm.github.api.app.branch.presenter.BranchPresenter;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
-import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
-import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.shared.repository.BaseTestsRepository;
 
 import static org.mockito.Mockito.atLeastOnce;
@@ -23,12 +21,12 @@ import static org.mockito.Mockito.verify;
 public class BranchRepositoryTest extends BaseTestsRepository {
 
     @Mock
-    BranchMVP.View mView;
+    IBranchView.View mView;
 
     @Mock
-    BranchMVP.Model mModel;
+    IBranchView.Model mModel;
 
-    private BranchMVP.Presenter mPresenter;
+    private IBranchView.Presenter mPresenter;
 
     @Before
     public void setUp() {
@@ -40,7 +38,7 @@ public class BranchRepositoryTest extends BaseTestsRepository {
     public void searchBranchesInServer_sesuccess_Test() {
         ArrayList<BranchesTagsResponse> response = new ArrayList<BranchesTagsResponse>();
         doAnswer(invocation -> {
-            BranchMVP.Presenter callback = invocation.getArgument(2);
+            IBranchView.Presenter callback = invocation.getArgument(2);
             callback.success(response);
             return null;
 
@@ -54,7 +52,7 @@ public class BranchRepositoryTest extends BaseTestsRepository {
     @Test
     public void searchBranchesInServer_networkIssue_Test() {
         doAnswer(invocation -> {
-            BranchMVP.Presenter callback = invocation.getArgument(2);
+            IBranchView.Presenter callback = invocation.getArgument(2);
             callback.networkIssue(400);
             return null;
 
@@ -68,7 +66,7 @@ public class BranchRepositoryTest extends BaseTestsRepository {
     @Test
     public void searchBranchesInServer_displayAlertDialog_Test() {
         doAnswer(invocation -> {
-            BranchMVP.Presenter callback = invocation.getArgument(2);
+            IBranchView.Presenter callback = invocation.getArgument(2);
             callback.displayAlertDialog(400);
             return null;
 

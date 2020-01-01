@@ -4,8 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import br.tbm.github.api.app.branch.BranchMVP;
-import br.tbm.github.api.app.branch.presenter.BranchPresenter;
+import br.tbm.github.api.app.branch.presenter.IBranchPresenter;
 import br.tbm.github.api.app.branch.repository.entity.BranchesTagsResponse;
 import br.tbm.github.api.shared.network.RestRepository;
 import retrofit2.Call;
@@ -16,7 +15,7 @@ import retrofit2.Retrofit;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class BranchRepository implements BranchMVP.Model {
+public class BranchRepository implements IBranchRepository {
 
     private Retrofit mRetrofit;
 
@@ -25,7 +24,7 @@ public class BranchRepository implements BranchMVP.Model {
     }
 
     @Override
-    public void searchBranchesInServer(String profileName, String repositoryName, BranchMVP.Presenter callback) {
+    public void searchBranchesInServer(String profileName, String repositoryName, IBranchPresenter callback) {
         Call<ArrayList<BranchesTagsResponse>> responseCall = mRetrofit.create(RestRepository.class).listBranches(profileName, repositoryName);
         responseCall.enqueue(new Callback<ArrayList<BranchesTagsResponse>>() {
             @Override

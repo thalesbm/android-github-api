@@ -8,7 +8,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.concurrent.TimeUnit;
 
-import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
 import br.tbm.github.api.app.commitDetails.presenter.CommitsDetailsPresenter;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
 import br.tbm.github.api.shared.GithubApiUtils;
@@ -16,7 +15,6 @@ import br.tbm.github.api.shared.repository.BaseTestsRepository;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 

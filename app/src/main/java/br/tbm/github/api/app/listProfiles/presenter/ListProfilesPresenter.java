@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.listProfiles.ListProfilesMVP;
+import br.tbm.github.api.app.listProfiles.repository.IListProfilesRepository;
+import br.tbm.github.api.app.listProfiles.view.IListProfilesView;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
@@ -12,12 +13,12 @@ import br.tbm.github.api.shared.presenter.BasePresenter;
  * Created by thalesbertolini on 03/09/2018
  **/
 public class ListProfilesPresenter extends BasePresenter<List<Profile>> implements
-        ListProfilesMVP.Presenter {
+        IListProfilesPresenter {
 
-    private ListProfilesMVP.View mView;
-    private ListProfilesMVP.Model mModel;
+    private IListProfilesView mView;
+    private IListProfilesRepository mModel;
 
-    public ListProfilesPresenter(ListProfilesMVP.View view, ListProfilesMVP.Model model) {
+    public ListProfilesPresenter(IListProfilesView view, IListProfilesRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

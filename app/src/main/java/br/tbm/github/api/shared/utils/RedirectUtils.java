@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 
 import br.tbm.github.api.shared.Constants;
-import br.tbm.github.api.app.commitDetails.ui.CommitsDetailsActivity;
-import br.tbm.github.api.app.eventDetails.ui.EventDetailsActivity;
-import br.tbm.github.api.app.githubRateLimit.ui.GithubRateLimitActivity;
-import br.tbm.github.api.app.listProfiles.ui.ListProfilesActivity;
-import br.tbm.github.api.app.profile.ui.ProfileActivity;
-import br.tbm.github.api.app.profile.ui.RepositoryDetailsActivity;
-import br.tbm.github.api.app.searchByUsername.ui.SearchByUsernameActivity;
+import br.tbm.github.api.app.commitDetails.view.CommitsDetailsActivity;
+import br.tbm.github.api.app.eventDetails.view.EventDetailsActivity;
+import br.tbm.github.api.app.githubRateLimit.view.GithubRateLimitActivity;
+import br.tbm.github.api.app.listProfiles.view.ListProfilesActivity;
+import br.tbm.github.api.app.profile.view.ProfileActivity;
+import br.tbm.github.api.app.profile.view.RepositoryDetailsActivity;
+import br.tbm.github.api.app.searchByUsername.view.SearchByUsernameActivity;
 import br.tbm.github.api.app.event.repository.entity.EventPayloadResponse;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 

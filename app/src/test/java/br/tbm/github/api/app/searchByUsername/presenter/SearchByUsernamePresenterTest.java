@@ -8,7 +8,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import br.tbm.github.api.R;
 import br.tbm.github.api.app.profile.repository.model.Profile;
-import br.tbm.github.api.app.searchByUsername.SearchByUsernameMVP;
 
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;

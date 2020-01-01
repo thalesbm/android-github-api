@@ -3,9 +3,9 @@ package br.tbm.github.api.app.searchByUsername.repository;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import br.tbm.github.api.app.searchByUsername.presenter.ISearchByUsernamePresenter;
 import br.tbm.github.api.shared.GithubApplication;
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.searchByUsername.SearchByUsernameMVP;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
 import br.tbm.github.api.shared.network.RestUser;
@@ -19,10 +19,10 @@ import retrofit2.Response;
  * Created by thalesbertolini on 15/09/2018
  **/
 public class SearchByUsernameRepository implements
-        SearchByUsernameMVP.Model,
+        ISearchByUsernameRepository,
         TasksCallbacks.SaveGithubUserTaskCallback {
 
-    private SearchByUsernameMVP.Presenter mPresenter;
+    private ISearchByUsernamePresenter mPresenter;
 
     private Context mContext;
 
@@ -98,7 +98,7 @@ public class SearchByUsernameRepository implements
      * @param presenter SearchByUsernameMVP.Presenter
      */
     @Override
-    public void setCallback(SearchByUsernameMVP.Presenter presenter) {
+    public void setCallback(ISearchByUsernamePresenter presenter) {
         this.mPresenter = presenter;
     }
 }

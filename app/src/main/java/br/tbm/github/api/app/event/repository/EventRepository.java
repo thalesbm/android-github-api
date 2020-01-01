@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.app.event.presenter.IEventPresenter;
 import br.tbm.github.api.shared.GithubApplication;
-import br.tbm.github.api.app.event.EventMVP;
 import br.tbm.github.api.app.event.repository.entity.EventsResponse;
 import br.tbm.github.api.shared.network.RestRepository;
 import retrofit2.Call;
@@ -15,9 +15,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class EventRepository implements EventMVP.Model {
+public class EventRepository implements IEventRepository {
 
-    private EventMVP.Presenter mPresenter;
+    private IEventPresenter mPresenter;
 
     @Override
     public void searchEventsInServer(String profileName, String repositoryName) {
@@ -46,7 +46,7 @@ public class EventRepository implements EventMVP.Model {
      * @param presenter EventMVP.Presenter
      */
     @Override
-    public void setCallback(EventMVP.Presenter presenter) {
+    public void setCallback(IEventPresenter presenter) {
         this.mPresenter = presenter;
     }
 }

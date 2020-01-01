@@ -2,8 +2,8 @@ package br.tbm.github.api.app.githubRateLimit.repository;
 
 import android.support.annotation.NonNull;
 
+import br.tbm.github.api.app.githubRateLimit.presenter.IGithubRateLimitPresenter;
 import br.tbm.github.api.shared.GithubApplication;
-import br.tbm.github.api.app.githubRateLimit.GithubRateLimitMVP;
 import br.tbm.github.api.app.githubRateLimit.repository.entity.ResourcesResponse;
 import br.tbm.github.api.shared.network.RestGithub;
 import retrofit2.Call;
@@ -13,9 +13,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class GithubRateLimitRepository implements GithubRateLimitMVP.Model {
+public class GithubRateLimitRepository implements IGithubRateLimitRepository {
 
-    private GithubRateLimitMVP.Presenter mPresenter;
+    private IGithubRateLimitPresenter mPresenter;
 
     @Override
     public void searchRateLimitInServer() {
@@ -44,7 +44,7 @@ public class GithubRateLimitRepository implements GithubRateLimitMVP.Model {
      * @param presenter GithubRateLimitMVP.Presenter
      */
     @Override
-    public void setCallback(GithubRateLimitMVP.Presenter presenter) {
+    public void setCallback(IGithubRateLimitPresenter presenter) {
         this.mPresenter = presenter;
     }
 }

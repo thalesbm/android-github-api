@@ -1,20 +1,21 @@
 package br.tbm.github.api.app.githubRateLimit.presenter;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.githubRateLimit.GithubRateLimitMVP;
+import br.tbm.github.api.app.githubRateLimit.repository.IGithubRateLimitRepository;
 import br.tbm.github.api.app.githubRateLimit.repository.entity.ResourcesResponse;
+import br.tbm.github.api.app.githubRateLimit.view.IGithubRateLimitView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 04/09/2018
  **/
 public class GithubRateLimitPresenter extends BasePresenter<ResourcesResponse> implements
-        GithubRateLimitMVP.Presenter {
+        IGithubRateLimitPresenter {
 
-    private GithubRateLimitMVP.View mView;
-    private GithubRateLimitMVP.Model mModel;
+    private IGithubRateLimitView mView;
+    private IGithubRateLimitRepository mModel;
 
-    public GithubRateLimitPresenter(GithubRateLimitMVP.View view, GithubRateLimitMVP.Model model) {
+    public GithubRateLimitPresenter(IGithubRateLimitView view, IGithubRateLimitRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

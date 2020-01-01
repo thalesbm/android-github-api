@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import br.tbm.github.api.app.profile.presenter.IProfilePresenter;
 import br.tbm.github.api.shared.GithubApplication;
-import br.tbm.github.api.app.profile.ProfileMVP;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
 import br.tbm.github.api.shared.network.RestUser;
 import retrofit2.Call;
@@ -15,9 +15,9 @@ import retrofit2.Response;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class ProfileRepository implements ProfileMVP.Model {
+public class ProfileRepository implements IProfileRepository {
 
-    private ProfileMVP.Presenter mPresenter;
+    private IProfilePresenter mPresenter;
 
     /**
      * Metodo para pesquisar um perfil pelo nome
@@ -52,7 +52,7 @@ public class ProfileRepository implements ProfileMVP.Model {
      * @param presenter ProfileMVP.Presenter
      */
     @Override
-    public void setCallback(ProfileMVP.Presenter presenter) {
+    public void setCallback(IProfilePresenter presenter) {
         this.mPresenter = presenter;
     }
 }

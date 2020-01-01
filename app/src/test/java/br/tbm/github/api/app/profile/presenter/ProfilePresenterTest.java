@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.profile.ProfileMVP;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 

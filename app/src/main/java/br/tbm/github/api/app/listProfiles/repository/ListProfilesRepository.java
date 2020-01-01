@@ -3,7 +3,7 @@ package br.tbm.github.api.app.listProfiles.repository;
 import java.util.List;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.listProfiles.ListProfilesMVP;
+import br.tbm.github.api.app.listProfiles.presenter.IListProfilesPresenter;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 import br.tbm.github.api.app.profile.repository.tasks.TasksCallbacks;
 import br.tbm.github.api.app.profile.repository.tasks.ListGithubUsersTask;
@@ -12,11 +12,11 @@ import br.tbm.github.api.app.profile.repository.tasks.RemoveUsersTask;
 /**
  * Created by thalesbertolini on 15/09/2018
  **/
-public class ListProfilesRepository implements ListProfilesMVP.Model,
+public class ListProfilesRepository implements IListProfilesRepository,
         TasksCallbacks.RemoveUsersTaskCallback,
         TasksCallbacks.ListGithubUserTaskCallback {
 
-    private ListProfilesMVP.Presenter mPresenter;
+    private IListProfilesPresenter mPresenter;
 
     @Override
     public void listProfilesInDatabase() {
@@ -58,7 +58,7 @@ public class ListProfilesRepository implements ListProfilesMVP.Model,
      * @param presenter ListProfilesMVP.Presenter
      */
     @Override
-    public void setCallback(ListProfilesMVP.Presenter presenter) {
+    public void setCallback(IListProfilesPresenter presenter) {
         this.mPresenter = presenter;
     }
 }

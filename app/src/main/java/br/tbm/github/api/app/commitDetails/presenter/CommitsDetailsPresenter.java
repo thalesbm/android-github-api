@@ -1,23 +1,22 @@
 package br.tbm.github.api.app.commitDetails.presenter;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.commitDetails.CommitDetailsMVP;
+import br.tbm.github.api.app.commitDetails.repository.ICommitDetailsRepository;
 import br.tbm.github.api.app.commitDetails.repository.entity.CommitsResponse;
-import br.tbm.github.api.shared.GithubApplication;
+import br.tbm.github.api.app.commitDetails.view.ICommitDetailsView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 import br.tbm.github.api.shared.utils.DateUtils;
-import retrofit2.Response;
 
 /**
  * Created by thalesbertolini on 03/09/2018
  **/
 public class CommitsDetailsPresenter extends BasePresenter<CommitsResponse> implements
-        CommitDetailsMVP.Presenter {
+        ICommitDetailsPresenter {
 
-    private CommitDetailsMVP.View mView;
-    private CommitDetailsMVP.Model mModel;
+    private ICommitDetailsView mView;
+    private ICommitDetailsRepository mModel;
 
-    public CommitsDetailsPresenter(CommitDetailsMVP.View view, CommitDetailsMVP.Model model) {
+    public CommitsDetailsPresenter(ICommitDetailsView view, ICommitDetailsRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

@@ -3,20 +3,21 @@ package br.tbm.github.api.app.event.presenter;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.event.EventMVP;
+import br.tbm.github.api.app.event.repository.IEventRepository;
 import br.tbm.github.api.app.event.repository.entity.EventsResponse;
+import br.tbm.github.api.app.event.view.IEventView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
  **/
 public class EventPresenter extends BasePresenter<EventsResponse> implements
-        EventMVP.Presenter {
+        IEventPresenter {
 
-    private EventMVP.View mView;
-    private EventMVP.Model mModel;
+    private IEventView mView;
+    private IEventRepository mModel;
 
-    public EventPresenter(EventMVP.View view, EventMVP.Model model) {
+    public EventPresenter(IEventView view, IEventRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

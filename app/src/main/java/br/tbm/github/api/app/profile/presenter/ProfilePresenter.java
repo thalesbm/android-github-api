@@ -3,21 +3,22 @@ package br.tbm.github.api.app.profile.presenter;
 import java.util.ArrayList;
 
 import br.tbm.github.api.R;
+import br.tbm.github.api.app.profile.repository.IProfileRepository;
 import br.tbm.github.api.app.profile.repository.model.Profile;
-import br.tbm.github.api.app.profile.ProfileMVP;
 import br.tbm.github.api.app.profile.repository.entity.RepositoriesResponse;
+import br.tbm.github.api.app.profile.view.IProfileView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 
 /**
  * Created by thalesbertolini on 03/09/2018
  **/
 public class ProfilePresenter extends BasePresenter<RepositoriesResponse> implements
-        ProfileMVP.Presenter {
+        IProfilePresenter {
 
-    private ProfileMVP.View mView;
-    private ProfileMVP.Model mModel;
+    private IProfileView mView;
+    private IProfileRepository mModel;
 
-    public ProfilePresenter(ProfileMVP.View view, ProfileMVP.Model model) {
+    public ProfilePresenter(IProfileView view, IProfileRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

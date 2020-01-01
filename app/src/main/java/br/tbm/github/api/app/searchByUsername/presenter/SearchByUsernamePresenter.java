@@ -1,7 +1,8 @@
 package br.tbm.github.api.app.searchByUsername.presenter;
 
 import br.tbm.github.api.R;
-import br.tbm.github.api.app.searchByUsername.SearchByUsernameMVP;
+import br.tbm.github.api.app.searchByUsername.repository.ISearchByUsernameRepository;
+import br.tbm.github.api.app.searchByUsername.view.ISearchByUsernameView;
 import br.tbm.github.api.shared.presenter.BasePresenter;
 import br.tbm.github.api.app.profile.repository.model.Profile;
 
@@ -9,12 +10,12 @@ import br.tbm.github.api.app.profile.repository.model.Profile;
  * Created by thalesbertolini on 03/09/2018
  **/
 public class SearchByUsernamePresenter extends BasePresenter<Profile> implements
-        SearchByUsernameMVP.Presenter {
+        ISearchByUsernamePresenter {
 
-    private SearchByUsernameMVP.View mView;
-    private SearchByUsernameMVP.Model mModel;
+    private ISearchByUsernameView mView;
+    private ISearchByUsernameRepository mModel;
 
-    public SearchByUsernamePresenter(SearchByUsernameMVP.View view, SearchByUsernameMVP.Model model) {
+    public SearchByUsernamePresenter(ISearchByUsernameView view, ISearchByUsernameRepository model) {
         super();
         this.mView = view;
         this.mModel = model;

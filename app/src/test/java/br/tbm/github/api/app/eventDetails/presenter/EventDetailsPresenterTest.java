@@ -9,7 +9,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 
 import br.tbm.github.api.app.event.repository.entity.EventCommitsResponse;
-import br.tbm.github.api.app.eventDetails.EventDetailsMVP;
 
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
