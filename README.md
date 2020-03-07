@@ -6,7 +6,7 @@ Aplicativo de exemplo de uso da API do Github, com esse aplicativo é possível 
 
 ## Versões
 
-#### tag github_api_v100
+#### tag v100
  - Aplicativo utilizando arquitetura MVP.
  - Primeira versão do aplicativo, contém as seguintes bibliotecas de terceiro:
 	 - ORMLite Framework
@@ -14,7 +14,7 @@ Aplicativo de exemplo de uso da API do Github, com esse aplicativo é possível 
 	 - Picasso
 	 - Espresso
 
-#### branch github_api_v200 (Trabalhando atualmente)
+#### branch master (Trabalhando atualmente)
  - Aplicativo utilizando arquitetura MVP.
  - Segunda versão do aplicativo, contém as seguintes bibliotecas de terceiro:
 	 - ORMLite Framework
