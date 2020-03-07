@@ -9,7 +9,7 @@
     android:paddingRight="10dp"
     android:paddingTop="10dp">
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.commons.view.components.CustomMontserratRegularTextView
         android:id="@+id/adapter_type_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textColor="@color/dark_grey"
         android:textSize="18sp" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.commons.view.components.CustomMontserratLightTextView
         android:id="@+id/adapter_created_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:layout_height="30dp"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <br.tbm.github.api.ui.components.CustomMontserratLightTextView
+    <br.tbm.github.api.commons.view.components.CustomMontserratLightTextView
         android:id="@+id/adapter_login_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

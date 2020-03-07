@@ -19,7 +19,7 @@
 		app:layout_constraintLeft_toLeftOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
-	<br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+	<br.tbm.github.api.commons.view.components.CustomMontserratRegularTextView
 		android:id="@+id/adapter_name_textview"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
 		android:textSize="18sp"
 		app:layout_constraintStart_toEndOf="@+id/adapter_imageview" />
 
-	<br.tbm.github.api.ui.components.CustomMontserratLightTextView
+	<br.tbm.github.api.commons.view.components.CustomMontserratLightTextView
 		android:id="@+id/adapter_description_textview"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

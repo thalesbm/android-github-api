@@ -9,7 +9,8 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "br.tbm.github.api.MockRunner"
         multiDexEnabled true
     }
 
@@ -31,6 +32,26 @@ android {
     task runTests(dependsOn: ['clean', 'test', 'connectedAndroidTest']) {
         group = 'Github API Tasks'
         description = "Executa todos os testes relacionados com o aplicativo"
+    }
+
+    tasks.withType(Test) {
+        testLogging {
+            events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+            exceptionFormat "full"
+        }
+
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                def output = "Results: ${result.resultType} (" +
+                        "${result.testCount} tested, " +
+                        "${result.successfulTestCount} successed, " +
+                        "${result.failedTestCount} failured, " +
+                        "${result.skippedTestCount} skipped)"
+                def startItem = '|  ', endItem = '  |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
     }
 
     compileOptions {
@@ -62,7 +83,9 @@ dependencies {
     // RETROFIT
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation 'com.squareup.retrofit2:retrofit-mock:2.5.0'
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3Version"
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
 
     // PICASSO
     implementation "com.squareup.picasso:picasso:$picassoVersion"
@@ -71,28 +94,24 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterKnifeVersion-rc1"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion-rc1"
 
-    // TEST
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
-
     // TEST IMPLEMENTATION
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
-    testImplementation "com.android.support.test.espresso:espresso-idling-resource:$androidTestVersion"
     testImplementation "org.mockito:mockito-core:$mockito"
+
+    // TEST SQUAREUP
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.14.2'
+    androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.5.0'
+    androidTestImplementation 'com.squareup.okhttp:mockwebserver:2.7.0'
+    androidTestImplementation 'com.squareup.spoon:spoon-client:1.2.0'
 
     // TEST SCREENS
     androidTestImplementation "com.android.support:support-annotations:$supportLibraryVersion"
     androidTestImplementation "com.android.support.test:runner:$androidTestVersion"
     androidTestImplementation "com.android.support.test:rules:$androidTestVersion"
-    androidTestImplementation("com.android.support.test.espresso:espresso-intents:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
-        exclude group: 'com.google.code.findbugs'
-    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
 
     implementation "com.google.guava:guava:$guavaVersion"
 }

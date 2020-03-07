@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <br.tbm.github.api.ui.components.CustomMontserratRegularTextView
+    <br.tbm.github.api.commons.view.components.CustomMontserratRegularTextView
         android:id="@+id/fragment_events_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
