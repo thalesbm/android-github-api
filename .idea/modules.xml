@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-github-api.iml" filepath="$PROJECT_DIR$/android-github-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/android-github-api-app.iml" filepath="$PROJECT_DIR$/app/android-github-api-app.iml" group="android-github-api/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/workspace-android-github-api.iml" filepath="$PROJECT_DIR$/workspace-android-github-api.iml" group="android-github-api" />
     </modules>
   </component>
 </project>
